@@ -1,0 +1,9 @@
+.app_header {
+  padding: 10px;
+  background-color: #20232a;
+}
+
+.app_header h1 {
+  font-size: 2rem;
+  color: white;
+}

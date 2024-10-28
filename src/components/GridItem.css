@@ -1,0 +1,15 @@
+.grid_item {
+  margin: 20px;
+  text-align: center;
+}
+
+.grid_item img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.grid_item p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
