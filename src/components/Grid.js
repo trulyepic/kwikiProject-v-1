@@ -1,8 +1,11 @@
 import React from "react";
 import GridItem from "./GridItem";
 import "./Grid.css";
+import { useNavigate } from "react-router-dom";
 
 const Grid = () => {
+  const navigate = useNavigate();
+
   const series = [
     { title: "Grotesquerie", img: "https://via.placeholder.com/200" },
     { title: "Doctor Odyssey", img: "https://via.placeholder.com/200" },
@@ -21,6 +24,10 @@ const Grid = () => {
     { title: "The First Omen", img: "https://via.placeholder.com/200" },
   ];
 
+  const handleMoreClick = (type) => {
+    navigate(`/filtered?type=${type}`);
+  };
+
   return (
     <div className="app_grid">
       {/* <div className="grid_section">
@@ -33,7 +40,9 @@ const Grid = () => {
           <GridItem key={index} title={show.title} img={show.img} />
         ))}
       </div>
-      <button className="more_button">More</button>
+      <button className="more_button" onClick={() => handleMoreClick("series")}>
+        More
+      </button>
 
       <h2>Movies</h2>
       <div className="grid_container">
