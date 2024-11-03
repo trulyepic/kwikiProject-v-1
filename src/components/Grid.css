@@ -1,36 +1,15 @@
 .app_grid {
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #616161;
 }
 
-/* .grid_section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-} */
 .app_grid h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 20px 0;
   text-align: left;
   padding-left: 20px;
-  /* color: white; */
-}
-
-/* .more_button {
-  background-color: #2d313c;
   color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: absolute;
-  right: 20px;
-  bottom: -250px;
-} */
+}
 
 .more_button {
   background-color: #2d313c;
@@ -55,11 +34,3 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
-
-/* .grid_container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 20px;
-  width: 100%;
-} */

@@ -6,6 +6,7 @@ import Grid from "./components/Grid";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FilteredPage from "./components/FilteredPage";
+import DetailPage from "./components/DetailPage";
 
 function App() {
   return (
@@ -25,7 +26,18 @@ function App() {
                 </>
               }
             />
-            <Route path="/filtered" element={<FilteredPage />} />
+            <Route
+              path="/filtered"
+              element={
+                <>
+                  <FilteredPage />
+                  <Footer />
+                </>
+              }
+            />
+
+            {/*series detail page*/}
+            <Route path="/series/:title" element={<DetailPage />} />
           </Route>
         </Routes>
       </div>
