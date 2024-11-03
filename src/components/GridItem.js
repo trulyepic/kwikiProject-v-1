@@ -6,7 +6,7 @@ const GridItem = ({ title, img }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`series/${title}`);
+    navigate(`/series/${title}`);
   };
   return (
     <div className="grid_item" onClick={handleClick}>

@@ -57,13 +57,6 @@ const FilteredPage = () => {
       </div>
 
       <div className="items_grid">
-        {/* {items.map((item) => (
-          <div className="grid-item" key={item.id}>
-            <h3>{item.title}</h3>
-            <p>{item.genre}</p>
-          </div>
-        ))} */}
-
         {currentPageItems.map((item) => (
           <GridItem
             key={item.id}
