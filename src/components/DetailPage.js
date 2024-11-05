@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./DetailPage.css";
 import Footer from "./Footer";
 
@@ -20,13 +20,20 @@ const characterData = [
 
 const DetailPage = () => {
   const { title } = useParams();
+  const navigate = useNavigate();
+
+  const handleTitleClick = () => {
+    navigate(`/information/${title}`);
+  };
 
   return (
     <div className="series_detail_page_wrapper">
       <div className="series_detail_page">
         <div className="content">
           <h2 className="main_title">Series</h2>
-          <h2 className="title">{title}</h2>
+          <h2 className="title" onClick={handleTitleClick}>
+            {title}
+          </h2>
 
           <div className="characters_section">
             <h3 className="characters_title">Characters</h3>

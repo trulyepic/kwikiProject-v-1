@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FilteredPage from "./components/FilteredPage";
 import DetailPage from "./components/DetailPage";
+import InformationPage from "./components/information-page/InformationPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
 
             {/*series detail page*/}
             <Route path="/series/:title" element={<DetailPage />} />
+            <Route path="/information/:title" element={<InformationPage />} />
           </Route>
         </Routes>
       </div>
