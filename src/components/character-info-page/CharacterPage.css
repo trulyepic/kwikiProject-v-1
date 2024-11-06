@@ -211,3 +211,7 @@ html {
 .character-content-header {
   border-bottom: 1px solid #ddd;
 }
+
+.test {
+  font: optional;
+}
