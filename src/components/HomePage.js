@@ -1,9 +1,9 @@
 import React from "react";
 import GridItem from "./GridItem";
-import "./Grid.css";
+import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
 
-const Grid = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const series = [
@@ -13,6 +13,12 @@ const Grid = () => {
     { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
     { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
     { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
+    { title: "She Taught Love", img: "https://via.placeholder.com/200" },
+    { title: "Perfect Days", img: "https://via.placeholder.com/200" },
+    { title: "The Promised Land", img: "https://via.placeholder.com/200" },
+    { title: "The First Omen", img: "https://via.placeholder.com/200" },
+    { title: "The First Omen", img: "https://via.placeholder.com/200" },
+    { title: "The First Omen", img: "https://via.placeholder.com/200" },
   ];
 
   const movies = [
@@ -44,15 +50,15 @@ const Grid = () => {
         More
       </button>
 
-      <h2>Movies</h2>
+      {/* <h2>Movies</h2>
       <div className="grid_container">
         {movies.map((movie, index) => (
           <GridItem key={index} title={movie.title} img={movie.img} />
         ))}
       </div>
-      <button className="more_button">More</button>
+      <button className="more_button">More</button> */}
     </div>
   );
 };
 
-export default Grid;
+export default HomePage;

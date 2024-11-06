@@ -26,6 +26,12 @@ const DetailPage = () => {
     navigate(`/information/${title}`);
   };
 
+  const handleCharacterClick = (characterName) => {
+    navigate(`/character/${characterName}`, {
+      state: { image: characterName.img },
+    });
+  };
+
   return (
     <div className="series_detail_page_wrapper">
       <div className="series_detail_page">
@@ -39,7 +45,11 @@ const DetailPage = () => {
             <h3 className="characters_title">Characters</h3>
             <div className="character_grid">
               {characterData.map((character, index) => (
-                <div key={index} className="character_card">
+                <div
+                  key={index}
+                  className="character_card"
+                  onClick={() => handleCharacterClick(character.name)}
+                >
                   <img src={character.img} alt={character.name} />
                   <p>{character.name}</p>
                 </div>

@@ -14,6 +14,7 @@
   overflow: hidden;
   transition: transform 0.3s, background-color 0.3s;
 }
+
 .grid_item_content:hover {
   transform: scale(1.2);
   /* background-color: black; */
@@ -38,7 +39,7 @@
 .grid_item p {
   margin-top: 10px;
   /* margin: 0; */
-  font-size: 1rem;
+  font-size: 14px;
   color: white;
   transition: font-size 0.3s, transform 0.3s;
   padding: 5px 0; /* Only bottom padding */

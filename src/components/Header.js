@@ -11,7 +11,7 @@ const Header = () => {
       <nav className="menu">
         <Link to="/">Home</Link>
         <Link to="/filtered?type=series">Series</Link>
-        <Link to="/filtered?type=movies">Movies</Link>
+        {/* <Link to="/filtered?type=movies">Movies</Link> */}
       </nav>
       <div className="search-icon">
         <span role="img" aria-label="search">
