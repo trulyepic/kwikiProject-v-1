@@ -1,4 +1,12 @@
 import React from "react";
+import TableOfContents from "./TableOfContents";
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const Content = () => {
   return (
@@ -24,6 +32,8 @@ const Content = () => {
         justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac
         lorem rutrum elementum.
       </p>
+
+      <TableOfContents scrollToSection={scrollToSection} />
     </div>
   );
 };

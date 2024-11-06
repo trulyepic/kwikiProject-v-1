@@ -10,13 +10,6 @@ import AdditionalContent from "./sections/AdditionalContent";
 const InformationPage = () => {
   const { title } = useParams();
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <div className="information_page_wrapper">
       <div className="information_page_content">
@@ -40,7 +33,7 @@ const InformationPage = () => {
           </div>
 
           {/* Table of Contents */}
-          <TableOfContents scrollToSection={scrollToSection} />
+          {/* <TableOfContents scrollToSection={scrollToSection} /> */}
           <AdditionalContent />
         </div>
 

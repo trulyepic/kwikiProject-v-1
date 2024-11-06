@@ -122,11 +122,11 @@ html {
 }
 
 .table_of_contents {
-  margin-top: 20px;
+  margin-top: 50px;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  width: 30%;
+  width: 50%;
   background-color: #f9f9f9;
 }
 
