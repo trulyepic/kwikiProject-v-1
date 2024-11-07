@@ -6,23 +6,25 @@ const TableOfContents = ({ scrollToSection }) => {
       <h3>Contents</h3>
       <ul>
         <li onClick={() => scrollToSection("premise")}>1. Premise</li>
-        <li>2. Cast</li>
-        <li>3. Development</li>
-        <li>4. Distribution</li>
-        <li>5. Awards and Nominations</li>
-        <li>
-          6. Seasons
-          <ul>
-            6.1. Posters
-            <ul>
-              <li>6.1.1. Season 1</li>
-              <li>6.1.2. Season 2</li>
-            </ul>
-            {/* <li>6.3. Behind the Scenes</li> */}
-          </ul>
+        <li onClick={() => scrollToSection("cast")}>2. Cast</li>
+        <li onClick={() => scrollToSection("development")}>3. Development</li>
+        <li onClick={() => scrollToSection("distribution")}>4. Distribution</li>
+        <li onClick={() => scrollToSection("awards and nominations")}>
+          5. Awards and Nominations
         </li>
-        <li>7. External Links</li>
-        <li>8. References</li>
+        <li onClick={() => scrollToSection("seasons")}>
+          6. Seasons
+          {/* <ul>
+            6.1. Seasons */}
+          <ul>
+            <li onClick={() => scrollToSection("season 1")}>6.1.1. Season 1</li>
+            <li onClick={() => scrollToSection("season 2")}>6.1.2. Season 2</li>
+          </ul>
+          {/* <li>6.3. Behind the Scenes</li> */}
+          {/* </ul> */}
+        </li>
+        {/* <li>7. External Links</li> */}
+        <li onClick={() => scrollToSection("references")}>8. References</li>
       </ul>
     </div>
   );

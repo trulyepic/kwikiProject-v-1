@@ -36,7 +36,7 @@ html {
   /* width: 100%; */
   padding: 20px;
   background-color: #f5f5f5;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   display: inline-block;
   flex-grow: 1;
 }
@@ -146,14 +146,14 @@ html {
   gap: 15px;
   background-color: #d9d9d9;
   padding: 15px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   margin-left: 20px;
 }
 
 .panel_item {
   background-color: #c0c0c0;
   padding: 15px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   text-align: center;
   font-size: 1rem;
   color: #333;
@@ -212,6 +212,8 @@ html {
   border-bottom: 1px solid #ddd;
 }
 
-.test {
-  font: optional;
+.character-sub-content-header {
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  color: #007bff;
 }

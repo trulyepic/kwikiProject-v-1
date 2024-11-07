@@ -8,13 +8,37 @@ const AdditionalContent = () => {
       </h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
 
-      <h2 className="content-header">Cast</h2>
+      <h2 className="content-header" id="cast">
+        Cast
+      </h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
 
-      <h2 className="content-header">Development</h2>
+      <h2 className="content-header" id="development">
+        Development
+      </h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
 
-      <div className="references_section">
+      <h2 className="content-header" id="awards and nominations">
+        Awards and Nominations
+      </h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+      <h2 className="content-header" id="seasons">
+        Seasons
+      </h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      <ul>
+        <li className="content-sub-header" id="season 1">
+          Season 1
+        </li>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        <li className="content-sub-header" id="season 2">
+          Season 2
+        </li>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      </ul>
+
+      <div className="references_section" id="references">
         <h2 className="content-header">References</h2>
         <ul className="reference_list">
           <li>
