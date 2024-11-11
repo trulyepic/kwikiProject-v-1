@@ -8,14 +8,9 @@ const Featured = () => {
       className="app_featured"
       style={{ backgroundImage: `url(${featuredImage})` }}
     >
-      {/*dark overlay */}
-      {/* <div className="overlay"></div> */}
       <div className="featured_content">
-        <h2>Doctor Odyssey</h2>
-        <p>Max is the new on-board doctor for a luxury cruise ship...</p>
-        <div className="featured_buttons">
-          <button>Details</button>
-        </div>
+        <h2>K-Wiki</h2>
+        <p>Explore information on all your favorite Korean shows</p>
       </div>
     </section>
   );

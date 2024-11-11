@@ -16,11 +16,8 @@
 }
 
 .grid_item_content:hover {
-  transform: scale(1.2);
-  /* background-color: black; */
-  /* padding-top: 0px;
-  padding-right: 0px;
-  padding-left: 0px; */
+  transform: scale(1.2) translateX(10px);
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .grid_item img {

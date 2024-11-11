@@ -1,6 +1,23 @@
+body,
+html {
+  background-color: #20232a;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.homepage_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .app_grid {
-  padding: 20px;
-  background-color: #616161;
+  padding: 70px;
+  text-align: center;
+  /* background-color: #e0e0e0;
+  margin-top: 40px; */
+  /* flex-grow: 1; */
 }
 
 .app_grid h2 {
@@ -12,22 +29,15 @@
 }
 
 .more_button {
-  background-color: #2d313c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: -15px;
-  position: absolute;
-  right: 20px;
+  margin-top: 40px;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
 }
 
-.more_button:hover {
+/* .more_button:hover {
   color: #61dafb;
-}
+} */
 
 .grid_container {
   display: flex;
