@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "./CharacterPage.css";
 import Footer from "../Footer";
@@ -9,8 +9,24 @@ import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 const CharacterPage = () => {
   const { characterName } = useParams();
   const location = useLocation();
-  const characterImage =
-    location.state?.image || "https://via.placeholder.com/200";
+  // const characterImage =
+  //   location.state?.image || "https://via.placeholder.com/200";
+
+  const characterData = location.state?.characterData;
+
+  // const characterData = {
+  //   // characterImage: location.state?.image || "https://via.placeholder.com/200",
+  //   characterName,
+  //   gender: location.state?.gender,
+  //   age: location.state?.age,
+  //   species: location.state?.species,
+  //   family: location.state?.family,
+  //   enemies: location.state?.enemies,
+  //   status: location.state?.status,
+  //   playedBy: location.state?.playedBy,
+  // };
+
+  console.log("character Data: ", characterData);
 
   return (
     <div className="character_page_wrapper">
@@ -24,8 +40,9 @@ const CharacterPage = () => {
 
             {/*Details Panel */}
             <CharacterDetailPanel
-              characterImage={characterImage}
-              characterName={characterName}
+              // characterImage={characterImage}
+              // characterName={characterName}
+              characterData={characterData}
             />
           </div>
 

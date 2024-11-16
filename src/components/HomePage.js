@@ -26,19 +26,6 @@ const HomePage = () => {
     { title: "The First Omen", img: "https://via.placeholder.com/200" },
   ];
 
-  // const movies = [
-  //   { title: "She Taught Love", img: "https://via.placeholder.com/200" },
-  //   { title: "Perfect Days", img: "https://via.placeholder.com/200" },
-  //   { title: "The Promised Land", img: "https://via.placeholder.com/200" },
-  //   { title: "The First Omen", img: "https://via.placeholder.com/200" },
-  //   { title: "The First Omen", img: "https://via.placeholder.com/200" },
-  //   { title: "The First Omen", img: "https://via.placeholder.com/200" },
-  // ];
-
-  // const handleMoreClick = (type) => {
-  //   navigate(`/filtered?type=${type}`);
-  // };
-
   const handleMoreClick = (type) => {
     navigate(`/seriesList?type=${type}`);
   };
@@ -64,21 +51,18 @@ const HomePage = () => {
         <h2>Series</h2>
 
         <div className="grid_container">
-          {seriesData.map((show, index) => (
+          {seriesData.slice(0, 10).map((show) => (
             <GridItem
-              key={index}
+              key={show.id}
+              id={show.id}
               title={show.title}
               // img={show.img}
-              img={`${BASE_URL}${show.imageLink}`}
+              // img={`${BASE_URL}${show.imageLink}`}
+              img={show.imageUrl}
+              seriesData={seriesData}
             />
           ))}
         </div>
-        {/* <button
-          className="more_button"
-          onClick={() => handleMoreClick("series")}
-        >
-          More
-        </button> */}
 
         <Button
           type="primary"

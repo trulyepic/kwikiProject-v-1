@@ -16,13 +16,13 @@
 }
 
 .grid_item_content:hover {
-  transform: scale(1.2) translateX(10px);
+  transform: scale(1.1) translateX(10px);
   transition: transform 0.3s, background-color 0.3s;
 }
 
 .grid_item img {
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 400px;
   border-radius: 5px;
   transition: width 0.3s, height 0.3s;
   cursor: pointer;
@@ -37,15 +37,16 @@
   margin-top: 10px;
   /* margin: 0; */
   font-size: 14px;
+  font-weight: 600;
   color: white;
   transition: font-size 0.3s, transform 0.3s;
   padding: 5px 0; /* Only bottom padding */
 }
 
 /* Larger images on wider screens */
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .grid_item img {
     width: 250px;
     height: 250px;
   }
-}
+} */

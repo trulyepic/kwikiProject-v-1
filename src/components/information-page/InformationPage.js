@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import "./InformationPage.css";
 import Content from "./sections/Content";
@@ -9,6 +9,15 @@ import AdditionalContent from "./sections/AdditionalContent";
 
 const InformationPage = () => {
   const { title } = useParams();
+  const location = useLocation();
+
+  const seriesData = location.state?.seriesData;
+
+  if (!seriesData) {
+    return <div>Loading or no data provided...</div>;
+  }
+
+  console.log("series data in info page: ", seriesData);
 
   return (
     <div className="information_page_wrapper">
@@ -16,11 +25,7 @@ const InformationPage = () => {
         <div className="information_page">
           {/* Title and Introductory Sentence */}
           <div className="page_header">
-            <span>{title} </span>
-            {/* <p>
-            This article is about the original TV series. For other pages with
-            the same name, see <a href="/">The {title} Television Universe</a>.
-          </p> */}
+            <span>{seriesData.title} </span>
           </div>
 
           {/* Main Content Section */}
@@ -29,7 +34,7 @@ const InformationPage = () => {
             <Content />
 
             {/* Details Panel */}
-            <DetailPanel title={title} />
+            <DetailPanel seriesData={seriesData} />
           </div>
 
           {/* Table of Contents */}

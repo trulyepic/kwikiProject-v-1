@@ -1,5 +1,7 @@
 .series-list-container {
   padding: 50px;
+  min-height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Ensure it’s scrollable */
 }
 
 header h1 {
@@ -14,6 +16,11 @@ header h1 {
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
+}
+
+.load-more-btn {
+  margin-top: 20px;
+  font-weight: 500;
 }
 
 .sort-buttons {
@@ -49,14 +56,22 @@ header h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
+  overflow: hidden;
 }
 
 .series-card {
-  background: #333;
+  background: #1a1a1d;
   color: #fff;
   border-radius: 8px;
   overflow: hidden;
   text-align: center;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.series-card:hover {
+  transform: scale(1.1) translateX(3px);
 }
 
 .series-card img {

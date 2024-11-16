@@ -2,11 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./GridItem.css";
 
-const GridItem = ({ title, img }) => {
+const GridItem = ({ id, title, img, seriesData }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/series/${title}`);
+    // Find the specific series data for the clicked series
+    const selectedSeriesData = seriesData.find((series) => series.id === id);
+    navigate(`/series/${title}`, {
+      state: { img, seriesId: id, seriesData: selectedSeriesData },
+    });
   };
   return (
     <div className="grid_item" onClick={handleClick}>
