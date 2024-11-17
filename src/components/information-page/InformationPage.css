@@ -100,7 +100,8 @@ html {
   display: flex;
   justify-content: space-between;
   padding: 5px 0;
-  border-bottom: 1px solid #9696aa71;
+  /* border-bottom: 1px solid #9696aa71; */
+  align-items: center;
 }
 
 .label {
@@ -114,10 +115,10 @@ html {
 
 .value {
   color: #007bff;
-  text-align: left;
+  text-align: center;
   line-height: inherit;
   font-size: 12px;
-  margin-right: 6px;
+  margin-right: 10px;
   line-height: 1.5;
 }
 

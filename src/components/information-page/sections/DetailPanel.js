@@ -14,7 +14,7 @@ const DetailPanel = ({ seriesData }) => {
   return (
     <div className="details_panel">
       <img
-        src="https://via.placeholder.com/200"
+        src={seriesData.imageUrl}
         alt={seriesData.title}
         className="title_image"
       />

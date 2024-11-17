@@ -34,7 +34,7 @@ const DetailPage = () => {
   // const [characterDetails, setCharacterDetails] = useState([]);
 
   console.log("series id: ", seriesId);
-  // console.log("series data in detail page: ", seriesData);
+  console.log("series data in detail page: ", seriesData);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -49,6 +49,7 @@ const DetailPage = () => {
 
         characters.forEach((character) => {
           const characterData = {
+            id: character.id,
             name: character.name,
             img:
               character.imageUrl === null
@@ -61,7 +62,10 @@ const DetailPage = () => {
             family: character.family,
             enemies: character.enemies,
             friends: character.friends,
+            description: character.description,
             playedBy: character.playedBy?.realName,
+            occupation: character.occupation,
+            affiliation: character.affiliation,
           };
 
           if (character.role === "main character") {

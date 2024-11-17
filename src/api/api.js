@@ -37,3 +37,16 @@ export const getCharacterBySeriesId = async (seriesId) => {
     throw error;
   }
 };
+
+export const getCharacterDetailByCharacterId = async (characterId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/characters/${characterId}/content`
+    );
+    console.log("character content from api: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching character content: ", error);
+    throw error;
+  }
+};

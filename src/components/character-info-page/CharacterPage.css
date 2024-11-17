@@ -177,6 +177,16 @@ html {
   width: 50%;
 }
 
+.character-sub-text {
+  font-weight: normal;
+  color: black;
+  line-height: 1.5;
+}
+
+.character-content-text {
+  line-height: 1.7;
+}
+
 .character_table_of_contents h3 {
   margin: 0;
   font-size: 16px;
@@ -220,7 +230,7 @@ html {
 }
 
 .character-sub-content-header {
-  border-bottom: 1px solid #9696aa;
+  /* border-bottom: 1px solid #9696aa; */
   font-weight: bold;
   color: #007bff;
 }

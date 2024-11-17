@@ -1,4 +1,5 @@
 import React from "react";
+import { convertToArray } from "../../../util/convertoArray";
 
 const CharacterDetailPanel = ({ characterData }) => {
   if (!characterData) return null;
@@ -13,13 +14,16 @@ const CharacterDetailPanel = ({ characterData }) => {
     friends,
     enemies,
     playedBy,
-    biography,
-    abilities,
+    description,
+    occupation,
+    affiliation,
   } = characterData;
   const BASE_URL = "http://localhost:8080";
   const parsedFamily = family ? JSON.parse(family) : null;
   const parsedFriends = friends ? JSON.parse(friends) : null;
   const parsedEnemies = enemies ? JSON.parse(enemies) : null;
+
+  const occupationArray = convertToArray(occupation);
 
   return (
     <div className="character_info">
@@ -43,10 +47,17 @@ const CharacterDetailPanel = ({ characterData }) => {
             <span className="character_label">Occupation</span>
             <span className="character_value">
               <ul className="detail_item-ul">
-                <li>Dancer</li>
-                <li>Fighter</li>
+                {occupationArray.map((occu, index) => (
+                  <li key={index}>{occu}</li>
+                ))}
+                {/* <li>Dancer</li>
+                <li>Fighter</li> */}
               </ul>
             </span>
+          </div>
+          <div className="character_item">
+            <span className="character_label">Affiliation</span>
+            <span className="character_value">{affiliation}</span>
           </div>
           <div className="character_item">
             <span className="character_label">Family</span>

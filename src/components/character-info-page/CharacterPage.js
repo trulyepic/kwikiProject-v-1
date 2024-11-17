@@ -5,26 +5,31 @@ import Footer from "../Footer";
 import CharacterContent from "./sections/CharacterContent";
 import CharacterAdditionalContent from "./sections/CharacterAdditionalContent";
 import CharacterDetailPanel from "./sections/CharacterDetailPanel";
+import { getCharacterDetailByCharacterId } from "../../api/api";
 
 const CharacterPage = () => {
   const { characterName } = useParams();
   const location = useLocation();
+  const [characterContent, setCharacterContent] = useState({});
   // const characterImage =
   //   location.state?.image || "https://via.placeholder.com/200";
 
   const characterData = location.state?.characterData;
 
-  // const characterData = {
-  //   // characterImage: location.state?.image || "https://via.placeholder.com/200",
-  //   characterName,
-  //   gender: location.state?.gender,
-  //   age: location.state?.age,
-  //   species: location.state?.species,
-  //   family: location.state?.family,
-  //   enemies: location.state?.enemies,
-  //   status: location.state?.status,
-  //   playedBy: location.state?.playedBy,
-  // };
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const content = await getCharacterDetailByCharacterId(characterData.id);
+        console.log("character content from character page: ", content);
+        setCharacterContent(content);
+      } catch (error) {
+        console.error("Failed to fetch content: ", error);
+      }
+    };
+    if (characterData.id) {
+      fetchContent();
+    }
+  }, [characterData.id]);
 
   console.log("character Data: ", characterData);
 
@@ -36,7 +41,10 @@ const CharacterPage = () => {
             <span>{characterName}</span>
           </div>
           <div className="character_main_content">
-            <CharacterContent />
+            <CharacterContent
+              characterData={characterData}
+              characterContent={characterContent}
+            />
 
             {/*Details Panel */}
             <CharacterDetailPanel
@@ -48,7 +56,7 @@ const CharacterPage = () => {
 
           {/* Table of Contents */}
 
-          <CharacterAdditionalContent />
+          <CharacterAdditionalContent characterContent={characterContent} />
         </div>
         {/* Side Panel */}
         <div className="side_panel">

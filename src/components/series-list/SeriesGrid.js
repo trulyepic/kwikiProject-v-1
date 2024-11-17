@@ -11,6 +11,7 @@ const SeriesGrid = ({ items }) => {
           genre={item.genre}
           imageUrl={item.imageUrl}
           id={item.id}
+          seriesData={item}
         />
       ))}
     </div>

@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getCharacterDetailByCharacterId } from "../../../api/api";
+import {
+  generateContent,
+  renderContent,
+  renderRelationships,
+} from "../../../util/generateContent";
 
-const CharacterAdditionalContent = () => {
+const CharacterAdditionalContent = ({ characterContent }) => {
+  // Extract relationships and parse JSON if necessary
+  // const relationships =
+  //   characterContent.relationships &&
+  //   JSON.parse(characterContent.relationships);
+
+  // Filter out "contentId" and "characterId" and dynamically generate content
+  // const contentKeys = Object.keys(characterContent).filter(
+  //   (key) =>
+  //     key !== "contentId" && key !== "characterId" && key !== "relationships"
+  // );
+
+  const { contentKeys, relationships } = generateContent(characterContent, [
+    "contentId",
+    "characterId",
+  ]);
+
   return (
     <div className="character_additional_content">
-      <h2 className="character-content-header" id="biography">
+      {renderContent(characterContent, contentKeys)}
+      {renderRelationships(relationships)}
+      {/* <h2 className="character-content-header" id="biography">
         Biography
       </h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
@@ -21,7 +45,7 @@ const CharacterAdditionalContent = () => {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
         <li className="character-sub-content-header">relationship 2</li>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </ul>
+      </ul> */}
     </div>
   );
 };
