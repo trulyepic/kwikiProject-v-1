@@ -182,8 +182,28 @@ html {
 
 .additional_content {
   margin-top: 20px;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   font-size: 16px;
+}
+
+.content-text {
+  line-height: 1.75;
+}
+
+.content-paragraph-spacing {
+  margin-bottom: 10px;
+}
+
+.content-sub-header-text {
+  font-weight: 500;
+  font-style: italic;
+  color: #6e6ebc;
+  /* text-decoration: underline; */
+}
+
+.awards-list {
+  font-size: 16px;
+  line-height: 1.75;
 }
 
 .additional_content h2 {
@@ -215,14 +235,14 @@ html {
 .reference_list {
   list-style-type: none;
   padding-left: 0;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   color: #007bff;
 }
 
 .reference_list li {
-  padding: 8px 0;
+  /* padding: 8px 0; */
   font-size: 0.9rem;
-  border-bottom: 1px solid #9696aa;
+  /* border-bottom: 1px solid #9696aa; */
 }
 
 .reference_list li:last-child {

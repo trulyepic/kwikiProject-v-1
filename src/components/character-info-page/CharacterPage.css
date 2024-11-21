@@ -185,6 +185,11 @@ html {
 
 .character-content-text {
   line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.character-description {
+  margin-bottom: 10px !important;
 }
 
 .character_table_of_contents h3 {

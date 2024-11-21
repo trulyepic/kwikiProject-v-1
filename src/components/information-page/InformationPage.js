@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import "./InformationPage.css";
@@ -6,12 +6,30 @@ import Content from "./sections/Content";
 import DetailPanel from "./sections/DetailPanel";
 import TableOfContents from "./sections/TableOfContents";
 import AdditionalContent from "./sections/AdditionalContent";
+import { getSeriesDetailBySeriesId } from "../../api/api";
 
 const InformationPage = () => {
   const { title } = useParams();
   const location = useLocation();
+  const [seriesContent, setSeriesContent] = useState([]);
 
   const seriesData = location.state?.seriesData;
+
+  useEffect(() => {
+    const fetchSeriesDetails = async () => {
+      try {
+        const details = await getSeriesDetailBySeriesId(seriesData.id);
+        console.log("series content in info page: ", details);
+        setSeriesContent(details);
+      } catch (error) {
+        console.error("Failed to fetch series content: ", error);
+      }
+    };
+
+    if (seriesData.id) {
+      fetchSeriesDetails();
+    }
+  }, [seriesData.id]);
 
   if (!seriesData) {
     return <div>Loading or no data provided...</div>;
@@ -31,7 +49,7 @@ const InformationPage = () => {
           {/* Main Content Section */}
           <div className="main_content">
             {/* Summary Section */}
-            <Content />
+            <Content seriesContent={seriesContent} />
 
             {/* Details Panel */}
             <DetailPanel seriesData={seriesData} />
@@ -39,7 +57,7 @@ const InformationPage = () => {
 
           {/* Table of Contents */}
           {/* <TableOfContents scrollToSection={scrollToSection} /> */}
-          <AdditionalContent />
+          <AdditionalContent seriesContent={seriesContent} />
         </div>
 
         {/* Side Panel */}

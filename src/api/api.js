@@ -50,3 +50,46 @@ export const getCharacterDetailByCharacterId = async (characterId) => {
     throw error;
   }
 };
+
+export const getSeriesDetailBySeriesId = async (seriesId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/series/${seriesId}/content`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching series details: ", error);
+    throw error;
+  }
+};
+
+export const addRating = async (seriesId, rating) => {
+  try {
+    await axios.post(`${BASE_URL}/series/${seriesId}/rate`, rating, {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Error adding rating: ", error);
+    throw error;
+  }
+};
+
+export const getAverageRating = async (seriesId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/series/${seriesId}/rating`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching average rating: ", error);
+    throw error;
+  }
+};
+
+export const getTotalRatings = async (seriesId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/series/${seriesId}/totalRatings`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching total ratings: ", error);
+    throw error;
+  }
+};

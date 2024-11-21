@@ -6,6 +6,10 @@ html {
   height: 100%;
 }
 
+p {
+  margin: 0;
+}
+
 .series_detail_page_wrapper {
   display: flex;
   flex-direction: column;
@@ -104,12 +108,18 @@ html {
 }
 
 .character_card img:hover {
-  transform: scale(1.2); /* Scale image up by 10% */
+  transform: scale(1.1); /* Scale image up by 10% */
 }
-.character_card p {
+.character_card {
   margin-top: 8px;
   font-size: 0.9rem;
-  font-weight: bold;
+  /* line-height: 1.5; */
+  /* font-weight: 600; */
+}
+
+.character_name_subtext {
+  /* font-weight: normal !important; */
+  padding-left: 2px;
 }
 
 /* .side_panel {

@@ -1,30 +1,36 @@
 import React from "react";
 
-const TableOfContents = ({ scrollToSection }) => {
+const TableOfContents = ({ scrollToSection, seriesContent }) => {
+  console.log("series content table of content: ", seriesContent);
+
+  const sectionOrder = [
+    { key: "synopsis", label: "I. Synopsis" },
+    { key: "development", label: "II. Development" },
+    { key: "awardsAndNominations", label: "III. Awards and Nominations" },
+    { key: "receptionAndImpact", label: "IV. Reception and Impact" },
+    { key: "references", label: "V. References" },
+  ];
+
+  // Filter sections to include only those present in the seriesContent
+  const availableSections = sectionOrder.filter(
+    (section) => seriesContent[section.key]
+  );
+
   return (
     <div className="table_of_contents">
       <h3>Contents</h3>
       <ul>
-        <li onClick={() => scrollToSection("premise")}>1. Premise</li>
-        <li onClick={() => scrollToSection("cast")}>2. Cast</li>
-        <li onClick={() => scrollToSection("development")}>3. Development</li>
-        <li onClick={() => scrollToSection("distribution")}>4. Distribution</li>
+        {availableSections.map((section) => (
+          <li key={section.key} onClick={() => scrollToSection(section.key)}>
+            {section.label}
+          </li>
+        ))}
+        {/* <li onClick={() => scrollToSection("synopsis")}>Synopsis</li>
+        <li onClick={() => scrollToSection("development")}> Development</li>
         <li onClick={() => scrollToSection("awards and nominations")}>
-          5. Awards and Nominations
+          Awards and Nominations
         </li>
-        <li onClick={() => scrollToSection("seasons")}>
-          6. Seasons
-          {/* <ul>
-            6.1. Seasons */}
-          <ul>
-            <li onClick={() => scrollToSection("season 1")}>6.1.1. Season 1</li>
-            <li onClick={() => scrollToSection("season 2")}>6.1.2. Season 2</li>
-          </ul>
-          {/* <li>6.3. Behind the Scenes</li> */}
-          {/* </ul> */}
-        </li>
-        {/* <li>7. External Links</li> */}
-        <li onClick={() => scrollToSection("references")}>8. References</li>
+        <li onClick={() => scrollToSection("references")}>References</li> */}
       </ul>
     </div>
   );

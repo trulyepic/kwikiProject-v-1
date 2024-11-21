@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./GridItem.css";
+import Rating from "./ratings/Rating";
 
 const GridItem = ({ id, title, img, seriesData }) => {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ const GridItem = ({ id, title, img, seriesData }) => {
       <div className="grid_item_content">
         <img src={img} alt={title} />
         <p>{title}</p>
+      </div>
+      <div onClick={(e) => e.stopPropagation()}>
+        <Rating seriesId={id} />
       </div>
     </div>
   );

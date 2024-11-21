@@ -5,26 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { getSeriesDetail } from "../api/api";
 import Featured from "./Featured";
 import Footer from "./Footer";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [seriesData, setSeriesData] = useState([]);
-
-  const series = [
-    { title: "Grotesquerie", img: "https://via.placeholder.com/200" },
-    { title: "Doctor Odyssey", img: "https://via.placeholder.com/200" },
-    { title: "Chief Detective 1958", img: "https://via.placeholder.com/200" },
-    { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
-    { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
-    { title: "Uncle Samsik", img: "https://via.placeholder.com/200" },
-    { title: "She Taught Love", img: "https://via.placeholder.com/200" },
-    { title: "Perfect Days", img: "https://via.placeholder.com/200" },
-    { title: "The Promised Land", img: "https://via.placeholder.com/200" },
-    { title: "The First Omen", img: "https://via.placeholder.com/200" },
-    { title: "The First Omen", img: "https://via.placeholder.com/200" },
-    { title: "The First Omen", img: "https://via.placeholder.com/200" },
-  ];
+  const [loading, setLoading] = useState(true);
 
   const handleMoreClick = (type) => {
     navigate(`/seriesList?type=${type}`);
@@ -37,6 +23,8 @@ const HomePage = () => {
         setSeriesData(data);
       } catch (error) {
         console.error("Failed to fetch series: ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -49,20 +37,21 @@ const HomePage = () => {
       <Featured />
       <div className="app_grid">
         <h2>Series</h2>
-
-        <div className="grid_container">
-          {seriesData.slice(0, 10).map((show) => (
-            <GridItem
-              key={show.id}
-              id={show.id}
-              title={show.title}
-              // img={show.img}
-              // img={`${BASE_URL}${show.imageLink}`}
-              img={show.imageUrl}
-              seriesData={seriesData}
-            />
-          ))}
-        </div>
+        <Spin spinning={loading} size="large" tip="Loading series...">
+          <div className="grid_container">
+            {seriesData.slice(0, 10).map((show) => (
+              <GridItem
+                key={show.id}
+                id={show.id}
+                title={show.title}
+                // img={show.img}
+                // img={`${BASE_URL}${show.imageLink}`}
+                img={show.imageUrl}
+                seriesData={seriesData}
+              />
+            ))}
+          </div>
+        </Spin>
 
         <Button
           type="primary"

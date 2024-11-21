@@ -8,10 +8,25 @@ const CharacterContent = ({ characterData, characterContent }) => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Function to render formatted paragraphs for the description
+  const renderDescription = (description) => {
+    if (!description) return null; // Handle empty or undefined descriptions
+    return description
+      .split(/\n\n|\\n\\n/) // Split by double newlines or escaped double newlines
+      .filter((paragraph) => paragraph.trim() !== "") // Remove empty lines
+      .map((paragraph, index) => (
+        <p key={index} className="character-description-paragraph">
+          {paragraph.trim()}
+        </p>
+      ));
+  };
+
   return (
     <div className="character_summary_text">
-      <p>{characterData.description}</p>
-
+      <div className="character-description">
+        <span>{renderDescription(characterData.description)}</span>
+      </div>
       <CharacterTableOfContents
         scrollToSection={scrollToSection}
         characterContent={characterContent}

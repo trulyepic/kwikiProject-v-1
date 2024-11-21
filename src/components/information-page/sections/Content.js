@@ -8,32 +8,37 @@ const scrollToSection = (sectionId) => {
   }
 };
 
-const Content = () => {
+const Content = ({ seriesContent }) => {
+  console.log("series content in content: ", seriesContent);
   return (
     <div className="summary_text">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus
-        urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis
-        porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac
-        euismod semper, magna diam porttitor mauris, quis sollicitudin sapien
-        justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac
-        lorem rutrum elementum.
-      </p>
-      <p>
-        Donec viverra auctor nibh, at convallis est ultrices sit amet. Nulla
-        facilisi. Duis tincidunt, ligula eu facilisis ultrices, odio lectus
-        laoreet lacus, ac pellentesque libero lectus vel magna. Nulla facilisi.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus
-        urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis
-        porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac
-        euismod semper, magna diam porttitor mauris, quis sollicitudin sapien
-        justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac
-        lorem rutrum elementum.
-      </p>
+      <div>
+        {seriesContent?.description ? (
+          seriesContent.description.split("\\n\\n").map((paragraph, index) => (
+            <React.Fragment key={index}>
+              <p>{paragraph.trim()}</p>
+              {index !==
+                seriesContent.description.split("\\n\\n").length - 1 && <br />}
+            </React.Fragment>
+          ))
+        ) : (
+          <p>No description available.</p>
+        )}
+      </div>
+      {/* <div>
+        {seriesContent?.description ? (
+          seriesContent.description
+            .split("\\n\\n")
+            .map((paragraph, index) => <p key={index}>{paragraph.trim()}</p>)
+        ) : (
+          <p>No description available.</p>
+        )}
+      </div> */}
 
-      <TableOfContents scrollToSection={scrollToSection} />
+      <TableOfContents
+        scrollToSection={scrollToSection}
+        seriesContent={seriesContent}
+      />
     </div>
   );
 };
