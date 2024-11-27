@@ -10,8 +10,9 @@ import { Button } from "antd";
 const SeriesList = () => {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [selectedSort, setSelectedSort] = useState("Action");
+  const [selectedSort, setSelectedSort] = useState("");
   const [page, setPage] = useState(1); // Track current page
+
   const ITEMS_PER_PAGE = 30; // Define items per page (matches API limit)
 
   useEffect(() => {
@@ -49,10 +50,29 @@ const SeriesList = () => {
   };
 
   const handleSortChange = (sortType) => {
-    setSelectedSort(sortType);
-    // Add sort logic here if needed
+    // Toggle the filter off if the same button is clicked
+    if (selectedSort === sortType) {
+      setSelectedSort(""); // Unselect the filter
+    } else {
+      setSelectedSort(sortType); // Apply the new filter
+    }
   };
 
+  // const filteredItems = items.filter((item) => {
+  //   const genre = item.genre.toLowerCase();
+  //   const selectedGenre = selectedSort.toLowerCase();
+  //   return genre.includes(selectedGenre);
+  // });
+
+  const filteredItems = selectedSort
+    ? items.filter((item) => {
+        const genre = item.genre.toLowerCase();
+        const selectedGenre = selectedSort.toLowerCase();
+        return genre.includes(selectedGenre);
+      })
+    : items; //show all items if no filter is selected
+
+  console.log("items in the serieslist page: ", items);
   return (
     <div>
       <div id="series-list-container" className="series-list-container">
@@ -84,13 +104,13 @@ const SeriesList = () => {
         </header>
 
         <InfiniteScroll
-          dataLength={items.length}
+          dataLength={filteredItems.length}
           next={fetchMoreData}
           hasMore={hasMore}
           loader={<h4>Loading...</h4>}
           // scrollableTarget="series-list-container"
         >
-          <SeriesGrid items={items} className="series-test" />
+          <SeriesGrid items={filteredItems} className="series-test" />
           {hasMore && (
             <Button
               type="primary"

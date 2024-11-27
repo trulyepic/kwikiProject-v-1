@@ -1,6 +1,6 @@
 import React from "react";
 import "./Featured.css";
-import featuredImage from "./images/featured.jpg";
+import featuredImage from "./images/featured2.png";
 
 const Featured = () => {
   return (

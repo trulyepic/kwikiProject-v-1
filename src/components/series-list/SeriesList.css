@@ -3,8 +3,8 @@
 } */
 .series-list-container {
   padding: 50px;
-  min-height: 100vh; /* Full viewport height */
-  overflow-y: auto; /* Ensure it’s scrollable */
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 header h1 {
@@ -73,15 +73,19 @@ header h1 {
   cursor: pointer;
 }
 
-.series-card:hover {
-  transform: scale(1.1) translateX(3px);
+.rating-series-list {
+  margin-bottom: 8px !important;
 }
 
-.series-card img {
-  width: 100%;
+.series-card:hover {
+  transform: scale(1.05);
 }
+
+/* .series-card img {
+  width: 100%;
+} */
 
 .series-info {
-  padding: 10px;
+  padding: 6px;
   font-size: 1rem;
 }

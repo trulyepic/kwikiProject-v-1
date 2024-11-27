@@ -16,7 +16,7 @@
 }
 
 .grid_item_content:hover {
-  transform: scale(1.1) translateX(10px);
+  transform: scale(1.08) translateX(10px);
   transition: transform 0.3s, background-color 0.3s;
 }
 

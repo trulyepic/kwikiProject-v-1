@@ -4,6 +4,7 @@ import "./DetailPage.css";
 import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
 import { Spin } from "antd";
+import Rating from "./ratings/Rating";
 
 const characterData = [
   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -127,6 +128,7 @@ const DetailPage = () => {
               </h2>
 
               <img src={titleImage} alt="title" onClick={handleTitleClick} />
+              <Rating seriesId={seriesData.id} />
             </div>
 
             <div className="characters_section">

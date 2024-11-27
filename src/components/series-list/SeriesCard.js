@@ -20,7 +20,7 @@ const SeriesCard = ({ title, genre, imageUrl, id, seriesData }) => {
         <h3>{title}</h3>
         <p>{genre}</p>
       </div>
-      <div onClick={(e) => e.stopPropagation()}>
+      <div onClick={(e) => e.stopPropagation()} className="rating-series-list">
         <Rating seriesId={id} />
       </div>
     </div>

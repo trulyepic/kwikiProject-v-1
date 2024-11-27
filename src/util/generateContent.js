@@ -1,3 +1,5 @@
+import React from "react";
+
 export const generateContent = (
   content,
   excludeKeys = [],
@@ -7,8 +9,16 @@ export const generateContent = (
     (key) => !excludeKeys.includes(key) && key !== relationshipsKey
   );
 
-  const relationships =
-    content[relationshipsKey] && JSON.parse(content[relationshipsKey]);
+  let relationships = null;
+  try {
+    if (content[relationshipsKey]) {
+      relationships = JSON.parse(content[relationshipsKey]);
+    }
+  } catch (error) {
+    console.error("Failed to parse relationships JSON:", error);
+  }
+
+  console.log("Parsed Relationships:", relationships);
 
   return { contentKeys, relationships };
 };
@@ -68,6 +78,40 @@ const renderPersonalityParagraphs = (text) => {
     ));
 };
 
+const formatText = (text) => {
+  // console.log("text: ", text);
+  if (!text || typeof text !== "string") return []; // Safeguard against invalid input
+
+  // Split into paragraphs at periods if word count exceeds 200
+  const words = text.split(" ");
+  if (words.length <= 80) {
+    return [text.trim()]; // Treat as a single paragraph
+  }
+
+  let wordCount = 0;
+  let currentParagraph = "";
+  const paragraphs = [];
+
+  words.forEach((word) => {
+    currentParagraph += word + " ";
+    wordCount++;
+
+    // Check if the word ends with a period and word count exceeds 200
+    if (wordCount > 80 && word.endsWith(".")) {
+      paragraphs.push(currentParagraph.trim());
+      currentParagraph = "";
+      wordCount = 0; // Reset the word count
+    }
+  });
+
+  // Add any remaining text as the last paragraph
+  if (currentParagraph.trim()) {
+    paragraphs.push(currentParagraph.trim());
+  }
+  console.log("Formatted Paragraphs:", paragraphs);
+  return paragraphs;
+};
+
 export const renderRelationships = (relationships) => {
   if (!relationships) return null;
 
@@ -78,10 +122,21 @@ export const renderRelationships = (relationships) => {
       </h2>
       <ul>
         {Object.keys(relationships).map((subKey, subIndex) => (
-          <li key={subIndex} className="character-sub-content-header">
-            <strong>{subKey.charAt(0).toUpperCase() + subKey.slice(1)}</strong>
-            <p className="character-sub-text">{relationships[subKey]}</p>
-          </li>
+          <React.Fragment key={subKey}>
+            <li key={subIndex} className="character-sub-content-header">
+              <strong>
+                {subKey.charAt(0).toUpperCase() + subKey.slice(1)}
+              </strong>
+              {formatText(relationships[subKey]).map(
+                (paragraph, paragraphIndex) => (
+                  <p key={paragraphIndex} className="character-sub-text">
+                    {paragraph}
+                  </p>
+                )
+              )}
+            </li>
+            <br />
+          </React.Fragment>
         ))}
       </ul>
     </div>

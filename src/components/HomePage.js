@@ -39,7 +39,7 @@ const HomePage = () => {
         <h2>Series</h2>
         <Spin spinning={loading} size="large" tip="Loading series...">
           <div className="grid_container">
-            {seriesData.slice(0, 10).map((show) => (
+            {seriesData.slice(0, 8).map((show) => (
               <GridItem
                 key={show.id}
                 id={show.id}
