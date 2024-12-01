@@ -69,6 +69,7 @@ const DetailPage = () => {
             playedBy: character.playedBy?.realName,
             occupation: character.occupation,
             affiliation: character.affiliation,
+            role: character.role,
           };
 
           if (character.role === "main character") {
@@ -172,6 +173,11 @@ const DetailPage = () => {
                           >
                             <img src={character.img} alt={character.name} />
                             <p>{character.name}</p>
+                            {character.role !== null && (
+                              <span className="character_name_subtext">
+                                ({character.role})
+                              </span>
+                            )}
                           </div>
                         ))}
                       </div>
