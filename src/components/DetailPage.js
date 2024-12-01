@@ -153,10 +153,12 @@ const DetailPage = () => {
               {/* Other Characters Grouped by Affiliation */}
 
               {Object.entries(groupedCharacters)
-                // Ensure "Other" is the last section
-                .sort(([a], [b]) =>
-                  a === "Others" ? 1 : b === "Others" ? -1 : 0
-                )
+                // Sort affiliations alphabetically, but keep "Others" at the end
+                .sort(([a], [b]) => {
+                  if (a === "Others") return 1;
+                  if (b === "Others") return -1;
+                  return a.localeCompare(b);
+                })
                 .map(([affiliation, characters]) => {
                   if (affiliation === "Other" && !hasOtherCharacters) {
                     return null; // skip rendering "others" if no unaffiliated characters exist
@@ -165,21 +167,25 @@ const DetailPage = () => {
                     <div key={affiliation}>
                       <h3 className="characters_title">{affiliation}</h3>
                       <div className="character_grid">
-                        {characters.map((character) => (
-                          <div
-                            key={character.id}
-                            className="character_card"
-                            onClick={() => handleCharacterClick(character)}
-                          >
-                            <img src={character.img} alt={character.name} />
-                            <p>{character.name}</p>
-                            {character.role !== null && (
-                              <span className="character_name_subtext">
-                                ({character.role})
-                              </span>
-                            )}
-                          </div>
-                        ))}
+                        {characters
+                          .sort((charA, charB) =>
+                            charA.name.localeCompare(charB.name)
+                          )
+                          .map((character) => (
+                            <div
+                              key={character.id}
+                              className="character_card"
+                              onClick={() => handleCharacterClick(character)}
+                            >
+                              <img src={character.img} alt={character.name} />
+                              <p>{character.name}</p>
+                              {character.role !== null && (
+                                <span className="character_name_subtext">
+                                  ({character.role})
+                                </span>
+                              )}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   );
