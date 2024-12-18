@@ -19,7 +19,7 @@ const AdditionalContent = ({ seriesContent }) => {
   const renderReferences = (content, className) => {
     return (
       <ul className={`${className} reference_list`}>
-        {content.split(",").map((ref, index) => {
+        {content.split(/,|\\n/).map((ref, index) => {
           const trimmedRef = ref.trim();
           // Check if the reference is a URL
           const isLink = /^https?:\/\//.test(trimmedRef);
