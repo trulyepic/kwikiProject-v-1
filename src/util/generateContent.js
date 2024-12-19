@@ -68,6 +68,7 @@ const renderParagraphs = (text) => {
 
 // New function for personality
 const renderPersonalityParagraphs = (text) => {
+  if (text == null) return;
   return text
     .split(/\n\n|\\n\\n/) // Split by actual or escaped double newlines
     .filter((paragraph) => paragraph.trim() !== "") // Remove empty lines
