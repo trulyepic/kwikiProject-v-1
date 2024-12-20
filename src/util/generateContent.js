@@ -48,11 +48,33 @@ export const renderContent = (content, contentKeys) => {
         renderParagraphs(content[key]) // Existing function for biography
       ) : key === "personality" ? (
         renderPersonalityParagraphs(content[key]) // New function for personality
+      ) : key === "abilities" ? (
+        renderAbilitiesAndLimitations(content[key])
+      ) : key === "limitations" ? (
+        renderAbilitiesAndLimitations(content[key])
       ) : (
         <p className="character-content-text">{content[key]}</p>
       )}
     </div>
   ));
+};
+
+export const renderAbilitiesAndLimitations = (abilities) => {
+  if (!abilities) return null;
+
+  const parsedAbilites = JSON.parse(abilities);
+
+  return (
+    <div>
+      <ul>
+        {Object.keys(parsedAbilites).map((abilityKey, index) => (
+          <li key={index} className="character-content-text">
+            <strong>{abilityKey}:</strong> {parsedAbilites[abilityKey]}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 // Existing function for biography

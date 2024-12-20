@@ -93,3 +93,15 @@ export const getTotalRatings = async (seriesId) => {
     throw error;
   }
 };
+
+export const getCharacterDetailByName = async (characterName) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/characters/name/${characterName}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching total ratings: ", error);
+    throw error;
+  }
+};

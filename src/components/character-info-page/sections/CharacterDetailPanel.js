@@ -1,7 +1,9 @@
 import React from "react";
 import { convertToArray } from "../../../util/convertoArray";
+import RelationList from "./RelationList";
 
 const CharacterDetailPanel = ({ characterData }) => {
+  console.log("character data: ", characterData);
   if (!characterData) return null;
   const {
     name,
@@ -70,21 +72,17 @@ const CharacterDetailPanel = ({ characterData }) => {
                 <li>Brother - bro</li>
               </ul> */}
               <ul className="detail_item-ul">
-                {parsedFamily
-                  ? Object.entries(parsedFamily).map(
-                      ([relation, name], index) => (
-                        <li key={index}>
-                          {relation} - {name}
-                        </li>
-                      )
-                    )
-                  : "None"}
+                {parsedFamily ? (
+                  <RelationList data={parsedFamily || null} />
+                ) : (
+                  "None"
+                )}
               </ul>
             </span>
           </div>
 
           <div className="character_item">
-            <span className="character_label">Freinds</span>
+            <span className="character_label">Friends</span>
             <span className="character_value">
               <ul className="detail_item-ul">
                 {parsedFriends

@@ -177,6 +177,31 @@ html {
   width: 50%;
 }
 
+.character_toc_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid #9696aa; */
+  border-bottom: 1px solid #9696aa;
+  padding-bottom: 8px;
+}
+
+.clickable-name {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.character_toc_hide {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.character_toc_hide svg {
+  margin-left: 5px;
+}
+
 .character-sub-text {
   font-weight: normal;
   color: black;
@@ -202,8 +227,8 @@ html {
   font-size: 16px;
   font-weight: bold;
   color: #333;
-  border-bottom: 1px solid #9696aa;
-  padding-bottom: 8px;
+  /* border-bottom: 1px solid #9696aa; */
+  /* padding-bottom: 8px; */
 }
 
 .character_table_of_contents ul {

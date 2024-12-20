@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { generateContent } from "../../../util/generateContent";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 const CharacterTableOfContents = ({ scrollToSection, characterContent }) => {
   console.log("characterContent: ", characterContent);
+  const [isExposed, setIsExposed] = useState(true);
 
   //extract relationships and parse JSON if necessary
   // const relationships =
@@ -22,26 +24,36 @@ const CharacterTableOfContents = ({ scrollToSection, characterContent }) => {
 
   return (
     <div className="character_table_of_contents">
-      <h3>Contents</h3>
-      <ul>
-        {contentKeys.map((key, index) => (
-          <li key={index} onClick={() => scrollToSection(key)}>
-            {index + 1}. {key.charAt(0).toUpperCase() + key.slice(1)}
+      <div className="character_toc_header">
+        <h3>Contents</h3>
+        <span
+          className="character_toc_hide"
+          onClick={() => setIsExposed(!isExposed)}
+        >
+          hide {isExposed ? <DownOutlined /> : <UpOutlined />}
+        </span>
+      </div>
+      {isExposed && (
+        <ul>
+          {contentKeys.map((key, index) => (
+            <li key={index} onClick={() => scrollToSection(key)}>
+              {index + 1}. {key.charAt(0).toUpperCase() + key.slice(1)}
+            </li>
+          ))}
+          <li onClick={() => scrollToSection("relationships")}>
+            {contentKeys.length + 1}. Relationsips
+            {relationships && (
+              <ul>
+                {Object.keys(relationships).map((subKey, subIndex) => (
+                  <li key={subIndex} onClick={() => scrollToSection(subKey)}>
+                    {subKey.charAt(0).toUpperCase() + subKey.slice(1)}
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
-        ))}
-        <li onClick={() => scrollToSection("relationships")}>
-          {contentKeys.length + 1}. Relationsips
-          {relationships && (
-            <ul>
-              {Object.keys(relationships).map((subKey, subIndex) => (
-                <li key={subIndex} onClick={() => scrollToSection(subKey)}>
-                  {subKey.charAt(0).toUpperCase() + subKey.slice(1)}
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      </ul>
+        </ul>
+      )}
       {/* <ul>
         <li onClick={() => scrollToSection("biography")}>
           1. Biography
