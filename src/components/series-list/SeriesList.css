@@ -17,6 +17,7 @@ header h1 {
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -28,15 +29,23 @@ header h1 {
 
 .sort-buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   color: #dddddd;
 }
 
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 .sort-buttons button {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  padding: 6px 14px;
+  /* border: 1px solid #ccc; */
+  border-radius: 15px;
   background-color: transparent;
   color: #fff;
   font-size: 16px;
@@ -60,6 +69,44 @@ header h1 {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
   overflow: hidden;
+}
+
+.series-search-input {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.ant-input-affix-wrapper {
+  background-color: transparent !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.ant-input::placeholder {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.ant-input-affix-wrapper input {
+  color: #fff; /* Text color inside input */
+}
+
+.ant-input-affix-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1;
+}
+
+.ant-input-affix-wrapper input:focus::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+.ant-input-affix-wrapper .ant-input-clear-icon {
+  color: #fff; /* Clear icon color */
+}
+
+.ant-input-affix-wrapper .ant-input-clear-icon:hover {
+  color: rgba(132, 149, 201, 0.815); /* Clear icon color */
 }
 
 .series-card {

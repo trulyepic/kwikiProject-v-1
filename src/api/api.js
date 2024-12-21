@@ -105,3 +105,15 @@ export const getCharacterDetailByName = async (characterName) => {
     throw error;
   }
 };
+
+export const searchSeriesByTitle = async (title) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/search/series`, {
+      params: { title },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error searching series: ", error);
+    throw error;
+  }
+};

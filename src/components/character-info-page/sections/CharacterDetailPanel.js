@@ -72,11 +72,7 @@ const CharacterDetailPanel = ({ characterData }) => {
                 <li>Brother - bro</li>
               </ul> */}
               <ul className="detail_item-ul">
-                {parsedFamily ? (
-                  <RelationList data={parsedFamily || null} />
-                ) : (
-                  "None"
-                )}
+                {parsedFamily ? <RelationList data={parsedFamily} /> : "None"}
               </ul>
             </span>
           </div>
@@ -85,15 +81,7 @@ const CharacterDetailPanel = ({ characterData }) => {
             <span className="character_label">Friends</span>
             <span className="character_value">
               <ul className="detail_item-ul">
-                {parsedFriends
-                  ? Object.entries(parsedFriends).map(
-                      ([relation, name], index) => (
-                        <li key={index}>
-                          {relation} - {name}
-                        </li>
-                      )
-                    )
-                  : "None"}
+                {parsedFriends ? <RelationList data={parsedFriends} /> : "None"}
               </ul>
             </span>
           </div>
@@ -102,15 +90,7 @@ const CharacterDetailPanel = ({ characterData }) => {
             <span className="character_label">Enemies</span>
             <span className="character_value">
               <ul className="detail_item-ul">
-                {parsedEnemies
-                  ? Object.entries(parsedEnemies).map(
-                      ([relation, name], index) => (
-                        <li key={index}>
-                          {relation} - {name}
-                        </li>
-                      )
-                    )
-                  : "None"}
+                {parsedEnemies ? <RelationList data={parsedEnemies} /> : "None"}
               </ul>
             </span>
           </div>

@@ -57,6 +57,11 @@ const CharacterPage = () => {
           {/* Table of Contents */}
 
           <CharacterAdditionalContent characterContent={characterContent} />
+
+          <div className="ai-special-footnote">
+            Some information about Extraordinary Attorney Woo was derived from a
+            conversation with an AI assistant on December 20, 2024
+          </div>
         </div>
         {/* Side Panel */}
         <div className="side_panel">

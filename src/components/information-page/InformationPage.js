@@ -58,6 +58,10 @@ const InformationPage = () => {
           {/* Table of Contents */}
           {/* <TableOfContents scrollToSection={scrollToSection} /> */}
           <AdditionalContent seriesContent={seriesContent} />
+          <div className="ai-special-footnote">
+            Some information about Extraordinary Attorney Woo was derived from a
+            conversation with an AI assistant on December 20, 2024
+          </div>
         </div>
 
         {/* Side Panel */}

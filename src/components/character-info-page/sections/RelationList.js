@@ -3,18 +3,51 @@ import { useNavigate } from "react-router-dom";
 import { getCharacterDetailByName } from "../../../api/api";
 
 const RelationList = ({ data }) => {
-  //   const [charName, setCharName] = useState("");
-  //   const [characterData, setCharacterData] = useState({});
   const navigate = useNavigate();
 
-  //to do --> need to make characters that appear in character detail clickable
-  //clicking on the character name should take them to the character page
   const handleCharacterClick = async (characterName) => {
     // setCharName(characterName);
     try {
-      const characterData = await getCharacterDetailByName(characterName);
-      console.log("characterData in RelationList: ", characterData);
-      navigate(`/character/${characterData.name}`, {
+      const character = await getCharacterDetailByName(characterName);
+      console.log("characterData in RelationList: ", character);
+
+      const {
+        id,
+        name,
+        imageUrl,
+        gender,
+        age,
+        species,
+        status,
+        family,
+        enemies,
+        friends,
+        description,
+        playedBy,
+        occupation,
+        affiliation,
+        role,
+      } = character;
+
+      const characterData = {
+        id,
+        name,
+        img: imageUrl === null ? "https://via.placeholder.com/100" : imageUrl,
+        gender,
+        age,
+        species,
+        status,
+        family,
+        enemies,
+        friends,
+        description,
+        playedBy: playedBy?.realName,
+        occupation,
+        affiliation,
+        role,
+      };
+
+      navigate(`/character/${name}`, {
         state: {
           characterData,
         },
@@ -35,8 +68,8 @@ const RelationList = ({ data }) => {
         <li key={index}>
           {relation} -{" "}
           <span
-          // className="clickable-name"
-          // onClick={() => handleCharacterClick(name)}
+            className="clickable-name"
+            onClick={() => handleCharacterClick(name)}
           >
             {name}
           </span>

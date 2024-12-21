@@ -31,7 +31,7 @@ html {
 
 .character_information_page {
   flex: 3;
-  max-width: 800px;
+  max-width: 1100px;
   width: calc(100% - 300px);
   /* width: 100%; */
   padding: 20px;
@@ -96,7 +96,7 @@ html {
 }
 
 .character_box {
-  width: 260px;
+  width: 300px;
   background-color: #dcdcf6;
   border: 2px solid #9696aa;
   /* padding: 10px; */
@@ -126,7 +126,7 @@ html {
 }
 
 .character_value {
-  color: #007bff;
+  color: #0053ac;
   text-align: right;
   line-height: 1.5;
   font-size: 12px;
@@ -177,6 +177,10 @@ html {
   width: 50%;
 }
 
+.character_table_of_contents ul li:hover {
+  color: #7db8f8;
+}
+
 .character_toc_header {
   display: flex;
   justify-content: space-between;
@@ -187,9 +191,13 @@ html {
 }
 
 .clickable-name {
-  color: blue;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.5s ease;
+}
+
+.clickable-name:hover {
+  color: #7db8f8;
 }
 
 .character_toc_hide {

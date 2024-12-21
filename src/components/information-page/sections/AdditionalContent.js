@@ -25,6 +25,7 @@ const AdditionalContent = ({ seriesContent }) => {
           const isLink = /^https?:\/\//.test(trimmedRef);
           return (
             <li key={index} className={className}>
+              <span className="link-numb">[{index + 1}]</span>
               {isLink ? (
                 <a href={trimmedRef} target="_blank" rel="noopener noreferrer">
                   {trimmedRef}

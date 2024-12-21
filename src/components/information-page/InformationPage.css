@@ -212,6 +212,16 @@ html {
   margin-top: 20px;
 }
 
+.link-numb {
+  margin-right: 8px;
+}
+
+.ai-special-footnote {
+  line-height: 1.75;
+  font-size: x-small;
+  font-style: italic;
+}
+
 .content-header {
   border-bottom: 1px solid #9696aa;
 }

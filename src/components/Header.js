@@ -14,9 +14,9 @@ const Header = () => {
         {/* <Link to="/filtered?type=movies">Movies</Link> */}
       </nav>
       <div className="search-icon">
-        <span role="img" aria-label="search">
+        {/* <span role="img" aria-label="search">
           🔍
-        </span>
+        </span> */}
       </div>
     </header>
   );
