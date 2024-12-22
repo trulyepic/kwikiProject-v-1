@@ -15,6 +15,27 @@ header h1 {
   color: #fff;
 }
 
+.notification-container {
+  background-color: #222228 !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+
+.ant-notification-notice-close {
+  color: #fff !important;
+}
+
+/* .ant-notification-notice {
+  background-color: #222228 !important;
+  border-radius: 20px !important;
+  overflow: hidden;
+} */
+
+.notification-text {
+  color: #fff;
+  font-family: Roboto !important;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -88,7 +109,7 @@ header h1 {
 }
 
 .ant-input-affix-wrapper input {
-  color: #fff; /* Text color inside input */
+  color: #fff;
 }
 
 .ant-input-affix-wrapper input::placeholder {
@@ -102,7 +123,7 @@ header h1 {
 }
 
 .ant-input-affix-wrapper .ant-input-clear-icon {
-  color: #fff; /* Clear icon color */
+  color: #fff;
 }
 
 .ant-input-affix-wrapper .ant-input-clear-icon:hover {

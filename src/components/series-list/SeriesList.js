@@ -9,7 +9,7 @@ import {
   getSeriesDetailWithPagination,
   searchSeriesByTitle,
 } from "../../api/api";
-import { Button, Input } from "antd";
+import { Button, Input, notification } from "antd";
 
 const { Search } = Input;
 
@@ -90,7 +90,26 @@ const SeriesList = () => {
       const searchResults = await searchSeriesByTitle(value);
       setItems(searchResults);
     } catch (error) {
-      console.error("Error searching series: ", error);
+      if (error.response && error.response.status === 404) {
+        notification.info({
+          message: <span className="notification-text">No Results Found</span>,
+          description: (
+            <span className="notification-text">
+              {`No series found matching "${searchQuery}". Please try another search.`}
+            </span>
+          ),
+          placement: "topRight",
+          className: "notification-container",
+          // duration: 0,
+        });
+      } else {
+        console.error("Error searching series: ", error);
+        notification.error({
+          message: <span className="notification-text">Search Error</span>,
+          description: "An error occurred while searching. Please try again.",
+          placement: "topRight",
+        });
+      }
     } finally {
       setHasMore(true); //Re-enable infinite scroll
     }
