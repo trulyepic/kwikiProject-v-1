@@ -95,6 +95,10 @@ html {
   list-style-type: none;
 }
 
+.relation-title {
+  font-weight: bold;
+}
+
 .character_box {
   width: 300px;
   background-color: #dcdcf6;
@@ -123,6 +127,7 @@ html {
   font-size: 13px;
   margin: 0;
   margin-left: 6px;
+  width: 70px;
 }
 
 .character_value {

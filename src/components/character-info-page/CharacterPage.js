@@ -56,7 +56,10 @@ const CharacterPage = () => {
 
           {/* Table of Contents */}
 
-          <CharacterAdditionalContent characterContent={characterContent} />
+          <CharacterAdditionalContent
+            characterContent={characterContent}
+            characterRef={characterData.referencesData}
+          />
 
           <div className="ai-special-footnote">
             Some information about Extraordinary Attorney Woo was derived from a

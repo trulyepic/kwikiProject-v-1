@@ -6,7 +6,7 @@ import {
   renderRelationships,
 } from "../../../util/generateContent";
 
-const CharacterAdditionalContent = ({ characterContent }) => {
+const CharacterAdditionalContent = ({ characterContent, characterRef }) => {
   // Extract relationships and parse JSON if necessary
   // const relationships =
   //   characterContent.relationships &&
@@ -23,10 +23,42 @@ const CharacterAdditionalContent = ({ characterContent }) => {
     "characterId",
   ]);
 
+  const renderReferences = (content, className) => {
+    return (
+      <ul className={`${className} reference_list`}>
+        {content.split(/,|\\n/).map((ref, index) => {
+          const trimmedRef = ref.trim();
+          // Check if the reference is a URL
+          const isLink = /^https?:\/\//.test(trimmedRef);
+          return (
+            <li key={index} className={className}>
+              <span className="link-numb">[{index + 1}]</span>
+              {isLink ? (
+                <a href={trimmedRef} target="_blank" rel="noopener noreferrer">
+                  {trimmedRef}
+                </a>
+              ) : (
+                trimmedRef
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
   return (
     <div className="character_additional_content">
-      {renderContent(characterContent, contentKeys)}
+      {renderContent(characterContent, contentKeys, characterRef)}
       {renderRelationships(relationships)}
+
+      {/* Always render references as the last item */}
+      {characterRef && (
+        <div id="referencesRef">
+          <h2 className="character-content-header">References</h2>
+          {renderReferences(characterRef, "content-text")}
+        </div>
+      )}
     </div>
   );
 };

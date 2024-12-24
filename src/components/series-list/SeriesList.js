@@ -5,11 +5,12 @@ import SeriesGrid from "./SeriesGrid";
 import "./SeriesList.css";
 import Footer from "../Footer";
 import {
+  getSeriesByRating,
   getSeriesDetail,
   getSeriesDetailWithPagination,
   searchSeriesByTitle,
 } from "../../api/api";
-import { Button, Input, notification } from "antd";
+import { Button, Input, notification, Dropdown, Menu } from "antd";
 
 const { Search } = Input;
 
@@ -19,6 +20,7 @@ const SeriesList = () => {
   const [selectedSort, setSelectedSort] = useState("");
   const [page, setPage] = useState(1); // Track current page
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortLabel, setSortLabel] = useState("Sort By Ratings");
 
   const ITEMS_PER_PAGE = 30; // Define items per page (matches API limit)
 
@@ -26,45 +28,149 @@ const SeriesList = () => {
     fetchMoreData();
   }, []);
 
-  const fetchMoreData = async () => {
-    console.log("Fetching page:", page);
+  const fetchPaginationData = async (pageNumber = 1, resetItems = false) => {
     try {
       const newItems = await getSeriesDetailWithPagination(
-        page,
+        pageNumber,
         ITEMS_PER_PAGE
       );
-      if (newItems.length === 0) {
-        console.log("No more items to load.");
-        setHasMore(false); // Stop loading if there are no more items from the API
-        return;
-      }
-      // setItems((prevItems) => [...prevItems, ...newItems]);
-      setItems((prevItems) => {
-        const uniqueItems = newItems.filter(
-          (newItem) => !prevItems.some((item) => item.id === newItem.id)
-        );
-        return [...prevItems, ...uniqueItems];
-      });
-      setPage((prevPage) => prevPage + 1); // Move to the next page for the next load
 
-      if (newItems.length < ITEMS_PER_PAGE) {
-        setHasMore(false);
+      if (resetItems) {
+        // reset items and pagination
+        setItems(newItems);
+        setPage(2);
+        setHasMore(newItems.length === ITEMS_PER_PAGE); // Enable or disable infinite scroll
+      } else {
+        // append new items to the existing list
+        setItems((prevItems) => {
+          const uniqueItems = newItems.filter(
+            (newItem) => !prevItems.some((item) => item.id === newItem.id)
+          );
+          return [...prevItems, ...uniqueItems];
+        });
+        setPage((prevPage) => prevPage + 1); // Move to the next page for the next load
+        setHasMore(newItems.length === ITEMS_PER_PAGE); // Enable or disable infinite scroll
       }
     } catch (error) {
-      console.error("Error fetchig more data: ", error);
+      console.error("Error fetching more data: ", error);
       setHasMore(false);
+      notification.error({
+        message: (
+          <span className="notification-error-text">Fetching Error</span>
+        ),
+        description: (
+          <span className="notification-error-text">
+            {"An error occurred while fetching more data. Please try again."}
+          </span>
+        ),
+        placement: "topRight",
+        className: "notification-error-container",
+      });
     }
   };
 
-  const handleSortChange = (sortType) => {
-    // Toggle the filter off if the same button is clicked
-    // if (selectedSort === sortType) {
-    //   setSelectedSort(""); // Unselect the filter
-    // } else {
-    //   setSelectedSort(sortType); // Apply the new filter
+  const fetchMoreData = async () => {
+    console.log("Fetching page:", page);
+
+    fetchPaginationData(page);
+
+    // Old implementation
+    // try {
+    //   const newItems = await getSeriesDetailWithPagination(
+    //     page,
+    //     ITEMS_PER_PAGE
+    //   );
+    //   if (newItems.length === 0) {
+    //     console.log("No more items to load.");
+    //     setHasMore(false); // Stop loading if there are no more items from the API
+    //     return;
+    //   }
+    //   // setItems((prevItems) => [...prevItems, ...newItems]);
+    //   setItems((prevItems) => {
+    //     const uniqueItems = newItems.filter(
+    //       (newItem) => !prevItems.some((item) => item.id === newItem.id)
+    //     );
+    //     return [...prevItems, ...uniqueItems];
+    //   });
+    //   setPage((prevPage) => prevPage + 1); // Move to the next page for the next load
+
+    //   if (newItems.length < ITEMS_PER_PAGE) {
+    //     setHasMore(false);
+    //   }
+    // } catch (error) {
+    //   console.error("Error fetchig more data: ", error);
+    //   setHasMore(false);
     // }
+  };
+
+  const handleSortChange = (sortType) => {
     // Toggle the filter off if the same button is clicked twice
     setSelectedSort((prevSort) => (prevSort === sortType ? "" : sortType));
+  };
+
+  const handleRatingSort = async (ratingNum, label) => {
+    if (sortLabel === `Sorted By ${label}`) {
+      // Reset to default items if the same sort is clicked again
+      resetRatingSort();
+      return;
+    }
+
+    try {
+      const rating = parseFloat(ratingNum).toFixed(1); // convert to BigDecimal-commpatible string
+      setSortLabel(`Sorted By ${label}`);
+      const sortedItems = await getSeriesByRating(rating);
+      setItems(sortedItems);
+      setHasMore(false); //disable infinite scroll
+    } catch (error) {
+      console.error("Error fetching sorted items: ", error);
+      notification.error({
+        message: <span className="notification-error-text">Sort Error</span>,
+        description: (
+          <span className="notification-error-text">
+            {"An error occurred while sorting. Please try again."}
+          </span>
+        ),
+        placement: "topRight",
+        className: "notification-error-container",
+      });
+    }
+  };
+
+  const sortItems = [
+    { label: "5 Stars", key: "5.0" },
+    { label: "4 Stars", key: "4.0" },
+    { label: "3 Stars", key: "3.0" },
+    { label: "2 Stars", key: "2.0" },
+    { label: "1 Star", key: "1.0" },
+  ];
+
+  const menuProps = {
+    items: sortItems.map((item) => ({
+      key: item.key,
+      label: item.label,
+      onClick: () => handleRatingSort(item.key, item.label),
+    })),
+  };
+
+  const resetRatingSort = async () => {
+    setSortLabel("Sort By Ratings");
+
+    fetchPaginationData(1, true); //fetch the initial data again
+
+    // try {
+    //   // Fetch the initial data again
+    //   const initialItems = await getSeriesDetailWithPagination(
+    //     1,
+    //     ITEMS_PER_PAGE
+    //   );
+    //   setItems(initialItems);
+    // } catch (error) {
+    //   console.error("Error resetting data: ", error);
+    //   notification.error({
+    //     message: "Error",
+    //     description: "Failed to reload series data.",
+    //   });
+    // }
   };
 
   const filteredItems = selectedSort
@@ -100,14 +206,20 @@ const SeriesList = () => {
           ),
           placement: "topRight",
           className: "notification-container",
-          // duration: 0,
         });
       } else {
         console.error("Error searching series: ", error);
         notification.error({
-          message: <span className="notification-text">Search Error</span>,
-          description: "An error occurred while searching. Please try again.",
+          message: (
+            <span className="notification-error-text">Search Error</span>
+          ),
+          description: (
+            <span className="notification-error-text">
+              {"An error occurred while searching. Please try again."}
+            </span>
+          ),
           placement: "topRight",
+          className: "notification-error-container",
         });
       }
     } finally {
@@ -119,15 +231,28 @@ const SeriesList = () => {
   return (
     <div>
       <div id="series-list-container" className="series-list-container">
-        <header>
+        <header className="series-list-header">
           <h1 className="series-title">Series</h1>
-          <Search
-            className="series-search-input"
-            placeholder="Search series"
-            allowClear
-            size="large"
-            onSearch={handleSearch}
-          />
+          <div className="search-and-dropdown">
+            <Search
+              className="series-search-input"
+              placeholder="Search series"
+              allowClear
+              size="large"
+              onSearch={handleSearch}
+            />
+
+            <Dropdown.Button
+              menu={menuProps}
+              trigger={["click"]}
+              size="large"
+              className="sort-dropdown"
+            >
+              <span className="rating-sort-text" onClick={resetRatingSort}>
+                {sortLabel}
+              </span>
+            </Dropdown.Button>
+          </div>
           <div className="filters">
             <div className="sort-buttons">
               Sort By:{" "}

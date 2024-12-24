@@ -117,3 +117,15 @@ export const searchSeriesByTitle = async (title) => {
     throw error;
   }
 };
+
+export const getSeriesByRating = async (rating) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/series/by-rating`, {
+      params: { rating },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching series by rating: ", error);
+    throw error;
+  }
+};

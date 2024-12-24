@@ -2,6 +2,7 @@ import React from "react";
 import CharacterTableOfContents from "./CharacterTableOfContents";
 
 const CharacterContent = ({ characterData, characterContent }) => {
+  // console.log("characterData in CharacterContent: ", characterData);
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -46,6 +47,7 @@ const CharacterContent = ({ characterData, characterContent }) => {
       <CharacterTableOfContents
         scrollToSection={scrollToSection}
         characterContent={characterContent}
+        characterRef={characterData.referencesData}
       />
     </div>
   );

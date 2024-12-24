@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { generateContent } from "../../../util/generateContent";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-const CharacterTableOfContents = ({ scrollToSection, characterContent }) => {
+const CharacterTableOfContents = ({
+  scrollToSection,
+  characterContent,
+  characterRef,
+}) => {
   console.log("characterContent: ", characterContent);
+  console.log("characterRef: ", characterRef);
   const [isExposed, setIsExposed] = useState(true);
 
   //extract relationships and parse JSON if necessary
@@ -50,6 +55,11 @@ const CharacterTableOfContents = ({ scrollToSection, characterContent }) => {
                   </li>
                 ))}
               </ul>
+            )}
+            {characterRef && (
+              <li onClick={() => scrollToSection("referencesRef")}>
+                {contentKeys.length + (relationships ? 2 : 1)}. References
+              </li>
             )}
           </li>
         </ul>

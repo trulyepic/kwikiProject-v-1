@@ -65,11 +65,13 @@ const DetailPage = () => {
             family: character.family,
             enemies: character.enemies,
             friends: character.friends,
+            loveInterest: character.loveInterest,
             description: character.description,
             playedBy: character.playedBy?.realName,
             occupation: character.occupation,
             affiliation: character.affiliation,
             role: character.role,
+            referencesData: character.referencesData,
           };
 
           if (character.role === "main character") {

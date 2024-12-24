@@ -21,6 +21,12 @@ header h1 {
   padding: 15px 20px !important;
 }
 
+.notification-error-container {
+  background-color: #421318 !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+
 .ant-notification-notice-close {
   color: #fff !important;
 }
@@ -32,6 +38,11 @@ header h1 {
 } */
 
 .notification-text {
+  color: #fff;
+  font-family: Roboto !important;
+}
+
+.notification-error-text {
   color: #fff;
   font-family: Roboto !important;
 }
@@ -61,6 +72,59 @@ header h1 {
     flex-direction: column;
     gap: 10px;
   }
+}
+
+.series-list-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-and-dropdown {
+  display: flex;
+  /* align-items: center; */
+  gap: 20px;
+}
+
+/* .sort-dropdown {
+  background-color: #222228 !important;
+} */
+
+.rating-sort-text {
+  font-family: Roboto !important;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.rating-sort-text:hover {
+  color: #007bff;
+}
+
+.ant-dropdown-menu-title-content {
+  font-family: Roboto !important;
+  color: #fff !important;
+}
+
+.ant-dropdown .ant-dropdown-menu {
+  background-color: #222228 !important;
+}
+
+.ant-dropdown-menu-title-content:hover {
+  /* background-color: rgba(59, 71, 159, 0.1) !important;
+  border-radius: 3px; */
+  color: #007bff !important;
+}
+
+.series-search-input .anticon {
+  color: #fff;
+}
+
+.sort-dropdown .anticon {
+  color: #fff;
+}
+
+.ant-btn-variant-outlined {
+  background: transparent !important;
 }
 
 .sort-buttons button {
