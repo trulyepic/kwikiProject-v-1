@@ -70,7 +70,7 @@ const InformationPage = () => {
           <div className="panel_item">Ad Placeholder</div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

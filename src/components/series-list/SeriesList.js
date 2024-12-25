@@ -325,7 +325,7 @@ const SeriesList = () => {
           )}
         </InfiniteScroll>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

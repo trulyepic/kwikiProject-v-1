@@ -243,7 +243,7 @@ const DetailPage = () => {
           </div>
         </div>
       </Spin>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

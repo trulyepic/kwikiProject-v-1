@@ -73,7 +73,7 @@ const CharacterPage = () => {
           <div className="panel_item">Related Links</div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
