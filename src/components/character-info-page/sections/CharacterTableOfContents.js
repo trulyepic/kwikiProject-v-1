@@ -50,17 +50,19 @@ const CharacterTableOfContents = ({
             {relationships && (
               <ul>
                 {Object.keys(relationships).map((subKey, subIndex) => (
-                  <li key={subIndex} onClick={() => scrollToSection(subKey)}>
+                  <li
+                    key={subIndex}
+                    onClick={() => scrollToSection(subKey)}
+                    className="sub-relationship"
+                  >
                     {subKey.charAt(0).toUpperCase() + subKey.slice(1)}
                   </li>
                 ))}
               </ul>
             )}
-            {characterRef && (
-              <li onClick={() => scrollToSection("referencesRef")}>
-                {contentKeys.length + (relationships ? 2 : 1)}. References
-              </li>
-            )}
+          </li>
+          <li onClick={() => scrollToSection("referencesRef")}>
+            {contentKeys.length + (relationships ? 2 : 1)}. References
           </li>
         </ul>
       )}

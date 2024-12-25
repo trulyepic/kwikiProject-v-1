@@ -3,7 +3,7 @@ import { convertToArray } from "../../../util/convertoArray";
 import RelationList from "./RelationList";
 
 const CharacterDetailPanel = ({ characterData }) => {
-  console.log("character data: ", characterData);
+  console.log("character data in CharacterDetailPanel.js: ", characterData);
   if (!characterData) return null;
   const {
     name,
@@ -17,9 +17,9 @@ const CharacterDetailPanel = ({ characterData }) => {
     loveInterest,
     enemies,
     playedBy,
-    description,
     occupation,
     affiliation,
+    wikiUrl,
   } = characterData;
   const BASE_URL = "http://localhost:8080";
   const parsedFamily = family ? JSON.parse(family) : null;
@@ -28,6 +28,7 @@ const CharacterDetailPanel = ({ characterData }) => {
   const parsedLoveInterest = loveInterest ? JSON.parse(loveInterest) : null;
 
   const occupationArray = convertToArray(occupation);
+  console.log("wikiUrl: ", wikiUrl);
 
   return (
     <div className="character_info">
@@ -115,7 +116,15 @@ const CharacterDetailPanel = ({ characterData }) => {
           </div>
           <div className="detail_item">
             <span className="character_label">Played by:</span>
-            <span className="character_value">{playedBy}</span>
+            <span className="character_value">
+              {wikiUrl ? (
+                <a href={wikiUrl} target="_blank" rel="noopener noreferrer">
+                  {playedBy}
+                </a>
+              ) : (
+                playedBy
+              )}
+            </span>
           </div>
         </div>
       </div>

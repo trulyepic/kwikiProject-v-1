@@ -133,6 +133,7 @@ html {
 .character_value {
   color: #0053ac;
   text-align: right;
+  /* text-align: center; */
   line-height: 1.5;
   font-size: 12px;
   margin-right: 6px;
@@ -180,6 +181,11 @@ html {
   border: 1px solid #9696aa;
   /* background-color: #f9f9f9; */
   width: 50%;
+}
+
+.sub-relationship {
+  font-size: 15px !important;
+  font-style: oblique !important;
 }
 
 .character_table_of_contents ul li:hover {

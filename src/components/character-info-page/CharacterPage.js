@@ -31,7 +31,7 @@ const CharacterPage = () => {
     }
   }, [characterData.id]);
 
-  console.log("character Data: ", characterData);
+  console.log("character Data in CharacterPage: ", characterData);
 
   return (
     <div className="character_page_wrapper">
