@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
 import { Spin } from "antd";
 import Rating from "./ratings/Rating";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 const characterData = [
   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -34,6 +35,7 @@ const DetailPage = () => {
   const [groupedCharacters, setGroupedCharacters] = useState({});
   const [hasOtherCharacters, setHasOtherCharacters] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [exposedSections, setExposedSections] = useState({});
 
   console.log("series id: ", seriesId);
   console.log("series data in detail page: ", seriesData);
@@ -72,6 +74,7 @@ const DetailPage = () => {
             affiliation: character.affiliation,
             role: character.role,
             referencesData: character.referencesData,
+            wikiUrl: character.playedBy?.wikiUrl,
           };
 
           if (character.role === "main character") {
@@ -118,6 +121,14 @@ const DetailPage = () => {
       },
     });
   };
+
+  const handleExposedCharacters = (affiliation) => {
+    setExposedSections((prev) => ({
+      ...prev,
+      [affiliation]: !prev[affiliation], //toggle the specific affiliation
+    }));
+  };
+
   const BASE_URL = "http://localhost:8080";
   return (
     <div className="series_detail_page_wrapper">
@@ -167,28 +178,42 @@ const DetailPage = () => {
                   }
                   return (
                     <div key={affiliation}>
-                      <h3 className="characters_title">{affiliation}</h3>
-                      <div className="character_grid">
-                        {characters
-                          .sort((charA, charB) =>
-                            charA.name.localeCompare(charB.name)
-                          )
-                          .map((character) => (
-                            <div
-                              key={character.id}
-                              className="character_card"
-                              onClick={() => handleCharacterClick(character)}
-                            >
-                              <img src={character.img} alt={character.name} />
-                              <p>{character.name}</p>
-                              {character.role !== null && (
-                                <span className="character_name_subtext">
-                                  ({character.role})
-                                </span>
-                              )}
-                            </div>
-                          ))}
+                      <div className="detail_character_header_container">
+                        <h3 className="characters_title">{affiliation}</h3>
+                        <div
+                          className="detail_character_dropdown"
+                          onClick={() => handleExposedCharacters(affiliation)}
+                        >
+                          {exposedSections[affiliation] ? (
+                            <DownOutlined />
+                          ) : (
+                            <UpOutlined />
+                          )}
+                        </div>
                       </div>
+                      {exposedSections[affiliation] && (
+                        <div className="character_grid">
+                          {characters
+                            .sort((charA, charB) =>
+                              charA.name.localeCompare(charB.name)
+                            )
+                            .map((character) => (
+                              <div
+                                key={character.id}
+                                className="character_card"
+                                onClick={() => handleCharacterClick(character)}
+                              >
+                                <img src={character.img} alt={character.name} />
+                                <p>{character.name}</p>
+                                {character.role !== null && (
+                                  <span className="character_name_subtext">
+                                    ({character.role})
+                                  </span>
+                                )}
+                              </div>
+                            ))}
+                        </div>
+                      )}
                     </div>
                   );
                 })}

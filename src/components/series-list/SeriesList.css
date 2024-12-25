@@ -191,7 +191,7 @@ header h1 {
 }
 
 .ant-input-affix-wrapper .ant-input-clear-icon:hover {
-  color: rgba(132, 149, 201, 0.815); /* Clear icon color */
+  color: rgba(132, 149, 201, 0.815) !important;
 }
 
 .series-card {

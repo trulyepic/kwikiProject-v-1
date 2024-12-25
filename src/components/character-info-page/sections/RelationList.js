@@ -69,6 +69,8 @@ const RelationList = ({ data }) => {
         occupation,
         affiliation,
         role,
+        loveInterest,
+        referencesData,
       } = character;
 
       const characterData = {
@@ -87,6 +89,9 @@ const RelationList = ({ data }) => {
         occupation,
         affiliation,
         role,
+        loveInterest,
+        referencesData,
+        wikiUrl: playedBy?.wikiUrl,
       };
 
       navigate(`/character/${name}`, {
