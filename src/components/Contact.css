@@ -1,0 +1,40 @@
+/* Contact.css */
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.contact-text {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Contact.css */
+.ant-form-item-label > label {
+  width: 100px;
+  text-align: left;
+  color: #fff !important;
+  font-family: Roboto !important;
+}
+
+.ant-form-item {
+  /* display: flex; */
+  align-items: center;
+}
+
+.contact-input {
+  background: transparent !important;
+}
+
+.ant-input.contact-input {
+  color: #fff !important;
+}
+
+.contact-button-wrapper {
+  text-align: center;
+}
