@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DetailPage.css";
 import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
-import { Spin } from "antd";
+import { notification, Spin } from "antd";
 import Rating from "./ratings/Rating";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
@@ -75,6 +75,7 @@ const DetailPage = () => {
             role: character.role,
             referencesData: character.referencesData,
             wikiUrl: character.playedBy?.wikiUrl,
+            hasData: character.hasData,
           };
 
           if (character.role === "main character") {
@@ -114,6 +115,23 @@ const DetailPage = () => {
   };
 
   const handleCharacterClick = (character) => {
+    console.log("character: ", character)
+    if(!character.hasData){
+      notification.info({
+        message: (
+          <span className="notification-text">Notice!</span>
+        ),
+        description: (
+          <span className="notification-text">
+            Data is currently not available for this character, please try again later.
+          </span>
+        ),
+        placement: "topRight",
+        className: "notification-container",
+      })
+      return
+    }
+
     navigate(`/character/${character.name}`, {
       state: {
         // image: character.img,
@@ -128,7 +146,6 @@ const DetailPage = () => {
       [affiliation]: !prev[affiliation], //toggle the specific affiliation
     }));
   };
-
   const BASE_URL = "http://localhost:8080";
   return (
     <div className="series_detail_page_wrapper">

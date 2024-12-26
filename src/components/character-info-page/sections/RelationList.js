@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCharacterDetailByName } from "../../../api/api";
 import { use } from "react";
+import { notification } from "antd";
 
 const RelationList = ({ data }) => {
   const [clickableNames, setClickableNames] = useState({});
@@ -71,6 +72,7 @@ const RelationList = ({ data }) => {
         role,
         loveInterest,
         referencesData,
+        hasData,
       } = character;
 
       const characterData = {
@@ -92,7 +94,24 @@ const RelationList = ({ data }) => {
         loveInterest,
         referencesData,
         wikiUrl: playedBy?.wikiUrl,
+        hasData,
       };
+
+      if(!hasData){
+        notification.info({
+          message: (
+            <span className="notification-text">Notice!</span>
+          ),
+          description: (
+            <span className="notification-text">
+              Data is currently not available for this character, please try again later.
+            </span>
+          ),
+          placement: "topRight",
+          className: "notification-container",
+        })
+        return
+      }
 
       navigate(`/character/${name}`, {
         state: {
