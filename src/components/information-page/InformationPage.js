@@ -12,8 +12,10 @@ const InformationPage = () => {
   const { title } = useParams();
   const location = useLocation();
   const [seriesContent, setSeriesContent] = useState([]);
+  
 
-  const seriesData = location.state?.seriesData;
+  const seriesData = location.state?.seriesData || JSON.parse(localStorage.getItem("selectedSeries"));
+
 
   useEffect(() => {
     const fetchSeriesDetails = async () => {

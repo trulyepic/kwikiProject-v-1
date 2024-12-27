@@ -3,9 +3,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DetailPage.css";
 import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
-import { notification, Spin } from "antd";
+import { Spin } from "antd";
 import Rating from "./ratings/Rating";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { showErrorNotification, showInfoNotification } from "../util/Notification";
 
 const characterData = [
   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -27,20 +28,43 @@ const DetailPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const titleImage = location.state?.img || "https://via.placeholder.com/300";
-  const seriesData = location.state?.seriesData;
+  // const titleImage = location.state?.img || "https://via.placeholder.com/300";
+  // const seriesData = location.state?.seriesData;
+  // const seriesId = location.state?.seriesId;
 
-  const seriesId = location.state?.seriesId;
   const [mainCharacters, setMainCharacters] = useState([]);
   const [groupedCharacters, setGroupedCharacters] = useState({});
   const [hasOtherCharacters, setHasOtherCharacters] = useState(false);
   const [loading, setLoading] = useState(true);
   const [exposedSections, setExposedSections] = useState({});
+  const [seriesData, setSeriesData] = useState(null);
+  const [seriesId, setSeriesId] = useState(null);
+  const [titleImage, setTitleImage] = useState(null);
+  const [error, setError] = useState(null);
 
-  console.log("series id: ", seriesId);
   console.log("series data in detail page: ", seriesData);
 
   useEffect(() => {
+    //retrieve series data from location.state or local storage
+    const storedSeries = localStorage.getItem("selectedSeries");
+
+    if(!storedSeries){
+      setError("Series data not available. Please navigate from the home page.");
+      setLoading(false);
+      return;
+    }
+
+    const parsedSeries = JSON.parse(storedSeries);
+
+    setSeriesData(parsedSeries);
+    setSeriesId(parsedSeries.id);
+    setTitleImage(parsedSeries.img);
+    
+  }, []);
+
+  useEffect(() => {
+    if(!seriesId) return;
+
     const fetchCharacters = async () => {
       try {
         const characters = await getCharacterBySeriesId(seriesId);
@@ -56,10 +80,7 @@ const DetailPage = () => {
           const characterData = {
             id: character.id,
             name: character.name,
-            img:
-              character.imageUrl === null
-                ? "https://via.placeholder.com/100"
-                : character.imageUrl,
+            img:character.imageUrl || "https://via.placeholder.com/100",
             gender: character.gender,
             age: character.age,
             species: character.species,
@@ -108,6 +129,12 @@ const DetailPage = () => {
     }
   }, [seriesId]);
 
+  if (loading) return <Spin size="large" tip="Loading details..." />;
+  if (error) {
+    showErrorNotification("Error Fetching Data!", error)
+    return;
+  }
+
   const handleTitleClick = () => {
     navigate(`/information/${title}`, {
       state: { seriesData },
@@ -117,20 +144,13 @@ const DetailPage = () => {
   const handleCharacterClick = (character) => {
     console.log("character: ", character)
     if(!character.hasData){
-      notification.info({
-        message: (
-          <span className="notification-text">Notice!</span>
-        ),
-        description: (
-          <span className="notification-text">
-            Data is currently not available for this character, please try again later.
-          </span>
-        ),
-        placement: "topRight",
-        className: "notification-container",
-      })
+      showInfoNotification("Notice!", 
+        "Data is currently not available for this character, please try again later.")
       return
     }
+
+     // Save character data to local storage
+  localStorage.setItem("selectedCharacter", JSON.stringify(character));
 
     navigate(`/character/${character.name}`, {
       state: {

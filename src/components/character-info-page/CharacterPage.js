@@ -6,17 +6,48 @@ import CharacterContent from "./sections/CharacterContent";
 import CharacterAdditionalContent from "./sections/CharacterAdditionalContent";
 import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 import { getCharacterDetailByCharacterId } from "../../api/api";
+import { notification, Spin } from "antd";
+import { showErrorNotification } from "../../util/Notification";
 
 const CharacterPage = () => {
   const { characterName } = useParams();
   const location = useLocation();
   const [characterContent, setCharacterContent] = useState({});
+  const [characterData, setCharacterData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   // const characterImage =
   //   location.state?.image || "https://via.placeholder.com/200";
 
-  const characterData = location.state?.characterData;
+  // const characterData = location.state?.characterData;
+
+
+  useEffect(()=> {
+    const storedCharacter = localStorage.getItem("selectedCharacter");
+
+    const characterFromLocation = location.state?.characterData;
+
+    if(characterFromLocation){
+      setCharacterData(characterFromLocation);
+    } else if (storedCharacter) {
+      const parsedCharacter = JSON.parse(storedCharacter);
+      if (parsedCharacter.name === characterName){
+        setCharacterData(parsedCharacter);
+      }else {
+        setError("Character data not available. Please navigate from the series page.");
+        setLoading(false);
+      }
+
+      }else {
+        setError("Character data not available. Please navigate from the series page.");
+        setLoading(false);
+      }
+    
+  }, [characterName, location.state]);
 
   useEffect(() => {
+    if(!characterData) return;
+
     const fetchContent = async () => {
       try {
         const content = await getCharacterDetailByCharacterId(characterData.id);
@@ -24,12 +55,21 @@ const CharacterPage = () => {
         setCharacterContent(content);
       } catch (error) {
         console.error("Failed to fetch content: ", error);
+      } finally {
+        setLoading(false);
       }
     };
-    if (characterData.id) {
-      fetchContent();
-    }
-  }, [characterData.id]);
+    // if (characterData.id) {
+    //   fetchContent();
+    // }
+    fetchContent();
+  }, [characterData]);
+
+  if (loading) return <Spin size="large" tip="Loading character details..."/>
+  if (error) {
+    showErrorNotification("Error Notice", error);
+    return;
+  }
 
   console.log("character Data in CharacterPage: ", characterData);
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCharacterDetailByName } from "../../../api/api";
 import { use } from "react";
 import { notification } from "antd";
+import { showInfoNotification } from "../../../util/Notification";
 
 const RelationList = ({ data }) => {
   const [clickableNames, setClickableNames] = useState({});
@@ -98,20 +99,23 @@ const RelationList = ({ data }) => {
       };
 
       if(!hasData){
-        notification.info({
-          message: (
-            <span className="notification-text">Notice!</span>
-          ),
-          description: (
-            <span className="notification-text">
-              Data is currently not available for this character, please try again later.
-            </span>
-          ),
-          placement: "topRight",
-          className: "notification-container",
-        })
+        showInfoNotification("Notice!", "Data is currently not available for this character, please try again later.")
+        // notification.info({
+        //   message: (
+        //     <span className="notification-text">Notice!</span>
+        //   ),
+        //   description: (
+        //     <span className="notification-text">
+        //       Data is currently not available for this character, please try again later.
+        //     </span>
+        //   ),
+        //   placement: "topRight",
+        //   className: "notification-container",
+        // })
         return
       }
+
+    localStorage.setItem("selectedCharacter", JSON.stringify(characterData));
 
       navigate(`/character/${name}`, {
         state: {

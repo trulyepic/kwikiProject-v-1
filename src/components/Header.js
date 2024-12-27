@@ -12,6 +12,7 @@ const Header = () => {
         <Link to="/">Home</Link>
         <Link to="/seriesList?type=series">Series</Link>
         <Link to="/contact">Contact Us</Link>
+        <Link>Discord</Link>
         {/* <Link to="/filtered?type=movies">Movies</Link> */}
       </nav>
       <div className="search-icon">
