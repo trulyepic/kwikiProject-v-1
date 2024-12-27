@@ -9,6 +9,13 @@ const GridItem = ({ id, title, img, seriesData }) => {
   const handleClick = () => {
     // Find the specific series data for the clicked series
     const selectedSeriesData = seriesData.find((series) => series.id === id);
+
+    //save the selected series data to local storage
+    localStorage.setItem(
+      "selectedSeries", 
+      JSON.stringify({ ...selectedSeriesData, img})
+    );
+
     navigate(`/series/${title}`, {
       state: { img, seriesId: id, seriesData: selectedSeriesData },
     });
