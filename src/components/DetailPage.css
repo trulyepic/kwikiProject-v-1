@@ -89,6 +89,11 @@ p {
   height: 59px;
 }
 
+.detail_character_header_container:hover{
+  color: #007bff;
+  cursor: pointer;
+}
+
 .characters_title {
   /* background-color: #20232a; */
   /* color: white; */

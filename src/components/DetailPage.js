@@ -215,11 +215,13 @@ const DetailPage = () => {
                   }
                   return (
                     <div key={affiliation}>
-                      <div className="detail_character_header_container">
+                      <div className="detail_character_header_container" 
+                        onClick={() => handleExposedCharacters(affiliation)}
+                      >
                         <h3 className="characters_title">{affiliation}</h3>
                         <div
                           className="detail_character_dropdown"
-                          onClick={() => handleExposedCharacters(affiliation)}
+                          // onClick={() => handleExposedCharacters(affiliation)}
                         >
                           {exposedSections[affiliation] ? (
                             <DownOutlined />
