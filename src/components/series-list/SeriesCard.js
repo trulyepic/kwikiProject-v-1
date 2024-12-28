@@ -8,6 +8,13 @@ const SeriesCard = ({ title, genre, imageUrl, id, seriesData }) => {
   const BASE_URL = "http://localhost:8080";
 
   const handleCardClick = () => {
+
+    // Save series data to localStorage
+  localStorage.setItem(
+    "selectedSeries",
+    JSON.stringify({ img: imageUrl, seriesId: id, ...seriesData })
+  );
+  
     navigate(`/series/${title}`, {
       state: { img: `${imageUrl}`, seriesId: id, seriesData },
     });
