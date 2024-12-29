@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api";
+// const BASE_URL = "http://localhost:8080/api";
+
+const BASE_URL = "http://starwiki.us-west-1.elasticbeanstalk.com/api";
 
 export const getSeriesDetail = async () => {
   try {
