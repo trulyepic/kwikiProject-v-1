@@ -10,6 +10,7 @@ import CharacterPage from "./components/character-info-page/CharacterPage";
 import SeriesList from "./components/series-list/SeriesList";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 element={<CharacterPage />}
               />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Route>
           </Routes>
         </div>
