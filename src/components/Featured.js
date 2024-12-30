@@ -9,8 +9,11 @@ const Featured = () => {
       style={{ backgroundImage: `url(${featuredImage})` }}
     >
       <div className="featured_content">
-        <h2>K-Wiki</h2>
-        <p>Explore information on all your favorite Korean shows</p>
+        <h2>Star K-wiki Hub</h2>
+        <p>
+          Explore information on all your favorite Korean shows and Star them
+          up!
+        </p>
       </div>
     </section>
   );
