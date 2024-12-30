@@ -1,3 +1,5 @@
+/* global gtag */
+
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
@@ -11,8 +13,71 @@ import SeriesList from "./components/series-list/SeriesList";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
+import CookieConsent from "react-cookie-consent";
 
 function App() {
+  const [cookies, setCookie] = useCookies(["analytics", "marketing"]);
+
+  useEffect(() => {
+    console.log("Current cookies:", cookies);
+    // Enable or disable analytics based on cookie
+    if (cookies.analytics === true) {
+      console.log("Analytics cookie found, initializing consent as granted.");
+      handleConsent(true);
+    } else {
+      console.log(
+        "Analytics cookie not found, initializing consent as denied."
+      );
+      handleConsent(false);
+    }
+
+    // if (cookies.marketing === "true") {
+    //   initializeMarketing();
+    // }
+  }, [cookies]);
+
+  const handleConsent = (analyticsConsent) => {
+    // if (typeof gtag === "function") {
+    //   gtag("consent", "update", {
+    //     ad_storage: accepted ? "granted" : "denied",
+    //     analytics_storage: accepted ? "granted" : "denied",
+    //   });
+    //   console.log(`Google Analytics consent set to: ${accepted}`);
+    // }
+    gtag("consent", "update", {
+      ad_storage: analyticsConsent ? "granted" : "denied",
+      analytics_storage: analyticsConsent ? "granted" : "denied",
+    });
+    console.log(`Google Analytics consent set to: ${analyticsConsent}`);
+  };
+
+  const initializeAnalytics = () => {
+    // Google Analytics initialization using gtag.js
+    // const script = document.createElement("script");
+    // script.async = true;
+    // script.src = "https://www.googletagmanager.com/gtag/js?id=G-2DZV8XEDJY";
+    // document.head.appendChild(script);
+    // script.onload = () => {
+    //   window.dataLayer = window.dataLayer || [];
+    //   function gtag() {
+    //     window.dataLayer.push(arguments);
+    //   }
+    //   gtag("js", new Date());
+    //   gtag("config", "G-2DZV8XEDJY");
+    //   console.log("Google Analytics initialized.");
+    // };
+    // ReactGA.initialize("G-2DZV8XEDJY");
+    // ReactGA.pageview(window.location.pathname + window.location.search);
+    // console.log("Google Analytics initialized");
+  };
+
+  const initializeMarketing = () => {
+    //todo: Add marketing tools initialization code here, e.g., Facebook Pixel.
+  };
+
   return (
     <Router>
       <div className="app">
@@ -51,6 +116,37 @@ function App() {
           </Routes>
         </div>
         <Footer />
+        {/* Cookie Consent Banner */}
+        <CookieConsent
+          onAccept={(acceptedByScrolling) => {
+            setCookie("analytics", "true", {
+              path: "/",
+              maxAge: 30 * 24 * 60 * 60,
+            });
+            // initializeAnalytics();
+            // setCookie("marketing", "true", {
+            //   path: "/",
+            //   maxAge: 30 * 24 * 60 * 60,
+            // });
+
+            // initializeMarketing();
+          }}
+          location="bottom"
+          buttonText="Accept All"
+          cookieName="analytics"
+          style={{ background: "#2B373B" }}
+          buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+          expires={150}
+        >
+          We use cookies to improve your experience and analyze website traffic.
+          By clicking "Accept All," you consent to the use of cookies for
+          analytics and marketing purposes. For more information, please review
+          our{" "}
+          <a href="/privacy-policy" style={{ color: "#FFD700" }}>
+            Privacy Policy
+          </a>
+          .
+        </CookieConsent>
       </div>
     </Router>
   );
