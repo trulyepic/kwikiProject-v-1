@@ -1,12 +1,16 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import logoImage from "./images/transLogo.png";
 
 const Header = () => {
   return (
     <header className="app_header">
       <div className="logo">
-        <h1>version 1-0 KWiki</h1>
+        <Link to="/" className="logo-link">
+          <img src={logoImage} alt="logo" className="logo-image" />
+          <h1>Star K-wiki</h1>
+        </Link>
       </div>
       <nav className="menu">
         <Link to="/">Home</Link>
