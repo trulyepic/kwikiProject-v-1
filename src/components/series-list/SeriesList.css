@@ -221,3 +221,15 @@ header h1 {
   padding: 6px;
   font-size: 1rem;
 }
+
+.series-card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.series-card-image:hover {
+  transform: scale(1.05);
+}

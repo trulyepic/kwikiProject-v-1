@@ -50,3 +50,15 @@
     height: 250px;
   }
 } */
+
+.grid_item_image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.grid_item_image:hover {
+  transform: scale(1.05);
+}
