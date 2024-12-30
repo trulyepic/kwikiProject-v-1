@@ -6,22 +6,25 @@ import { getCharacterBySeriesId } from "../api/api";
 import { Spin } from "antd";
 import Rating from "./ratings/Rating";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import { showErrorNotification, showInfoNotification } from "../util/Notification";
+import {
+  showErrorNotification,
+  showInfoNotification,
+} from "../util/Notification";
 
-const characterData = [
-  { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
-  { name: "Daryl Dixon", img: "https://via.placeholder.com/100" },
-  { name: "Carol Peletier", img: "https://via.placeholder.com/100" },
-  { name: "Maggie Rhee", img: "https://via.placeholder.com/100" },
-  { name: "Michonne Grimes", img: "https://via.placeholder.com/100" },
-  { name: "Rosita Espinosa", img: "https://via.placeholder.com/100" },
-  { name: "Judith Grimes", img: "https://via.placeholder.com/100" },
-  { name: "Eugene Porter", img: "https://via.placeholder.com/100" },
-  { name: "Carl Grimes", img: "https://via.placeholder.com/100" },
-  { name: "Glenn Rhee", img: "https://via.placeholder.com/100" },
-  { name: "Gabriel Stokes", img: "https://via.placeholder.com/100" },
-  { name: "Aaron", img: "https://via.placeholder.com/100" },
-];
+// const characterData = [
+//   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
+//   { name: "Daryl Dixon", img: "https://via.placeholder.com/100" },
+//   { name: "Carol Peletier", img: "https://via.placeholder.com/100" },
+//   { name: "Maggie Rhee", img: "https://via.placeholder.com/100" },
+//   { name: "Michonne Grimes", img: "https://via.placeholder.com/100" },
+//   { name: "Rosita Espinosa", img: "https://via.placeholder.com/100" },
+//   { name: "Judith Grimes", img: "https://via.placeholder.com/100" },
+//   { name: "Eugene Porter", img: "https://via.placeholder.com/100" },
+//   { name: "Carl Grimes", img: "https://via.placeholder.com/100" },
+//   { name: "Glenn Rhee", img: "https://via.placeholder.com/100" },
+//   { name: "Gabriel Stokes", img: "https://via.placeholder.com/100" },
+//   { name: "Aaron", img: "https://via.placeholder.com/100" },
+// ];
 
 const DetailPage = () => {
   const { title } = useParams();
@@ -48,8 +51,10 @@ const DetailPage = () => {
     //retrieve series data from location.state or local storage
     const storedSeries = localStorage.getItem("selectedSeries");
 
-    if(!storedSeries){
-      setError("Series data not available. Please navigate from the home page.");
+    if (!storedSeries) {
+      setError(
+        "Series data not available. Please navigate from the home page."
+      );
       setLoading(false);
       return;
     }
@@ -59,11 +64,10 @@ const DetailPage = () => {
     setSeriesData(parsedSeries);
     setSeriesId(parsedSeries.id);
     setTitleImage(parsedSeries.img);
-    
   }, []);
 
   useEffect(() => {
-    if(!seriesId) return;
+    if (!seriesId) return;
 
     const fetchCharacters = async () => {
       try {
@@ -80,7 +84,7 @@ const DetailPage = () => {
           const characterData = {
             id: character.id,
             name: character.name,
-            img:character.imageUrl || "https://via.placeholder.com/100",
+            img: character.imageUrl || "https://via.placeholder.com/100",
             gender: character.gender,
             age: character.age,
             species: character.species,
@@ -131,7 +135,7 @@ const DetailPage = () => {
 
   if (loading) return <Spin size="large" tip="Loading details..." />;
   if (error) {
-    showErrorNotification("Error Fetching Data!", error)
+    showErrorNotification("Error Fetching Data!", error);
     return;
   }
 
@@ -142,15 +146,17 @@ const DetailPage = () => {
   };
 
   const handleCharacterClick = (character) => {
-    console.log("character: ", character)
-    if(!character.hasData){
-      showInfoNotification("Notice!", 
-        "Data is currently not available for this character, please try again later.")
-      return
+    console.log("character: ", character);
+    if (!character.hasData) {
+      showInfoNotification(
+        "Notice!",
+        "Data is currently not available for this character, please try again later."
+      );
+      return;
     }
 
-     // Save character data to local storage
-  localStorage.setItem("selectedCharacter", JSON.stringify(character));
+    // Save character data to local storage
+    localStorage.setItem("selectedCharacter", JSON.stringify(character));
 
     navigate(`/character/${character.name}`, {
       state: {
@@ -171,94 +177,101 @@ const DetailPage = () => {
     <div className="series_detail_page_wrapper">
       <Spin spinning={loading} size="large" tip="Loading details...">
         <div className="series_detail_page">
-          <div className="content">
-            <h2 className="main_title">Series</h2>
-            <div className="detail_title_img">
-              <h2 className="title" onClick={handleTitleClick}>
-                {title}
-              </h2>
+          <div className="main_panel_exclude_side_panel">
+            <div className="content">
+              <h2 className="main_title">Series</h2>
+              <div className="detail_title_img">
+                <h2 className="title" onClick={handleTitleClick}>
+                  {title}
+                </h2>
 
-              <img src={titleImage} alt="title" onClick={handleTitleClick} />
-              <Rating seriesId={seriesData.id} />
-            </div>
-
-            <div className="characters_section">
-              <h3 className="characters_title">Main Characters</h3>
-              <div className="character_grid">
-                {/* {characterData.map((character, index) => ( */}
-                {mainCharacters.map((character, index) => (
-                  <div
-                    key={index}
-                    className="character_card"
-                    onClick={() => handleCharacterClick(character)}
-                  >
-                    <img src={`${character.img}`} alt={character.name} />
-                    <span>{character.name}</span>
-                    <span className="character_name_subtext">
-                      ({character.affiliation})
-                    </span>
-                  </div>
-                ))}
+                <img src={titleImage} alt="title" onClick={handleTitleClick} />
+                <Rating seriesId={seriesData.id} />
               </div>
-              {/* Other Characters Grouped by Affiliation */}
 
-              {Object.entries(groupedCharacters)
-                // Sort affiliations alphabetically, but keep "Others" at the end
-                .sort(([a], [b]) => {
-                  if (a === "Others") return 1;
-                  if (b === "Others") return -1;
-                  return a.localeCompare(b);
-                })
-                .map(([affiliation, characters]) => {
-                  if (affiliation === "Other" && !hasOtherCharacters) {
-                    return null; // skip rendering "others" if no unaffiliated characters exist
-                  }
-                  return (
-                    <div key={affiliation}>
-                      <div className="detail_character_header_container" 
-                        onClick={() => handleExposedCharacters(affiliation)}
-                      >
-                        <h3 className="characters_title">{affiliation}</h3>
-                        <div
-                          className="detail_character_dropdown"
-                          // onClick={() => handleExposedCharacters(affiliation)}
-                        >
-                          {exposedSections[affiliation] ? (
-                            <DownOutlined />
-                          ) : (
-                            <UpOutlined />
-                          )}
-                        </div>
-                      </div>
-                      {exposedSections[affiliation] && (
-                        <div className="character_grid">
-                          {characters
-                            .sort((charA, charB) =>
-                              charA.name.localeCompare(charB.name)
-                            )
-                            .map((character) => (
-                              <div
-                                key={character.id}
-                                className="character_card"
-                                onClick={() => handleCharacterClick(character)}
-                              >
-                                <img src={character.img} alt={character.name} />
-                                <p>{character.name}</p>
-                                {character.role !== null && (
-                                  <span className="character_name_subtext">
-                                    ({character.role})
-                                  </span>
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                      )}
+              <div className="characters_section">
+                <h3 className="characters_title">Main Characters</h3>
+                <div className="character_grid">
+                  {/* {characterData.map((character, index) => ( */}
+                  {mainCharacters.map((character, index) => (
+                    <div
+                      key={index}
+                      className="character_card"
+                      onClick={() => handleCharacterClick(character)}
+                    >
+                      <img src={`${character.img}`} alt={character.name} />
+                      <span>{character.name}</span>
+                      <span className="character_name_subtext">
+                        ({character.affiliation})
+                      </span>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
+                {/* Other Characters Grouped by Affiliation */}
+
+                {Object.entries(groupedCharacters)
+                  // Sort affiliations alphabetically, but keep "Others" at the end
+                  .sort(([a], [b]) => {
+                    if (a === "Others") return 1;
+                    if (b === "Others") return -1;
+                    return a.localeCompare(b);
+                  })
+                  .map(([affiliation, characters]) => {
+                    if (affiliation === "Other" && !hasOtherCharacters) {
+                      return null; // skip rendering "others" if no unaffiliated characters exist
+                    }
+                    return (
+                      <div key={affiliation}>
+                        <div
+                          className="detail_character_header_container"
+                          onClick={() => handleExposedCharacters(affiliation)}
+                        >
+                          <h3 className="characters_title">{affiliation}</h3>
+                          <div
+                            className="detail_character_dropdown"
+                            // onClick={() => handleExposedCharacters(affiliation)}
+                          >
+                            {exposedSections[affiliation] ? (
+                              <DownOutlined />
+                            ) : (
+                              <UpOutlined />
+                            )}
+                          </div>
+                        </div>
+                        {exposedSections[affiliation] && (
+                          <div className="character_grid">
+                            {characters
+                              .sort((charA, charB) =>
+                                charA.name.localeCompare(charB.name)
+                              )
+                              .map((character) => (
+                                <div
+                                  key={character.id}
+                                  className="character_card"
+                                  onClick={() =>
+                                    handleCharacterClick(character)
+                                  }
+                                >
+                                  <img
+                                    src={character.img}
+                                    alt={character.name}
+                                  />
+                                  <p>{character.name}</p>
+                                  {character.role !== null && (
+                                    <span className="character_name_subtext">
+                                      ({character.role})
+                                    </span>
+                                  )}
+                                </div>
+                              ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
-
           <div className="side_panel">
             <div className="panel_item">
               <h3>Discussion Threads</h3>

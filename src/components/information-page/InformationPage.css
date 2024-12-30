@@ -290,3 +290,79 @@ html {
   font-size: 1rem;
   color: #333;
 }
+
+/* Responsive Design */
+
+/* Medium screens (tablets, smaller desktops) */
+@media (max-width: 1024px) {
+  .information_page_content {
+    flex-direction: column; /* Stack content vertically */
+  }
+
+  .information_page {
+    max-width: 100%; /* Full width */
+    width: 100%;
+  }
+
+  .side_panel {
+    margin-left: 0; /* Remove side margin */
+    margin-top: 20px;
+    max-width: 100%; /* Full width */
+  }
+
+  .details_box {
+    width: 100%; /* Stretch details box */
+  }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 768px) {
+  .page_header {
+    font-size: 22px; /* Slightly smaller header */
+  }
+
+  .main_content {
+    flex-direction: column; /* Stack content vertically */
+  }
+
+  .summary_text {
+    font-size: 14px; /* Smaller font for summary */
+  }
+
+  .panel_item {
+    font-size: 0.9rem; /* Adjust font size */
+  }
+
+  .details_box {
+    width: 100%; /* Full width */
+  }
+}
+
+/* Extra small screens (very small mobile devices) */
+@media (max-width: 480px) {
+  .information_page_wrapper {
+    padding: 10px; /* Reduce padding */
+  }
+
+  .page_header {
+    font-size: 20px; /* Smaller header font */
+    text-align: center; /* Center align header */
+  }
+
+  .main_content {
+    gap: 10px; /* Reduce gap */
+  }
+
+  .side_panel {
+    padding: 10px; /* Reduce padding */
+    gap: 10px;
+  }
+
+  .panel_item {
+    font-size: 0.8rem; /* Reduce font size */
+  }
+
+  .additional_content {
+    font-size: 14px; /* Smaller font for additional content */
+  }
+}

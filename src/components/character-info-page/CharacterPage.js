@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "./CharacterPage.css";
-import Footer from "../Footer";
 import CharacterContent from "./sections/CharacterContent";
 import CharacterAdditionalContent from "./sections/CharacterAdditionalContent";
 import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 import { getCharacterDetailByCharacterId } from "../../api/api";
-import { notification, Spin } from "antd";
+import { Spin } from "antd";
 import { showErrorNotification } from "../../util/Notification";
 
 const CharacterPage = () => {
@@ -21,32 +20,33 @@ const CharacterPage = () => {
 
   // const characterData = location.state?.characterData;
 
-
-  useEffect(()=> {
+  useEffect(() => {
     const storedCharacter = localStorage.getItem("selectedCharacter");
 
     const characterFromLocation = location.state?.characterData;
 
-    if(characterFromLocation){
+    if (characterFromLocation) {
       setCharacterData(characterFromLocation);
     } else if (storedCharacter) {
       const parsedCharacter = JSON.parse(storedCharacter);
-      if (parsedCharacter.name === characterName){
+      if (parsedCharacter.name === characterName) {
         setCharacterData(parsedCharacter);
-      }else {
-        setError("Character data not available. Please navigate from the series page.");
+      } else {
+        setError(
+          "Character data not available. Please navigate from the series page."
+        );
         setLoading(false);
       }
-
-      }else {
-        setError("Character data not available. Please navigate from the series page.");
-        setLoading(false);
-      }
-    
+    } else {
+      setError(
+        "Character data not available. Please navigate from the series page."
+      );
+      setLoading(false);
+    }
   }, [characterName, location.state]);
 
   useEffect(() => {
-    if(!characterData) return;
+    if (!characterData) return;
 
     const fetchContent = async () => {
       try {
@@ -65,7 +65,7 @@ const CharacterPage = () => {
     fetchContent();
   }, [characterData]);
 
-  if (loading) return <Spin size="large" tip="Loading character details..."/>
+  if (loading) return <Spin size="large" tip="Loading character details..." />;
   if (error) {
     showErrorNotification("Error Notice", error);
     return;

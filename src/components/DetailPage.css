@@ -14,6 +14,7 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: auto;
 }
 
 .series_detail_page {
@@ -23,6 +24,11 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   flex-grow: 1;
+  flex-wrap: wrap;
+}
+.main_panel_exclude_side_panel {
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
@@ -89,7 +95,7 @@ p {
   height: 59px;
 }
 
-.detail_character_header_container:hover{
+.detail_character_header_container:hover {
   color: #007bff;
   cursor: pointer;
 }
@@ -119,9 +125,33 @@ p {
 .character_grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  /* grid-template-columns: repeat(
+    auto-fit,
+    minmax(100px, 1fr)
+  );  */
   gap: 15px;
   justify-items: center;
   /* margin-top: 10px; */
+}
+
+/* Adjust grid for smaller screens */
+@media (max-width: 1024px) {
+  .character_grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .character_grid {
+    margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .character_grid {
+    grid-template-columns: 1fr; /* Single column for very small screens */
+  }
 }
 
 .character_card {
@@ -168,6 +198,18 @@ p {
   text-align: center;
 } */
 
+.side_panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  /* background-color: #d9d9d9; */
+  margin-left: 20px;
+  width: 100%; /* Full width for smaller screens */
+  max-width: 300px; /* Restrict width on larger screens */
+}
+
 .panel_item h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
@@ -192,3 +234,41 @@ p {
   max-width: 1200px;
   margin: 0 auto;
 } */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .series_detail_page {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .side_panel {
+    margin-left: 0;
+    margin-top: 20px;
+    width: 100%; /* Take up full width on smaller screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .characters_title {
+    font-size: 20px;
+    /* 4 columns for medium screens */
+    transition: transform 0.3s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  .characters_title {
+    font-size: 15px;
+    /* 2 columns for smaller screens */
+    transition: transform 0.3s ease;
+  }
+}
+
+@media (max-width: 480px) {
+  .characters_title {
+    font-size: 10px;
+    /* Single column for very small screens */
+    transition: transform 0.3s ease;
+  }
+}
