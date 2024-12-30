@@ -17,6 +17,7 @@ import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
 import CookieConsent from "react-cookie-consent";
+import routes from "./Routes/routes";
 
 function App() {
   const [cookies, setCookie] = useCookies(["analytics", "marketing"]);
@@ -84,8 +85,13 @@ function App() {
         <Header />
         <div className="app-content">
           <Routes>
+            {routes.map(({ path, element }, index) => (
+              <Route key={index} path={path} element={element} />
+            ))}
+          </Routes>
+          {/* <Routes>
             <Route>
-              {/*Home Page */}
+              
               <Route
                 path="/"
                 element={
@@ -103,7 +109,7 @@ function App() {
                 }
               />
 
-              {/*series detail page*/}
+              
               <Route path="/series/:title" element={<DetailPage />} />
               <Route path="/information/:title" element={<InformationPage />} />
               <Route
@@ -113,7 +119,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Route>
-          </Routes>
+          </Routes> */}
         </div>
         <Footer />
         {/* Cookie Consent Banner */}
