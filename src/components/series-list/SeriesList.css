@@ -95,6 +95,12 @@ header h1 {
   font-weight: 500;
   color: #fff;
 }
+.add-series-btn {
+  font-family: Roboto !important;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+}
 
 .rating-sort-text:hover {
   color: #007bff;
@@ -232,4 +238,31 @@ header h1 {
 
 .series-card-image:hover {
   transform: scale(1.05);
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  .series-list-header {
+    gap: 10px;
+  }
+
+  .search-and-dropdown {
+    flex-direction: column; /* Stack elements vertically */
+    gap: 15px;
+  }
+
+  .series-search-input {
+    width: 100%; /* Take full width */
+    max-width: none; /* Remove max-width constraint */
+  }
+
+  .sort-dropdown {
+    width: 100%; /* Full width on smaller screens */
+    max-width: none; /* Remove max-width constraint */
+  }
+
+  /* .add-series-btn {
+    width: 100%; 
+    text-align: center; 
+  } */
 }

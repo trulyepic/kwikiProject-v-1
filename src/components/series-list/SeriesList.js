@@ -252,6 +252,11 @@ const SeriesList = () => {
                 {sortLabel}
               </span>
             </Dropdown.Button>
+
+            <Button size="large">
+              {" "}
+              <span className="add-series-btn">Add Series</span>
+            </Button>
           </div>
           <div className="filters">
             <div className="sort-buttons">

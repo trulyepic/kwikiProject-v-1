@@ -1,0 +1,101 @@
+.comment-section-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.comment-section {
+  width: 100%;
+  max-width: 1165px;
+  padding: 20px;
+}
+
+.comment-section-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.comment-section-header-text {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.comment-section-header-disqus-text {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.comment-section-header span:hover {
+  color: #007bff !important;
+  cursor: pointer;
+}
+
+.comment-section-icon {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.comment-section h3 {
+  font-size: 1.5rem !important;
+  margin-bottom: 10px !important;
+  color: #fff;
+}
+
+.comment-text-area {
+  margin-top: 20px;
+}
+
+.comment-text-section {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #fff !important;
+}
+
+.comment-text-section:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.reply-comment {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+.comment-start {
+  background-color: transparent !important;
+  color: #fff;
+  font-weight: 600;
+}
+
+.comment-submit-button {
+  margin-top: 10px;
+}
+
+/* .comment-text-area textarea {
+  width: 100% !important;
+} */
+
+/* antd override */
+
+.ant-comment-content-author-name {
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.ant-comment-content-author-time {
+  color: #bbb8b8 !important;
+}
+
+.ant-comment-actions span {
+  color: #bbb8b8 !important;
+  font-size: 0.9rem !important;
+}
+
+.ant-comment-actions span:hover {
+  color: #fff !important;
+}

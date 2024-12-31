@@ -10,6 +10,8 @@ import {
   showErrorNotification,
   showInfoNotification,
 } from "../util/Notification";
+import CommentSection from "./CommentSection";
+import CommentSectionDisqus from "./CommentSectionDisqus";
 
 // const characterData = [
 //   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -296,6 +298,9 @@ const DetailPage = () => {
         </div>
       </Spin>
       {/* <Footer /> */}
+      {/* <CommentSection /> */}
+
+      <CommentSectionDisqus seriesId={seriesId} />
     </div>
   );
 };
