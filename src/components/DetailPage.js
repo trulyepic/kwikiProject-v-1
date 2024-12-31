@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DetailPage.css";
 import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 import Rating from "./ratings/Rating";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import {
@@ -181,7 +181,12 @@ const DetailPage = () => {
         <div className="series_detail_page">
           <div className="main_panel_exclude_side_panel">
             <div className="content">
-              <h2 className="main_title">Series</h2>
+              <div className="title-add-btn">
+                <h2 className="main_title">Series</h2>
+                <Button className="add-char-btn" size="small">
+                  Add Series Characters
+                </Button>
+              </div>
               <div className="detail_title_img">
                 <h2 className="title" onClick={handleTitleClick}>
                   {title}

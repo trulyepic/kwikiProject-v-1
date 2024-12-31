@@ -132,3 +132,15 @@ export const getSeriesByRating = async (rating) => {
     throw error;
   }
 };
+
+export const saveSeries = async (formData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/series/save`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error saving series: ", error);
+    throw error;
+  }
+};

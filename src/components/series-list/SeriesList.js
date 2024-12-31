@@ -11,6 +11,7 @@ import {
   searchSeriesByTitle,
 } from "../../api/api";
 import { Button, Input, notification, Dropdown, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -227,6 +228,7 @@ const SeriesList = () => {
     }
   };
 
+  const navigate = useNavigate();
   console.log("items in the serieslist page: ", items);
   return (
     <div>
@@ -253,7 +255,7 @@ const SeriesList = () => {
               </span>
             </Dropdown.Button>
 
-            <Button size="large">
+            <Button size="large" onClick={() => navigate("/addSeries")}>
               {" "}
               <span className="add-series-btn">Add Series</span>
             </Button>

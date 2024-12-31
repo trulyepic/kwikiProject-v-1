@@ -1,0 +1,58 @@
+.add-series-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 80vh; */
+  min-height: 80vh;
+  height: auto;
+  overflow-y: auto;
+  /* background-color: #f9f9f9; */
+  /* padding: 20px; */
+}
+
+.add-series-header {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.add-series-form {
+  max-width: 600px;
+  width: 100%;
+  /* border: 1px solid #ddd; */
+}
+
+.add-series-form .ant-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid;
+  /* border: none; */
+}
+
+.add-series-form .submit-btn {
+  /* display: flex; */
+  width: auto !important;
+  padding: 0 15px;
+  display: block;
+  margin: 0 auto;
+}
+
+.add-series-form .submit-btn:hover {
+  background-color: #007bff;
+  border: none;
+}
+
+.add-series-form .ant-upload-list-item {
+  display: none; /* Hide uploaded file preview */
+}
+
+.ant-upload-list-item-name {
+  color: #fff !important;
+}
+
+.anticon.anticon-delete {
+  color: #fff !important;
+}

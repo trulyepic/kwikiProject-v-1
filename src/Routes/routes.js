@@ -6,6 +6,7 @@ import InformationPage from "../components/information-page/InformationPage";
 import CharacterPage from "../components/character-info-page/CharacterPage";
 import Contact from "../components/Contact";
 import PrivacyPolicy from "../components/PrivacyPolicy";
+import AddSeries from "../components/add-series/AddSeries";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -15,6 +16,7 @@ const routes = [
   { path: "/character/:characterName", element: <CharacterPage /> },
   { path: "/contact", element: <Contact /> },
   { path: "/privacy-policy", element: <PrivacyPolicy /> },
+  { path: "/addSeries", element: <AddSeries /> },
 ];
 
 export default routes;

@@ -15,6 +15,7 @@ p {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: auto;
+  justify-content: center;
 }
 
 .series_detail_page {
@@ -23,8 +24,8 @@ p {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  flex-grow: 1;
-  flex-wrap: wrap;
+  /* flex-grow: 1;
+  flex-wrap: wrap; */
 }
 .main_panel_exclude_side_panel {
   display: flex;
@@ -41,6 +42,43 @@ p {
   max-width: 800px;
 }
 
+.title-add-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+/* .add-char-btn {
+  border-color: #535353e5 !important;
+} */
+
+/* .add-char-btn:hover {
+  color: #007bff !important;
+} */
+
+/* .title-add-btn .main_title {
+  flex-grow: 1;
+  text-align: center;
+  border-bottom: 2px solid #9696aa71;
+  padding-bottom: 5px;
+} */
+
+.title-add-btn .main_title {
+  flex-grow: 0;
+  text-align: left;
+  /* border-bottom: 2px solid #9696aa71; */
+  padding-bottom: 5px;
+}
+
+.title-add-btn button {
+  margin-left: auto;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .main_title {
   /* background-color: #20232a; */
   /* color: white; */
@@ -48,7 +86,7 @@ p {
   border-radius: 5px;
   font-size: 1.5rem;
   margin-bottom: 20px;
-  border-bottom: 2px solid #9696aa71;
+  /* border-bottom: 2px solid #9696aa71; */
 }
 
 .title {
@@ -263,6 +301,22 @@ p {
     /* 2 columns for smaller screens */
     transition: transform 0.3s ease;
   }
+
+  .title-add-btn {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-add-btn .main_title {
+    text-align: center; /* Keep title centered */
+    margin-bottom: 10px; /* Add spacing between title and button */
+  }
+
+  .title-add-btn button {
+    position: static; /* Remove absolute positioning */
+    transform: none; /* Reset transform */
+    margin: 0px 0 20px; /* Add top margin for spacing */
+  }
 }
 
 @media (max-width: 480px) {
@@ -271,4 +325,12 @@ p {
     /* Single column for very small screens */
     transition: transform 0.3s ease;
   }
+}
+
+.ant-btn-variant-outlined.add-char-btn {
+  border-color: #686868b5 !important;
+}
+
+.ant-btn-variant-outlined.add-char-btn:hover {
+  border-color: #007bff !important;
 }
