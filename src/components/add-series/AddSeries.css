@@ -40,6 +40,23 @@
   margin: 0 auto;
 }
 
+.add-series-form-input {
+  background-color: transparent;
+  color: #fff;
+}
+
+.add-series-form-input:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-form-input:focus-within {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-form-input:not(.ant-input-disabled) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 .add-series-form .submit-btn:hover {
   background-color: #007bff;
   border: none;

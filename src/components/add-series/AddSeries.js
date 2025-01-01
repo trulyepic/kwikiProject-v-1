@@ -1,8 +1,12 @@
 import { Button, Form, Input, message, Upload } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveSeries } from "../../api/api";
+import { saveSeries, searchSeriesByTitle } from "../../api/api";
 import "./AddSeries.css";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from "../../util/Notification";
 
 const { TextArea } = Input;
 
@@ -34,20 +38,45 @@ const AddSeries = () => {
   const handleSubmit = async (values) => {
     if (!imageFile) {
       message.error("Please upload a valid image.");
+      // showErrorNotification("error", "Please upload a valide image.");
       return;
     }
 
-    const formData = new FormData();
-    Object.keys(values).forEach((key) => formData.append(key, values[key]));
-    formData.append("image", imageFile);
-
     try {
+      // check if series already exists
+      const existingSeries = await searchSeriesByTitle(values.title);
+      console.log("series title in adde series delete later: ", values.title);
+      if (existingSeries && existingSeries.length > 0) {
+        message.warning(`The series "${values.title}" already exists.`);
+        return;
+      }
+
+      //Prepare the form data for submission
+      const formData = new FormData();
+      Object.keys(values).forEach((key) => formData.append(key, values[key]));
+      formData.append("image", imageFile);
+
+      //save the new series
       await saveSeries(formData);
+      // showSuccessNotification("Success!", "Series added successfully!");
       message.success("Series added successfully!");
       navigate("/seriesList");
     } catch (error) {
       message.error("Error adding series. ");
+      // showErrorNotification("Error", "Error adding series.");
     }
+
+    // const formData = new FormData();
+    // Object.keys(values).forEach((key) => formData.append(key, values[key]));
+    // formData.append("image", imageFile);
+
+    // try {
+    //   await saveSeries(formData);
+    //   message.success("Series added successfully!");
+    //   navigate("/seriesList");
+    // } catch (error) {
+    //   message.error("Error adding series. ");
+    // }
   };
 
   return (
@@ -66,7 +95,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the series title." },
           ]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -74,7 +103,7 @@ const AddSeries = () => {
           label="Genre"
           rules={[{ required: true, message: "Please enter the genre" }]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -84,7 +113,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the director's name." },
           ]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -94,7 +123,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the writer's name." },
           ]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -104,7 +133,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the network name." },
           ]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -114,7 +143,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the number of seasons." },
           ]}
         >
-          <Input type="number" />
+          <Input type="number" className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -124,7 +153,7 @@ const AddSeries = () => {
             { required: true, message: "please enter the number of episodes." },
           ]}
         >
-          <Input type="number" />
+          <Input type="number" className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item
@@ -134,7 +163,7 @@ const AddSeries = () => {
             { required: true, message: "Please enter the release data." },
           ]}
         >
-          <Input />
+          <Input className="add-series-form-input" />
         </Form.Item>
 
         <Form.Item label="Upload Image">
