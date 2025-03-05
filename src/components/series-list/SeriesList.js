@@ -196,8 +196,7 @@ const SeriesList = () => {
     try {
       const searchResults = await searchSeriesByTitle(value);
       setItems(searchResults);
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
+      if (searchResults.length === 0) {
         notification.info({
           message: <span className="notification-text">No Results Found</span>,
           description: (
@@ -208,21 +207,19 @@ const SeriesList = () => {
           placement: "topRight",
           className: "notification-container",
         });
-      } else {
-        console.error("Error searching series: ", error);
-        notification.error({
-          message: (
-            <span className="notification-error-text">Search Error</span>
-          ),
-          description: (
-            <span className="notification-error-text">
-              {"An error occurred while searching. Please try again."}
-            </span>
-          ),
-          placement: "topRight",
-          className: "notification-error-container",
-        });
       }
+    } catch (error) {
+      console.error("Error searching series: ", error);
+      notification.error({
+        message: <span className="notification-error-text">Search Error</span>,
+        description: (
+          <span className="notification-error-text">
+            {"An error occurred while searching. Please try again."}
+          </span>
+        ),
+        placement: "topRight",
+        className: "notification-error-container",
+      });
     } finally {
       setHasMore(true); //Re-enable infinite scroll
     }

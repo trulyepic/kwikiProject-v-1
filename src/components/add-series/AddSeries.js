@@ -26,8 +26,11 @@ const AddSeries = () => {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = () => {
-      if (img.width !== 350 || img.height < 350 || img.height > 500) {
-        message.error("Image dimentions must be 350x350and height <= 500.");
+      if (img.width < 350 || img.width > 500) {
+        // console.log("image width: ", img.width);
+        message.error(
+          "Image width must equal or greater 350 and less than 500"
+        );
         return false;
       }
       setImageFile(file);

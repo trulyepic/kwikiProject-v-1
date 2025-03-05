@@ -7,6 +7,7 @@ import CharacterPage from "../components/character-info-page/CharacterPage";
 import Contact from "../components/Contact";
 import PrivacyPolicy from "../components/PrivacyPolicy";
 import AddSeries from "../components/add-series/AddSeries";
+import AddSeriesCharacter from "../components/AddSeriesCharacters/AddSeriesCharacter";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -17,6 +18,7 @@ const routes = [
   { path: "/contact", element: <Contact /> },
   { path: "/privacy-policy", element: <PrivacyPolicy /> },
   { path: "/addSeries", element: <AddSeries /> },
+  { path: "/addSeriesCharacter", element: <AddSeriesCharacter /> },
 ];
 
 export default routes;

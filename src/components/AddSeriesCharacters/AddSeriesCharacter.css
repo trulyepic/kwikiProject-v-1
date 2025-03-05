@@ -1,0 +1,45 @@
+.add-series-character {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-series-char-input {
+  background-color: transparent;
+  color: #fff;
+}
+
+.friend-inputs {
+  display: flex;
+  gap: 5px;
+}
+
+.add-series-char-modal .ant-modal-content {
+  background-color: #1a1a1d !important;
+}
+
+.add-series-char-modal .ant-modal-title {
+  background-color: #1a1a1d !important;
+  color: #fff !important;
+}
+
+.add-series-char-modal .anticon {
+  color: #fff !important;
+}
+
+.add-series-char-input:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-char-input:focus-within {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-char-input:not(.ant-input-disabled) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-char-input:disabled {
+  color: #d6d6d6c8 !important;
+}

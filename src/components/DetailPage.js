@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import { getCharacterBySeriesId } from "../api/api";
 import { Button, Spin } from "antd";
 import Rating from "./ratings/Rating";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { DownOutlined, EditOutlined, UpOutlined } from "@ant-design/icons";
 import {
   showErrorNotification,
   showInfoNotification,
@@ -183,7 +183,13 @@ const DetailPage = () => {
             <div className="content">
               <div className="title-add-btn">
                 <h2 className="main_title">Series</h2>
-                <Button className="add-char-btn" size="small">
+                <Button
+                  className="add-char-btn"
+                  size="small"
+                  onClick={() =>
+                    navigate("/addSeriesCharacter", { state: { seriesId } })
+                  }
+                >
                   Add Series Characters
                 </Button>
               </div>
@@ -201,16 +207,33 @@ const DetailPage = () => {
                 <div className="character_grid">
                   {/* {characterData.map((character, index) => ( */}
                   {mainCharacters.map((character, index) => (
-                    <div
-                      key={index}
-                      className="character_card"
-                      onClick={() => handleCharacterClick(character)}
-                    >
-                      <img src={`${character.img}`} alt={character.name} />
+                    <div key={index} className="character_card">
+                      <img
+                        src={`${character.img}`}
+                        alt={character.name}
+                        onClick={() => handleCharacterClick(character)}
+                      />
                       <span>{character.name}</span>
                       <span className="character_name_subtext">
                         ({character.affiliation})
                       </span>
+                      <div className="char-edit-btn">
+                        <Button
+                          className="char-edit-btn"
+                          onClick={() => {
+                            navigate("/addSeriesCharacter", {
+                              state: {
+                                seriesId,
+                                // character,
+                                characterId: character.id,
+                                isEdit: true,
+                              },
+                            });
+                          }}
+                        >
+                          <EditOutlined />
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -255,13 +278,13 @@ const DetailPage = () => {
                                 <div
                                   key={character.id}
                                   className="character_card"
-                                  onClick={() =>
-                                    handleCharacterClick(character)
-                                  }
                                 >
                                   <img
                                     src={character.img}
                                     alt={character.name}
+                                    onClick={() =>
+                                      handleCharacterClick(character)
+                                    }
                                   />
                                   <p>{character.name}</p>
                                   {character.role !== null && (
@@ -269,6 +292,22 @@ const DetailPage = () => {
                                       ({character.role})
                                     </span>
                                   )}
+                                  <div className="char-edit-btn">
+                                    <Button
+                                      className="char-edit-btn"
+                                      onClick={() =>
+                                        navigate("/addSeriesCharacter", {
+                                          state: {
+                                            seriesId,
+                                            // character,
+                                            characterId: character.id,
+                                          },
+                                        })
+                                      }
+                                    >
+                                      <EditOutlined />
+                                    </Button>
+                                  </div>
                                 </div>
                               ))}
                           </div>

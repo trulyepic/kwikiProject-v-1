@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:8080/api";
-// const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5000/api";
 
-const BASE_URL = "http://starwiki.us-west-1.elasticbeanstalk.com/api";
+// const BASE_URL = "http://starwiki.us-west-1.elasticbeanstalk.com/api";
 
 export const getSeriesDetail = async () => {
   try {
@@ -116,6 +116,10 @@ export const searchSeriesByTitle = async (title) => {
     });
     return response.data;
   } catch (error) {
+    if (error.response && error.status === 404) {
+      //if the series is not found. return an empty array or null
+      return [];
+    }
     console.error("Error searching series: ", error);
     throw error;
   }
@@ -141,6 +145,95 @@ export const saveSeries = async (formData) => {
     return response.data;
   } catch (error) {
     console.log("Error saving series: ", error);
+    throw error;
+  }
+};
+
+export const addCharacter = async (characterData, imageFile) => {
+  try {
+    const formData = new FormData();
+    formData.append(
+      "character",
+      new Blob([JSON.stringify(characterData)], { type: "application/json" })
+    );
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    const response = await axios.post(`${BASE_URL}/character/add`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding character:", error);
+    throw error;
+  }
+};
+
+export const updateCharacter = async (
+  characterId,
+  characterData,
+  imageFile
+) => {
+  try {
+    const formData = new FormData();
+    formData.append(
+      "character",
+      new Blob([JSON.stringify(characterData)], { type: "application/json" })
+    );
+
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    const response = await axios.put(
+      `${BASE_URL}/character/update/${characterId}`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating character:", error);
+    throw error;
+  }
+};
+
+export const checkActorExists = async (realName) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/actor/exists`, {
+      params: { realName },
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      return null; // Actor not found
+    }
+    console.error("Error checking actor existence:", error);
+    throw error;
+  }
+};
+
+export const addActor = async (actorData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/actor/add`, actorData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding actor:", error);
+    throw error;
+  }
+};
+
+export const getCharacterById = async (characterId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/character/${characterId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching character details:", error);
     throw error;
   }
 };
