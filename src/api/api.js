@@ -3,8 +3,10 @@ import axios from "axios";
 // const BASE_URL = "http://localhost:8080/api";
 // const BASE_URL = "http://localhost:5000/api";
 
-const BASE_URL =
-  "http://kviki-env.eba-b6newnia.us-west-1.elasticbeanstalk.com/api";
+// const BASE_URL =
+//   "http://kviki-env.eba-b6newnia.us-west-1.elasticbeanstalk.com/api";
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const getSeriesDetail = async () => {
   try {
