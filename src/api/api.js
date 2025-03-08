@@ -1,9 +1,10 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:8080/api";
-const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "http://localhost:5000/api";
 
-// const BASE_URL = "http://starwiki.us-west-1.elasticbeanstalk.com/api";
+const BASE_URL =
+  "http://kviki-env.eba-b6newnia.us-west-1.elasticbeanstalk.com/api";
 
 export const getSeriesDetail = async () => {
   try {
@@ -234,6 +235,42 @@ export const getCharacterById = async (characterId) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching character details:", error);
+    throw error;
+  }
+};
+
+export const saveSeriesDetails = async (seriesDetails) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/series/details/save`,
+      seriesDetails,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error saving series details:", error);
+    throw error;
+  }
+};
+
+export const updateSeriesDetails = async (seriesDetails) => {
+  try {
+    if (!seriesDetails.detailId) {
+      throw new Error("Missing detail ID for update");
+    }
+
+    const response = await axios.put(
+      `${BASE_URL}/series/details/update`,
+      seriesDetails,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating series details:", error);
     throw error;
   }
 };

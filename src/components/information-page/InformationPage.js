@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import "./InformationPage.css";
 import Content from "./sections/Content";
@@ -7,15 +7,17 @@ import DetailPanel from "./sections/DetailPanel";
 import TableOfContents from "./sections/TableOfContents";
 import AdditionalContent from "./sections/AdditionalContent";
 import { getSeriesDetailBySeriesId } from "../../api/api";
+import { Button } from "antd";
 
 const InformationPage = () => {
   const { title } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [seriesContent, setSeriesContent] = useState([]);
-  
 
-  const seriesData = location.state?.seriesData || JSON.parse(localStorage.getItem("selectedSeries"));
-
+  const seriesData =
+    location.state?.seriesData ||
+    JSON.parse(localStorage.getItem("selectedSeries"));
 
   useEffect(() => {
     const fetchSeriesDetails = async () => {
@@ -46,6 +48,23 @@ const InformationPage = () => {
           {/* Title and Introductory Sentence */}
           <div className="page_header">
             <span>{seriesData.title} </span>
+            <Button
+              className="add-btn-series"
+              onClick={() => navigate(`/addSeriesDetails/${seriesData.title}`)}
+            >
+              Add Series Details
+            </Button>
+
+            <Button
+              className="add-btn-series"
+              onClick={() =>
+                navigate(`/addSeriesDetails/${seriesData.title}`, {
+                  state: { seriesContent },
+                })
+              }
+            >
+              Edit
+            </Button>
           </div>
 
           {/* Main Content Section */}
@@ -68,8 +87,16 @@ const InformationPage = () => {
 
         {/* Side Panel */}
         <div className="side_panel">
-          <div className="panel_item">Ad Placeholder</div>
-          <div className="panel_item">Ad Placeholder</div>
+          <div className="panel_item">
+            <h3>Discussion Threads</h3>
+            <p>Chat with other users and hundreds of "{title}" fans!</p>
+            <button>Join the Discussions</button>
+          </div>
+          <div className="panel_item">
+            <h3>Discord Server</h3>
+            <p>Chat with fellow wiki editors and hundreds of "{title}" fans!</p>
+            <button>Join the Server</button>
+          </div>
         </div>
       </div>
       {/* <Footer /> */}

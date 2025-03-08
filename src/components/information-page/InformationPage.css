@@ -35,9 +35,15 @@ html {
 }
 
 .page_header {
+  display: flex;
   margin-bottom: 10px;
   font-size: 27px;
   font-weight: bold;
+  gap: 15px;
+}
+
+.add-btn-series {
+  border-color: #072b4e43 !important;
 }
 
 .page_header h1 {

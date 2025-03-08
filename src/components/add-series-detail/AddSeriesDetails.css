@@ -1,0 +1,54 @@
+.add-series-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  overflow-y: auto;
+}
+
+.add-series-details-header {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.add-series-details-form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.add-series-details-form .ant-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid;
+}
+
+.add-series-details-form .submit-btn {
+  width: auto !important;
+  padding: 0 15px;
+  display: block;
+  margin: 0 auto;
+}
+
+.add-series-details-form-input {
+  background-color: transparent;
+  color: #fff;
+}
+
+.add-series-details-form-input:disabled {
+  color: #9a9898;
+}
+
+.add-series-details-form-input:hover,
+.add-series-details-form-input:focus-within,
+.add-series-details-form-input:not(.ant-input-disabled) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-series-details-form .submit-btn:hover {
+  background-color: #007bff;
+  border: none;
+}
