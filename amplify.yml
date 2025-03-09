@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - echo "REACT_APP_BASE_URL=http://kviki-env.eba-b6newnia.us-west-1.elasticbeanstalk.com/api" >> .env
+        - echo "REACT_APP_BASE_URL=https://api.starflickswiki.com/api" >> .env
 
     build:
       commands:
