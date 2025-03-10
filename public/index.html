@@ -6,54 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
 
-    <!-- SEO Meta Tags -->
+    <!-- ✅ SEO Meta Tags -->
     <meta
       name="description"
-      content="Discover your favorite series and explore new ones and ratings. 
-          Streamlined sorting and filters to show you the best shows based on your preferences, detailed information, and more.."
+      content="Discover your favorite series and explore new ones. 
+      Streamlined sorting, ratings, and filters to help you find the best shows based on your preferences."
     />
     <meta
       name="keywords"
-      content="series, series list, series details, series information, 
-    series ratings, series, movies, entertainment, discover shows, 
-    featured series, korean series, korean movies, kdrama, k-drama, k-movies, 
-    korean drama, korean movies, korean entertainment"
+      content="series, tv shows, movies, entertainment, kdrama, k-movies, korean drama, anime, streaming, 
+      best series, top movies, tv series recommendations"
     />
     <meta name="author" content="Star Kwiki Hub" />
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Your Series Hub" />
+    <!-- ✅ Open Graph (Facebook & Social Media) Meta Tags -->
+    <meta
+      property="og:title"
+      content="Star Kwiki Hub - Your Ultimate Series Guide"
+    />
     <meta
       property="og:description"
-      content="Discover your favorite series and explore new ones and ratings. 
-     Streamlined sorting and filters to show you the best shows based on your preferences, detailed information, and more.."
+      content="Find and explore the best series, discover new shows, view ratings, and stay updated with the latest entertainment trends."
     />
-    <!-- <meta property="og:image" content="%PUBLIC_URL%/logo192.png" /> -->
-    <!-- <meta property="og:url" content="https://yourwebsite.com" />
-     <meta property="og:type" content="website" /> -->
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+    <meta property="og:url" content="https://www.starflickswiki.com" />
+    <meta property="og:type" content="website" />
 
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <!-- ✅ Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Star Kwiki Hub - Your Ultimate Series Guide"
+    />
+    <meta
+      name="twitter:description"
+      content="Discover your favorite series, explore ratings, and find new entertainment recommendations."
+    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
+    <meta name="twitter:site" content="@StarFlicksWiki" />
+
+    <!-- ✅ Structured Data (JSON-LD for Google Rich Results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Star Kwiki Hub",
+        "url": "https://www.starflickswiki.com",
+        "description": "Find and explore the best series, discover new shows, view ratings, and stay updated with the latest entertainment trends.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Star Kwiki Hub",
+          "logo": "%PUBLIC_URL%/logo192.png"
+        }
+      }
+    </script>
+
+    <!-- ✅ Favicon & Apple Icons -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
+    <!-- ✅ FontAwesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <!-- Google Analytics (gtag.js) -->
+    <!-- ✅ Google Analytics (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-2DZV8XEDJY"
@@ -64,22 +82,12 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-2DZV8XEDJY", { anonymize_ip: true }); // Add anonymize_ip for GDPR compliance
+      gtag("config", "G-2DZV8XEDJY", { anonymize_ip: true }); // GDPR Compliance
     </script>
-    <title>Star Kwiki Hub</title>
+
+    <title>Star Kwiki Hub - Your Ultimate Series Guide</title>
   </head>
   <body>
-    <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
