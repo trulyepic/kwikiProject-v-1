@@ -164,6 +164,7 @@ const DetailPage = () => {
       state: {
         // image: character.img,
         characterData: character,
+        seriesName: seriesData.title,
       },
     });
   };

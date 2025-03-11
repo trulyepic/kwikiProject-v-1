@@ -107,6 +107,7 @@ const AddSeriesCharacter = () => {
           description: char.description || "",
           hasData: char.hasData ?? false,
           imageUrl: char.imageUrl,
+          referencesData: char.referencesData,
         });
 
         setImageUrl(char.imageUrl || "");
@@ -148,6 +149,7 @@ const AddSeriesCharacter = () => {
         playedBy: char.playedBy?.realName || "",
         description: char.description || "",
         hasData: char.hasData ?? false,
+        referencesData: char.referencesData,
       });
 
       setPlayedByName(char.playedBy?.realName || "");
@@ -624,6 +626,14 @@ const AddSeriesCharacter = () => {
             className="add-series-char-input"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
+          />
+        </Form.Item>
+
+        <Form.Item name="referencesData" label="References">
+          <Input
+            className="add-series-char-input"
+            // value={referencesData}
+            // onChange={(e) => setImageUrl(e.target.value)}
           />
         </Form.Item>
 

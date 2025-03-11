@@ -39,7 +39,7 @@ const InformationPage = () => {
     return <div>Loading or no data provided...</div>;
   }
 
-  console.log("series data in info page: ", seriesData);
+  console.log("series data in info page: ", seriesContent);
 
   return (
     <div className="information_page_wrapper">
@@ -50,6 +50,7 @@ const InformationPage = () => {
             <span>{seriesData.title} </span>
             <Button
               className="add-btn-series"
+              disabled={seriesContent.length !== 0}
               onClick={() => navigate(`/addSeriesDetails/${seriesData.title}`)}
             >
               Add Series Details
@@ -57,6 +58,7 @@ const InformationPage = () => {
 
             <Button
               className="add-btn-series"
+              disabled={seriesContent.length === 0}
               onClick={() =>
                 navigate(`/addSeriesDetails/${seriesData.title}`, {
                   state: { seriesContent },

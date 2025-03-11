@@ -1,0 +1,84 @@
+.add-character-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  height: auto;
+  overflow-y: auto;
+}
+
+.add-character-details-header {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.add-character-details-form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.add-character-details-form .ant-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid;
+}
+
+.add-character-details-form .submit-btn {
+  width: auto !important;
+  padding: 0 15px;
+  display: block;
+  margin: 0 auto;
+}
+
+.add-character-details-form-input {
+  background-color: transparent;
+  color: #fff;
+}
+
+.add-character-details-form-input:hover,
+.add-character-details-form-input:focus-within,
+.add-character-details-form-input:not(.ant-input-disabled) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.add-character-details-form .submit-btn:hover {
+  background-color: #007bff;
+  border: none;
+}
+
+/* Ability & Limitation Sections */
+.ability-input-group,
+.limitation-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.add-ability-btn,
+.add-limitation-btn {
+  width: 100%;
+  margin-top: 10px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.add-ability-btn:hover,
+.add-limitation-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ant-btn-danger {
+  background-color: red;
+  color: white;
+  border: none;
+  margin-top: 5px;
+}
+
+.ant-btn-danger:hover {
+  background-color: darkred;
+}

@@ -46,9 +46,11 @@ html {
 }
 
 .character_page_header {
+  display: flex;
   margin-bottom: 10px;
   font-size: 27px;
   font-weight: bold;
+  gap: 15px;
 }
 
 /* Character Name at the top */

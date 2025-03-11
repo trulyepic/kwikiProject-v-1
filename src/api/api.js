@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:8080/api";
-// const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "http://localhost:7000/api";
 
 // const BASE_URL =
 //   "http://kviki-env.eba-b6newnia.us-west-1.elasticbeanstalk.com/api";
@@ -273,6 +273,42 @@ export const updateSeriesDetails = async (seriesDetails) => {
     return response.data;
   } catch (error) {
     console.error("Error updating series details:", error);
+    throw error;
+  }
+};
+
+export const saveCharacterDetails = async (characterDetails) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/character/details/save`,
+      characterDetails,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error saving character details:", error);
+    throw error;
+  }
+};
+
+export const updateCharacterDetails = async (characterDetails) => {
+  try {
+    // if (!characterDetails.contentId) {
+    //   throw new Error("Missing content ID for update.");
+    // }
+
+    const response = await axios.put(
+      `${BASE_URL}/character/details/update`,
+      characterDetails,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating character details:", error);
     throw error;
   }
 };

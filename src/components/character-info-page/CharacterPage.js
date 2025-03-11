@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./CharacterPage.css";
 import CharacterContent from "./sections/CharacterContent";
 import CharacterAdditionalContent from "./sections/CharacterAdditionalContent";
 import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 import { getCharacterDetailByCharacterId } from "../../api/api";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 import { showErrorNotification } from "../../util/Notification";
 
 const CharacterPage = () => {
   const { characterName } = useParams();
+  const navigate = useNavigate();
+
   const location = useLocation();
   const [characterContent, setCharacterContent] = useState({});
   const [characterData, setCharacterData] = useState(null);
@@ -19,6 +21,7 @@ const CharacterPage = () => {
   //   location.state?.image || "https://via.placeholder.com/200";
 
   // const characterData = location.state?.characterData;
+  const seriesName = location.state?.seriesName;
 
   useEffect(() => {
     const storedCharacter = localStorage.getItem("selectedCharacter");
@@ -71,7 +74,7 @@ const CharacterPage = () => {
     return;
   }
 
-  console.log("character Data in CharacterPage: ", characterData);
+  console.log("character Data in CharacterPage: ", characterContent);
 
   return (
     <div className="character_page_wrapper">
@@ -79,6 +82,28 @@ const CharacterPage = () => {
         <div className="character_information_page">
           <div className="character_page_header">
             <span>{characterName}</span>
+            <Button
+              className="add-btn-series"
+              disabled={characterContent.personality}
+              onClick={() =>
+                navigate(`/addCharacterDetails/${characterName}`, {
+                  state: { characterData },
+                })
+              }
+            >
+              Add Character Details
+            </Button>
+            <Button
+              className="add-btn-series"
+              disabled={!characterContent.personality}
+              onClick={() =>
+                navigate(`/addCharacterDetails/${characterName}`, {
+                  state: { characterData, characterContent },
+                })
+              }
+            >
+              Edit
+            </Button>
           </div>
           <div className="character_main_content">
             <CharacterContent
@@ -102,8 +127,8 @@ const CharacterPage = () => {
           />
 
           <div className="ai-special-footnote">
-            Some information about Extraordinary Attorney Woo was derived from a
-            conversation with an AI assistant on December 20, 2024
+            {`Some information about ${seriesName} was derived from a
+            conversation with an AI assistant on December 20, 2024`}
           </div>
         </div>
         {/* Side Panel */}

@@ -9,6 +9,7 @@ import PrivacyPolicy from "../components/PrivacyPolicy";
 import AddSeries from "../components/add-series/AddSeries";
 import AddSeriesCharacter from "../components/AddSeriesCharacters/AddSeriesCharacter";
 import AddSeriesDetails from "../components/add-series-detail/AddSeriesDetails";
+import AddCharacterDetails from "../components/add-character-details/AddCharacterDetails";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -21,6 +22,10 @@ const routes = [
   { path: "/addSeries", element: <AddSeries /> },
   { path: "/addSeriesCharacter", element: <AddSeriesCharacter /> },
   { path: "/addSeriesDetails/:title", element: <AddSeriesDetails /> },
+  {
+    path: "/addCharacterDetails/:characterName",
+    element: <AddCharacterDetails />,
+  },
 ];
 
 export default routes;
