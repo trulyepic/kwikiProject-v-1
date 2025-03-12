@@ -7,6 +7,7 @@ import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 import { getCharacterDetailByCharacterId } from "../../api/api";
 import { Button, Spin } from "antd";
 import { showErrorNotification } from "../../util/Notification";
+import { DiscussionEmbed } from "disqus-react";
 
 const CharacterPage = () => {
   const { characterName } = useParams();
@@ -74,6 +75,13 @@ const CharacterPage = () => {
     return;
   }
 
+  const disqusShortname = "starflicks-wiki";
+  const disqusConfig = {
+    url: `https://starflickswiki.com/character/${characterName}`,
+    identifier: characterName,
+    // title: characterData.id,
+  };
+
   console.log("character Data in CharacterPage: ", characterContent);
 
   return (
@@ -139,6 +147,9 @@ const CharacterPage = () => {
         </div>
       </div>
       {/* <Footer /> */}
+      <div className="disqus-section">
+        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      </div>
     </div>
   );
 };

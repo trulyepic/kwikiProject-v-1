@@ -12,6 +12,7 @@ import {
 } from "../util/Notification";
 import CommentSection from "./CommentSection";
 import CommentSectionDisqus from "./CommentSectionDisqus";
+import { DiscussionEmbed } from "disqus-react";
 
 // const characterData = [
 //   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -175,7 +176,13 @@ const DetailPage = () => {
       [affiliation]: !prev[affiliation], //toggle the specific affiliation
     }));
   };
-  const BASE_URL = "http://localhost:8080";
+
+  const disqusShortname = "starflicks-wiki";
+  const disqusConfig = {
+    url: `https://starflickswiki.com/series/${seriesData.title}`,
+    identifier: seriesId,
+    title: seriesData.title,
+  };
   return (
     <div className="series_detail_page_wrapper">
       <Spin spinning={loading} size="large" tip="Loading details...">
@@ -345,7 +352,10 @@ const DetailPage = () => {
       {/* <Footer /> */}
       {/* <CommentSection /> */}
 
-      <CommentSectionDisqus seriesId={seriesId} />
+      {/* <CommentSectionDisqus seriesId={seriesId} /> */}
+      <div className="disqus-section">
+        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      </div>
     </div>
   );
 };
