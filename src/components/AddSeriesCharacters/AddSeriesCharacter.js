@@ -19,10 +19,13 @@ import {
   addActor,
   addCharacter,
   checkActorExists,
+  getActorDetailsByName,
   getCharacterById,
+  updateActorDetails,
   updateCharacter,
 } from "../../api/api";
 import { use } from "react";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
@@ -54,38 +57,9 @@ const AddSeriesCharacter = () => {
   const [loveInterestObject, setLoveInterestObject] = useState({});
   const [playedByName, setPlayedByName] = useState("");
   const [isEdit, setIsEdit] = useState(false);
+  const [actorDetails, setActorDetails] = useState(null);
 
-  // auto populate seriesId
-  //   useEffect(() => {
-  //     if (location.state?.seriesId) {
-  //       setSeriesId(location.state.seriesId);
-  //       form.setFieldsValue({ series_id: location.state.seriesId });
-  //     }
-
-  //     if (location.state?.character) {
-  //       const char = location.state.character;
-  //       form.setFieldsValue({
-  //         name: char.name,
-  //         gender: char.gender,
-  //         age: char.age,
-  //         role: char.role,
-  //         status: char.status,
-  //         species: char.species,
-  //         affiliation: char.affiliation,
-  //         occupation: char.occupation,
-  //         played_by: char.playedBy || "",
-  //         description: char.description,
-  //         hasData: char.hasData ?? false,
-  //       });
-
-  //       setFriendsList(JSON.parse(char.friends || "{}"));
-  //       setFamilyList(JSON.parse(char.family || "{}"));
-  //       setEnemiesObject(JSON.parse(char.enemies || "{}"));
-  //       setLoveInterestObject(JSON.parse(char.loveInterest || "{}"));
-  //       setDescription(char.description || "");
-  //       setImageFile(char.imageUrl || null);
-  //     }
-  //   }, [location.state, form]);
+  const [actorForm] = Form.useForm();
 
   useEffect(() => {
     const fetchCharacterDetails = async (characterId) => {
@@ -118,6 +92,23 @@ const AddSeriesCharacter = () => {
         setLoveInterestObject(JSON.parse(char.loveInterest || "{}"));
         setDescription(char.description || "");
         setImageFile(char.imageUrl || null);
+
+        //actor details
+        const fetchActorData = async (realName) => {
+          try {
+            const actorDetails = await getActorDetailsByName(realName);
+            setActorDetails(actorDetails);
+            setActorExists(actorDetails);
+            // console.log("actor details: ", actorDetails);
+          } catch (err) {
+            console.warn("Actor not found or error fetching actor data.");
+          }
+        };
+
+        if (char.playedBy?.realName) {
+          setPlayedByName(char.playedBy.realName);
+          fetchActorData(char.playedBy.realName);
+        }
       } catch (error) {
         console.error("Error fetching character details:", error);
       }
@@ -169,6 +160,19 @@ const AddSeriesCharacter = () => {
       fetchCharacterDetails(location.state.characterId);
     }
   }, [location.state, form]);
+
+  useEffect(() => {
+    if (playedByModalVisible && actorDetails) {
+      actorForm.setFieldsValue({
+        real_name: actorDetails.realName,
+        birth_date: actorDetails.birthDate
+          ? dayjs(actorDetails.birthDate)
+          : null,
+        nationality: actorDetails.nationality || "",
+        wiki_url: actorDetails.wikiUrl || "",
+      });
+    }
+  }, [playedByModalVisible, actorDetails, actorForm]);
 
   const checkActor = async (realName) => {
     setCheckingActor(true);
@@ -306,21 +310,60 @@ const AddSeriesCharacter = () => {
     setDescription(text);
   };
 
+  // const handlePlayedBySubmit = async (values) => {
+  //   try {
+  //     let actor;
+  //     if (!actorExists) {
+  //       actor = await addActor(values);
+  //       message.success("New actor added successfully!");
+  //     } else {
+  //       actor = actorExists;
+  //       message.info("Using existing actor.");
+  //     }
+
+  //     setPlayedByName(values.real_name);
+  //     form.setFieldsValue({ playedBy: values.real_name });
+  //     setPlayedByModalVisible(false);
+  //   } catch (error) {
+  //     message.error("Error saving actor.");
+  //   }
+  // };
+
   const handlePlayedBySubmit = async (values) => {
     try {
       let actor;
-      if (!actorExists) {
-        actor = await addActor(values);
-        message.success("New actor added successfully!");
+
+      if (actorExists) {
+        actor = {
+          ...actorExists,
+          realName: values.real_name,
+          birthDate: values.birth_date
+            ? values.birth_date.format("YYYY-MM-DD")
+            : null,
+          nationality: values.nationality || "",
+          wikiUrl: values.wiki_url || "",
+        };
+
+        await updateActorDetails(actor);
+        message.success("Actor updated successfully!");
       } else {
-        actor = actorExists;
-        message.info("Using existing actor.");
+        //add new actor
+        actor = await addActor({
+          realName: values.real_name,
+          birthDate: values.birth_date
+            ? values.birth_date.format("YYYY-MM-DD")
+            : null,
+          nationality: values.nationality || "",
+          wikiUrl: values.wiki_url || "",
+        });
+        message.success("New actor added successfully!");
       }
 
       setPlayedByName(values.real_name);
-      form.setFieldsValue({ playedBy: values.real_name });
+      form.setFieldValue({ playedBy: values.real_name });
       setPlayedByModalVisible(false);
     } catch (error) {
+      console.error("Error saving actor:", error);
       message.error("Error saving actor.");
     }
   };
@@ -647,7 +690,7 @@ const AddSeriesCharacter = () => {
             className="add-series-char-input"
           />
           <Button type="link" onClick={() => setPlayedByModalVisible(true)}>
-            Add Actor
+            {isEdit ? "Update" : "Add Actor"}
           </Button>
         </Form.Item>
 
@@ -676,7 +719,11 @@ const AddSeriesCharacter = () => {
         onCancel={() => setPlayedByModalVisible(false)}
         footer={null}
       >
-        <Form layout="vertical" onFinish={handlePlayedBySubmit}>
+        <Form
+          form={actorForm}
+          layout="vertical"
+          onFinish={handlePlayedBySubmit}
+        >
           <Form.Item
             name="real_name"
             label="Real Name"
@@ -687,6 +734,7 @@ const AddSeriesCharacter = () => {
               placeholder="Enter actor's real name"
               className="add-series-char-input"
               onChange={(e) => setPlayedByName(e.target.value)}
+              disabled={actorExists}
             />
           </Form.Item>
 
@@ -706,7 +754,7 @@ const AddSeriesCharacter = () => {
               placeholder="Select birth date"
               style={{ width: "100%" }}
               className="add-series-char-input"
-              disabled={actorExists}
+              // disabled={actorExists}
             />
           </Form.Item>
 
@@ -714,7 +762,7 @@ const AddSeriesCharacter = () => {
             <Input
               placeholder="Enter nationality "
               className="add-series-char-input"
-              disabled={actorExists}
+              // disabled={actorExists}
             />
           </Form.Item>
 
@@ -722,12 +770,12 @@ const AddSeriesCharacter = () => {
             <Input
               placeholder="Enter Wikipedia link"
               className="add-series-char-input"
-              disabled={actorExists}
+              // disabled={actorExists}
             />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              {actorExists ? "Use Existing Actor" : "Save New Actor"}
+              {actorExists ? "Use/Save Existing Actor" : "Save New Actor"}
             </Button>
           </Form.Item>
         </Form>

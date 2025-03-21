@@ -312,3 +312,27 @@ export const updateCharacterDetails = async (characterDetails) => {
     throw error;
   }
 };
+
+export const updateActorDetails = async (actorDetails) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/actor/update`, actorDetails, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (err) {
+    console.error("Error updating actor details:", err);
+    throw err;
+  }
+};
+
+export const getActorDetailsByName = async (realName) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/actor/details`, {
+      params: { realName },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching actor details:", error);
+    throw error;
+  }
+};

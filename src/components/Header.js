@@ -9,7 +9,7 @@ const Header = () => {
       <div className="logo">
         <Link to="/" className="logo-link">
           <img src={logoImage} alt="logo" className="logo-image" />
-          <h1>Star K-wiki</h1>
+          <h1>StarFlicks Wiki</h1>
         </Link>
       </div>
       <nav className="menu">
