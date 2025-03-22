@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import InfiniteScroll from "react-infinite-scroller";
 import SeriesGrid from "./SeriesGrid";
@@ -12,10 +12,14 @@ import {
 } from "../../api/api";
 import { Button, Input, notification, Dropdown, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../login/UserContext";
 
 const { Search } = Input;
 
 const SeriesList = () => {
+  const { user } = useContext(UserContext);
+  const isAdmin = user && !user.roles.includes("ROLE_GENERAL");
+
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [selectedSort, setSelectedSort] = useState("");
@@ -74,34 +78,6 @@ const SeriesList = () => {
     console.log("Fetching page:", page);
 
     fetchPaginationData(page);
-
-    // Old implementation
-    // try {
-    //   const newItems = await getSeriesDetailWithPagination(
-    //     page,
-    //     ITEMS_PER_PAGE
-    //   );
-    //   if (newItems.length === 0) {
-    //     console.log("No more items to load.");
-    //     setHasMore(false); // Stop loading if there are no more items from the API
-    //     return;
-    //   }
-    //   // setItems((prevItems) => [...prevItems, ...newItems]);
-    //   setItems((prevItems) => {
-    //     const uniqueItems = newItems.filter(
-    //       (newItem) => !prevItems.some((item) => item.id === newItem.id)
-    //     );
-    //     return [...prevItems, ...uniqueItems];
-    //   });
-    //   setPage((prevPage) => prevPage + 1); // Move to the next page for the next load
-
-    //   if (newItems.length < ITEMS_PER_PAGE) {
-    //     setHasMore(false);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetchig more data: ", error);
-    //   setHasMore(false);
-    // }
   };
 
   const handleSortChange = (sortType) => {
@@ -157,21 +133,6 @@ const SeriesList = () => {
     setSortLabel("Sort By Ratings");
 
     fetchPaginationData(1, true); //fetch the initial data again
-
-    // try {
-    //   // Fetch the initial data again
-    //   const initialItems = await getSeriesDetailWithPagination(
-    //     1,
-    //     ITEMS_PER_PAGE
-    //   );
-    //   setItems(initialItems);
-    // } catch (error) {
-    //   console.error("Error resetting data: ", error);
-    //   notification.error({
-    //     message: "Error",
-    //     description: "Failed to reload series data.",
-    //   });
-    // }
   };
 
   const filteredItems = selectedSort
@@ -252,10 +213,12 @@ const SeriesList = () => {
               </span>
             </Dropdown.Button>
 
-            <Button size="large" onClick={() => navigate("/addSeries")}>
-              {" "}
-              <span className="add-series-btn">Add Series</span>
-            </Button>
+            {isAdmin && (
+              <Button size="large" onClick={() => navigate("/addSeries")}>
+                {" "}
+                <span className="add-series-btn">Add Series</span>
+              </Button>
+            )}
           </div>
           <div className="filters">
             <div className="sort-buttons">
@@ -269,43 +232,6 @@ const SeriesList = () => {
                   {genre}
                 </button>
               ))}
-              {/* old implementation */}
-              {/* <button
-                className={selectedSort === "Action" ? "active" : ""}
-                onClick={() => handleSortChange("Action")}
-              >
-                Action
-              </button>
-              <button
-                className={selectedSort === "Thriller" ? "active" : ""}
-                onClick={() => handleSortChange("Thriller")}
-              >
-                Thriller
-              </button>
-              <button
-                className={selectedSort === "Mystery" ? "active" : ""}
-                onClick={() => handleSortChange("Mystery")}
-              >
-                Mystery
-              </button>
-              <button
-                className={selectedSort === "Horror" ? "active" : ""}
-                onClick={() => handleSortChange("Horror")}
-              >
-                Horror
-              </button>
-              <button
-                className={selectedSort === "Romance" ? "active" : ""}
-                onClick={() => handleSortChange("Romance")}
-              >
-                Romance
-              </button>
-              <button
-                className={selectedSort === "Melodrama" ? "active" : ""}
-                onClick={() => handleSortChange("Melodrama")}
-              >
-                Melodrama
-              </button> */}
             </div>
           </div>
         </header>

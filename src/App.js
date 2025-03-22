@@ -14,13 +14,15 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import CookieConsent from "react-cookie-consent";
 import routes from "./Routes/routes";
+import { UserContext } from "./login/UserContext";
 
 function App() {
   const [cookies, setCookie] = useCookies(["analytics", "marketing"]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     console.log("Current cookies:", cookies);
@@ -81,15 +83,16 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
-        <Header />
-        <div className="app-content">
-          <Routes>
-            {routes.map(({ path, element }, index) => (
-              <Route key={index} path={path} element={element} />
-            ))}
-          </Routes>
-          {/* <Routes>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className="app">
+          <Header />
+          <div className="app-content">
+            <Routes>
+              {routes.map(({ path, element }, index) => (
+                <Route key={index} path={path} element={element} />
+              ))}
+            </Routes>
+            {/* <Routes>
             <Route>
               
               <Route
@@ -120,40 +123,41 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Route>
           </Routes> */}
-        </div>
-        <Footer />
-        {/* Cookie Consent Banner */}
-        <CookieConsent
-          onAccept={(acceptedByScrolling) => {
-            setCookie("analytics", "true", {
-              path: "/",
-              maxAge: 30 * 24 * 60 * 60,
-            });
-            // initializeAnalytics();
-            // setCookie("marketing", "true", {
-            //   path: "/",
-            //   maxAge: 30 * 24 * 60 * 60,
-            // });
+          </div>
+          <Footer />
+          {/* Cookie Consent Banner */}
+          <CookieConsent
+            onAccept={(acceptedByScrolling) => {
+              setCookie("analytics", "true", {
+                path: "/",
+                maxAge: 30 * 24 * 60 * 60,
+              });
+              // initializeAnalytics();
+              // setCookie("marketing", "true", {
+              //   path: "/",
+              //   maxAge: 30 * 24 * 60 * 60,
+              // });
 
-            // initializeMarketing();
-          }}
-          location="bottom"
-          buttonText="Accept All"
-          cookieName="analytics"
-          style={{ background: "#2B373B" }}
-          buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-          expires={150}
-        >
-          We use cookies to improve your experience and analyze website traffic.
-          By clicking "Accept All," you consent to the use of cookies for
-          analytics and marketing purposes. For more information, please review
-          our{" "}
-          <a href="/privacy-policy" style={{ color: "#FFD700" }}>
-            Privacy Policy
-          </a>
-          .
-        </CookieConsent>
-      </div>
+              // initializeMarketing();
+            }}
+            location="bottom"
+            buttonText="Accept All"
+            cookieName="analytics"
+            style={{ background: "#2B373B" }}
+            buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+            expires={150}
+          >
+            We use cookies to improve your experience and analyze website
+            traffic. By clicking "Accept All," you consent to the use of cookies
+            for analytics and marketing purposes. For more information, please
+            review our{" "}
+            <a href="/privacy-policy" style={{ color: "#FFD700" }}>
+              Privacy Policy
+            </a>
+            .
+          </CookieConsent>
+        </div>
+      </UserContext.Provider>
     </Router>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import "./InformationPage.css";
@@ -8,11 +8,16 @@ import TableOfContents from "./sections/TableOfContents";
 import AdditionalContent from "./sections/AdditionalContent";
 import { getSeriesDetailBySeriesId } from "../../api/api";
 import { Button } from "antd";
+import { UserContext } from "../../login/UserContext";
 
 const InformationPage = () => {
   const { title } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+  const isAdmin = user && !user.roles.includes("ROLE_GENERAL");
+
   const [seriesContent, setSeriesContent] = useState([]);
 
   const seriesData =
@@ -48,25 +53,31 @@ const InformationPage = () => {
           {/* Title and Introductory Sentence */}
           <div className="page_header">
             <span>{seriesData.title} </span>
-            <Button
-              className="add-btn-series"
-              disabled={seriesContent.length !== 0}
-              onClick={() => navigate(`/addSeriesDetails/${seriesData.title}`)}
-            >
-              Add Series Details
-            </Button>
+            {isAdmin && (
+              <div className="btn-container">
+                <Button
+                  className="add-btn-series"
+                  disabled={seriesContent.length !== 0}
+                  onClick={() =>
+                    navigate(`/addSeriesDetails/${seriesData.title}`)
+                  }
+                >
+                  Add Series Details
+                </Button>
 
-            <Button
-              className="add-btn-series"
-              disabled={seriesContent.length === 0}
-              onClick={() =>
-                navigate(`/addSeriesDetails/${seriesData.title}`, {
-                  state: { seriesContent },
-                })
-              }
-            >
-              Edit
-            </Button>
+                <Button
+                  className="add-btn-series"
+                  disabled={seriesContent.length === 0}
+                  onClick={() =>
+                    navigate(`/addSeriesDetails/${seriesData.title}`, {
+                      state: { seriesContent },
+                    })
+                  }
+                >
+                  Edit
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Main Content Section */}

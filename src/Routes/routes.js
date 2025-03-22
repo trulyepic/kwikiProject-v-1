@@ -10,6 +10,8 @@ import AddSeries from "../components/add-series/AddSeries";
 import AddSeriesCharacter from "../components/AddSeriesCharacters/AddSeriesCharacter";
 import AddSeriesDetails from "../components/add-series-detail/AddSeriesDetails";
 import AddCharacterDetails from "../components/add-character-details/AddCharacterDetails";
+import LoginForm from "../login/LoginForm";
+import RegisterForm from "../login/RegisterForm";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -26,6 +28,8 @@ const routes = [
     path: "/addCharacterDetails/:characterName",
     element: <AddCharacterDetails />,
   },
+  { path: "/login", element: <LoginForm /> },
+  { path: "/register", element: <RegisterForm /> },
 ];
 
 export default routes;
