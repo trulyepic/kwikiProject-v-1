@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DetailPage.css";
 import Footer from "./Footer";
@@ -13,6 +13,7 @@ import {
 import CommentSection from "./CommentSection";
 import CommentSectionDisqus from "./CommentSectionDisqus";
 import { DiscussionEmbed } from "disqus-react";
+import { UserContext } from "../login/UserContext";
 
 // const characterData = [
 //   { name: "Rick Grimes", img: "https://via.placeholder.com/100" },
@@ -33,6 +34,9 @@ const DetailPage = () => {
   const { title } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { user } = useContext(UserContext);
+  const isAdmin = user && !user.roles.includes("ROLE_GENERAL");
 
   // const titleImage = location.state?.img || "https://via.placeholder.com/300";
   // const seriesData = location.state?.seriesData;
@@ -191,15 +195,17 @@ const DetailPage = () => {
             <div className="content">
               <div className="title-add-btn">
                 <h2 className="main_title">Series</h2>
-                <Button
-                  className="add-char-btn"
-                  size="small"
-                  onClick={() =>
-                    navigate("/addSeriesCharacter", { state: { seriesId } })
-                  }
-                >
-                  Add Series Characters
-                </Button>
+                {isAdmin && (
+                  <Button
+                    className="add-char-btn"
+                    size="small"
+                    onClick={() =>
+                      navigate("/addSeriesCharacter", { state: { seriesId } })
+                    }
+                  >
+                    Add Series Characters
+                  </Button>
+                )}
               </div>
               <div className="detail_title_img">
                 <h2 className="title" onClick={handleTitleClick}>
@@ -226,21 +232,23 @@ const DetailPage = () => {
                         ({character.affiliation})
                       </span>
                       <div className="char-edit-btn">
-                        <Button
-                          className="char-edit-btn"
-                          onClick={() => {
-                            navigate("/addSeriesCharacter", {
-                              state: {
-                                seriesId,
-                                // character,
-                                characterId: character.id,
-                                isEdit: true,
-                              },
-                            });
-                          }}
-                        >
-                          <EditOutlined />
-                        </Button>
+                        {isAdmin && (
+                          <Button
+                            className="char-edit-btn"
+                            onClick={() => {
+                              navigate("/addSeriesCharacter", {
+                                state: {
+                                  seriesId,
+                                  // character,
+                                  characterId: character.id,
+                                  isEdit: true,
+                                },
+                              });
+                            }}
+                          >
+                            <EditOutlined />
+                          </Button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -301,20 +309,22 @@ const DetailPage = () => {
                                     </span>
                                   )}
                                   <div className="char-edit-btn">
-                                    <Button
-                                      className="char-edit-btn"
-                                      onClick={() =>
-                                        navigate("/addSeriesCharacter", {
-                                          state: {
-                                            seriesId,
-                                            // character,
-                                            characterId: character.id,
-                                          },
-                                        })
-                                      }
-                                    >
-                                      <EditOutlined />
-                                    </Button>
+                                    {isAdmin && (
+                                      <Button
+                                        className="char-edit-btn"
+                                        onClick={() =>
+                                          navigate("/addSeriesCharacter", {
+                                            state: {
+                                              seriesId,
+                                              // character,
+                                              characterId: character.id,
+                                            },
+                                          })
+                                        }
+                                      >
+                                        <EditOutlined />
+                                      </Button>
+                                    )}
                                   </div>
                                 </div>
                               ))}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./CharacterPage.css";
 import CharacterContent from "./sections/CharacterContent";
@@ -8,10 +8,13 @@ import { getCharacterDetailByCharacterId } from "../../api/api";
 import { Button, Spin } from "antd";
 import { showErrorNotification } from "../../util/Notification";
 import { DiscussionEmbed } from "disqus-react";
+import { UserContext } from "../../login/UserContext";
 
 const CharacterPage = () => {
   const { characterName } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const isAdmin = user && !user.roles.includes("ROLE_GENERAL");
 
   const location = useLocation();
   const [characterContent, setCharacterContent] = useState({});
@@ -90,28 +93,32 @@ const CharacterPage = () => {
         <div className="character_information_page">
           <div className="character_page_header">
             <span>{characterName}</span>
-            <Button
-              className="add-btn-series"
-              disabled={characterContent.personality}
-              onClick={() =>
-                navigate(`/addCharacterDetails/${characterName}`, {
-                  state: { characterData },
-                })
-              }
-            >
-              Add Character Details
-            </Button>
-            <Button
-              className="add-btn-series"
-              disabled={!characterContent.personality}
-              onClick={() =>
-                navigate(`/addCharacterDetails/${characterName}`, {
-                  state: { characterData, characterContent },
-                })
-              }
-            >
-              Edit
-            </Button>
+            {isAdmin && (
+              <div className="btn-container">
+                <Button
+                  className="add-btn-series"
+                  disabled={characterContent.personality}
+                  onClick={() =>
+                    navigate(`/addCharacterDetails/${characterName}`, {
+                      state: { characterData },
+                    })
+                  }
+                >
+                  Add Character Details
+                </Button>
+                <Button
+                  className="add-btn-series"
+                  disabled={!characterContent.personality}
+                  onClick={() =>
+                    navigate(`/addCharacterDetails/${characterName}`, {
+                      state: { characterData, characterContent },
+                    })
+                  }
+                >
+                  Edit
+                </Button>
+              </div>
+            )}
           </div>
           <div className="character_main_content">
             <CharacterContent

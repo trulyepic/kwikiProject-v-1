@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - echo "REACT_APP_BASE_URL=https://api.starflickswiki.com/api" >> .env
+        - echo "REACT_APP_BASE_URL_AUTH=https://api.starflickswiki.com/api/auth" >> .env
 
     build:
       commands:

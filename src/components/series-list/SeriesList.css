@@ -15,6 +15,11 @@ header h1 {
   color: #fff;
 }
 
+.btn-container {
+  display: flex;
+  gap: 15px;
+}
+
 .notification-container {
   background-color: #222228 !important;
   border-radius: 5px !important;
