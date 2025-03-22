@@ -336,3 +336,11 @@ export const getActorDetailsByName = async (realName) => {
     throw error;
   }
 };
+
+export const getTopRatedSeriesWithPagination = async (page, limit = 30) => {
+  const response = await fetch(
+    `${BASE_URL}/series/top-rated?page=${page}&limit=${limit}`
+  );
+  if (!response.ok) throw new Error("Failed to fetch top-rated series");
+  return await response.json();
+};
