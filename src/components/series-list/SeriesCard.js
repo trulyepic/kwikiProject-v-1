@@ -6,8 +6,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 const SeriesCard = ({ title, genre, imageUrl, id, seriesData }) => {
   const navigate = useNavigate();
 
-  const BASE_URL = "http://localhost:8080";
-
   const handleCardClick = () => {
     // Save series data to localStorage
     localStorage.setItem(

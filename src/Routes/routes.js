@@ -12,6 +12,7 @@ import AddSeriesDetails from "../components/add-series-detail/AddSeriesDetails";
 import AddCharacterDetails from "../components/add-character-details/AddCharacterDetails";
 import LoginForm from "../login/LoginForm";
 import RegisterForm from "../login/RegisterForm";
+import TopSeries from "../top-series/TopSeries";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -30,6 +31,7 @@ const routes = [
   },
   { path: "/login", element: <LoginForm /> },
   { path: "/register", element: <RegisterForm /> },
+  { path: "/topSeries", element: <TopSeries /> },
 ];
 
 export default routes;
