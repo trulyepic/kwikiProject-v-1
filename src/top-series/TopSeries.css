@@ -33,13 +33,11 @@
 }
 
 .top-series-table {
-  min-width: 600px; /* prevents wrapping headers */
-}
-
-.top-series-table {
+  min-width: 600px;
   width: 100%;
   border-collapse: collapse;
   background-color: transparent;
+  padding-right: 30px;
 }
 
 .top-series-table thead {
@@ -111,62 +109,71 @@
   font-weight: normal;
 }
 
-/* Better mobile responsiveness */
-@media (max-width: 768px) {
-  .top-series-container {
-    padding: 16px;
-  }
-
-  .top-series-header {
-    font-size: 1.75rem;
-  }
-
-  .top-series-table th,
-  .top-series-table td {
-    font-size: 13px;
-    padding: 8px;
-  }
-
-  .ratings-header,
-  .rating-cell-inner {
-    padding-right: 10px !important;
-  }
-
-  .rating-cell {
-    min-width: 100px;
-  }
-
-  .top-series-thumbnail {
-    width: 40px;
-    height: 55px;
-  }
-
-  .series-title {
-    font-size: 0.95rem;
-  }
-
-  .series-sub-info {
-    font-size: 0.75rem;
-  }
-
-  .rating-total-number {
-    font-size: 12px;
-  }
+/* Hide mobile view by default */
+.top-series-mobile-view {
+  display: none;
 }
 
-/* Very small phones */
-@media (max-width: 480px) {
-  .top-series-header {
-    font-size: 1.5rem;
+/* MOBILE CARD STYLES */
+.series-mobile-card {
+  background-color: #1a1a1d;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  font-family: Roboto, sans-serif;
+  cursor: pointer;
+}
+
+.series-mobile-card:hover {
+  background-color: #29292d6c;
+}
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.mobile-rank {
+  font-weight: bold;
+  color: #bbb;
+  font-size: 1rem;
+}
+
+.mobile-thumbnail {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.mobile-title {
+  font-weight: bold;
+  font-size: 1rem;
+  flex: 1;
+  color: #eaeaea;
+}
+
+.mobile-sub-info {
+  font-size: 0.85rem;
+  color: #aaaaaa;
+  margin-top: 4px;
+}
+
+.mobile-rating {
+  margin-top: 8px;
+}
+
+/* Show cards on mobile, hide table */
+@media (max-width: 768px) {
+  .table-scroll-wrapper {
+    display: none;
   }
 
-  .top-series-table th,
-  .top-series-table td {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  .rating-cell-inner {
-    padding-right: 6px;
+  .top-series-mobile-view {
+    display: block;
   }
 }

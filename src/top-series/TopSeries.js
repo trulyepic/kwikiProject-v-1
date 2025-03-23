@@ -101,6 +101,34 @@ const TopSeries = () => {
             </tbody>
           </table>
         </div>
+
+        {/* Mobile View - Series as stacked cards */}
+        <div className="top-series-mobile-view">
+          {seriesList.map((series, index) => (
+            <div
+              key={series.id}
+              className="series-mobile-card"
+              onClick={() => handleClick(series)}
+            >
+              <div className="mobile-header">
+                <span className="mobile-rank">#{index + 1}</span>
+                <LazyLoadImage
+                  src={series.imageUrl}
+                  alt={series.title}
+                  className="mobile-thumbnail"
+                />
+                <div className="mobile-title">{series.title}</div>
+              </div>
+              <div className="mobile-sub-info">
+                TV ({series.episode} eps) • {series.originalRelease}
+                <div>{series.genre}</div>
+              </div>
+              <div className="mobile-rating">
+                <Rating seriesId={series.id} />
+              </div>
+            </div>
+          ))}
+        </div>
       </InfiniteScroll>
     </div>
   );
