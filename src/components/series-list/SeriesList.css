@@ -252,16 +252,23 @@ header h1 {
     gap: 20px;
   }
 
-  .series-card-image {
-    height: 180px;
+  .series-list-header {
+    gap: 10px;
   }
 
-  .series-info h3 {
-    font-size: 0.85rem;
+  .search-and-dropdown {
+    flex-direction: column;
+    gap: 15px;
   }
 
-  .series-info p {
-    font-size: 0.75rem;
+  .series-search-input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .sort-dropdown {
+    width: 100%;
+    max-width: none;
   }
 
   /* .add-series-btn {
