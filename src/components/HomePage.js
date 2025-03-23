@@ -67,7 +67,6 @@ const HomePage = () => {
     fetchSeries();
   }, [numberOfSeries]);
 
-  const BASE_URL = "http://localhost:8080";
   return (
     <div className="homepage_container">
       <Helmet>

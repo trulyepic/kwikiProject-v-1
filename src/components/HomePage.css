@@ -45,3 +45,64 @@ html {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+@media (max-width: 1024px) {
+  .app_grid {
+    padding: 40px;
+  }
+
+  .app_grid h2 {
+    font-size: 2rem;
+    margin: 30px 0;
+    padding-left: 0;
+  }
+
+  .grid_container {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .more_button {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app_grid {
+    padding: 30px 20px;
+  }
+
+  .app_grid h2 {
+    font-size: 1.75rem;
+    margin: 20px 0;
+  }
+
+  .grid_container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .more_button {
+    margin-top: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app_grid {
+    padding: 20px 10px;
+  }
+
+  .app_grid h2 {
+    font-size: 1.5rem;
+  }
+
+  .grid_container {
+    gap: 15px;
+  }
+
+  .more_button {
+    font-size: 0.95rem;
+    margin-top: 30px;
+  }
+}
