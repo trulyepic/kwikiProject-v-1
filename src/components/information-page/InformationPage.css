@@ -32,6 +32,8 @@ html {
   /* border-radius: 8px; */
   display: inline-block;
   flex-grow: 1;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .page_header {
@@ -285,6 +287,8 @@ html {
   /* background-color: #d9d9d9; */
   background-color: #c0c0d9;
   margin-left: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .panel_item {
@@ -302,73 +306,113 @@ html {
 /* Medium screens (tablets, smaller desktops) */
 @media (max-width: 1024px) {
   .information_page_content {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
   }
 
   .information_page {
-    max-width: 100%; /* Full width */
     width: 100%;
+    padding: 20px 15px;
   }
 
   .side_panel {
-    margin-left: 0; /* Remove side margin */
+    margin-left: 0;
     margin-top: 20px;
-    max-width: 100%; /* Full width */
+    max-width: 100%;
   }
 
   .details_box {
-    width: 100%; /* Stretch details box */
+    width: 100%;
   }
 }
-
 /* Small screens (mobile devices) */
 @media (max-width: 768px) {
+  .information_page_wrapper {
+    padding: 15px;
+  }
+
   .page_header {
-    font-size: 22px; /* Slightly smaller header */
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+    align-items: flex-start;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .main_content {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
+    gap: 15px;
   }
 
   .summary_text {
-    font-size: 14px; /* Smaller font for summary */
+    font-size: 15px;
   }
 
-  .panel_item {
-    font-size: 0.9rem; /* Adjust font size */
+  .details_panel {
+    width: 100%;
+    align-items: stretch;
   }
 
   .details_box {
-    width: 100%; /* Full width */
+    width: 100%;
+  }
+
+  .panel_item {
+    font-size: 0.9rem;
+  }
+
+  .additional_content {
+    font-size: 15px;
   }
 }
 
 /* Extra small screens (very small mobile devices) */
 @media (max-width: 480px) {
   .information_page_wrapper {
-    padding: 10px; /* Reduce padding */
+    padding: 10px;
   }
 
   .page_header {
-    font-size: 20px; /* Smaller header font */
-    text-align: center; /* Center align header */
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .btn-container {
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .main_content {
-    gap: 10px; /* Reduce gap */
-  }
-
-  .side_panel {
-    padding: 10px; /* Reduce padding */
     gap: 10px;
   }
 
+  .details_box {
+    width: 100%;
+  }
+
   .panel_item {
-    font-size: 0.8rem; /* Reduce font size */
+    font-size: 0.8rem;
+    padding: 10px;
   }
 
   .additional_content {
-    font-size: 14px; /* Smaller font for additional content */
+    font-size: 14px;
+  }
+
+  .summary_text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ai-special-footnote {
+    text-align: center;
+    font-size: 0.7rem;
+    margin-top: 15px;
   }
 }

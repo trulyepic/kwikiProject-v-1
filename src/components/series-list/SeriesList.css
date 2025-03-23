@@ -252,18 +252,18 @@ header h1 {
   }
 
   .search-and-dropdown {
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column;
     gap: 15px;
   }
 
   .series-search-input {
-    width: 100%; /* Take full width */
-    max-width: none; /* Remove max-width constraint */
+    width: 100%;
+    max-width: none;
   }
 
   .sort-dropdown {
-    width: 100%; /* Full width on smaller screens */
-    max-width: none; /* Remove max-width constraint */
+    width: 100%;
+    max-width: none;
   }
 
   /* .add-series-btn {

@@ -63,7 +63,7 @@ const TopSeries = () => {
               <th>Rank</th>
               <th>Image</th>
               <th>Title</th>
-              <th>Ratings</th>
+              <th className="ratings-header">Ratings</th>
             </tr>
           </thead>
 
@@ -91,7 +91,9 @@ const TopSeries = () => {
                   </div>
                 </td>
                 <td className="rating-cell">
-                  <Rating seriesId={series.id} />
+                  <div className="rating-cell-inner">
+                    <Rating seriesId={series.id} />
+                  </div>
                 </td>
               </tr>
             ))}

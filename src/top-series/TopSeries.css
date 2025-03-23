@@ -48,10 +48,23 @@
   min-width: 150px;
 }
 
+.ratings-header {
+  text-align: right !important;
+  padding-right: 70px !important; /* Optional: tweak as needed */
+}
+
 .rating-cell {
-  text-align: center;
-  vertical-align: middle;
   min-width: 150px;
+  vertical-align: middle;
+  padding: 16px;
+}
+
+.rating-cell-inner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  padding-right: 20px; /* Match the header */
 }
 
 .image-cell {
