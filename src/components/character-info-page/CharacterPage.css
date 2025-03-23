@@ -3,6 +3,9 @@ html {
   margin: 0;
   padding: 0;
   font-family: Roboto, helvetica, arial, sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
   /* height: 100%; */
 }
 
@@ -13,20 +16,17 @@ html {
   /* background-color: #616161; */
   /* min-height: 100vh; */
   /* height: 100vh; */
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .character_page_content {
-  /* display: flex;
-  max-width: 800px;
-  width: 100%;
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative; */
   display: flex;
+  flex-wrap: wrap;
   max-width: 1200px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .character_information_page {
@@ -39,6 +39,7 @@ html {
   /* border-radius: 8px; */
   display: inline-block;
   flex-grow: 1;
+  box-sizing: border-box;
 }
 .character_main_content {
   display: flex;
@@ -329,49 +330,72 @@ html {
 /* Small screens (mobile devices) */
 @media (max-width: 768px) {
   .character_page_header {
-    font-size: 22px; /* Slightly smaller header */
+    font-size: 22px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .character_table_of_contents {
-    width: 100%; /* Full width */
-    margin-top: 20px;
+  .btn-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .add-btn-series {
+    width: 100%;
   }
 
   .character_main_content {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .character_info,
+  .character_box {
+    width: 100%;
+    margin-left: 0;
   }
 
   .panel_item {
-    font-size: 0.9rem; /* Adjust font size for readability */
+    font-size: 0.9rem;
+  }
+
+  .character_table_of_contents {
+    /* width: 100%; */
+    font-size: 15px;
   }
 }
 
 /* Extra small screens (very small mobile devices) */
 @media (max-width: 480px) {
-  .character_page_wrapper {
-    padding: 10px;
+  .character_summary_text,
+  .character-content-text,
+  .character_additional_content {
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .character_page_header {
-    font-size: 20px; /* Smaller header */
-    text-align: center; /* Center align header text */
+    font-size: 18px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   .character_main_content {
-    gap: 10px;
+    flex-direction: column;
+    gap: 15px;
   }
 
-  .character_table_of_contents {
+  .character_box {
+    width: 100%;
+  }
+
+  .character_info {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .disqus-section {
     padding: 10px;
-    font-size: 14px;
-  }
-
-  .character_table_of_contents ul li {
-    font-size: 14px;
-  }
-
-  .side_panel {
-    padding: 10px;
-    gap: 10px;
   }
 }
