@@ -247,23 +247,21 @@ header h1 {
 
 /* Ensure responsiveness */
 @media (max-width: 768px) {
-  .series-list-header {
-    gap: 10px;
+  .series-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
   }
 
-  .search-and-dropdown {
-    flex-direction: column;
-    gap: 15px;
+  .series-card-image {
+    height: 180px;
   }
 
-  .series-search-input {
-    width: 100%;
-    max-width: none;
+  .series-info h3 {
+    font-size: 0.85rem;
   }
 
-  .sort-dropdown {
-    width: 100%;
-    max-width: none;
+  .series-info p {
+    font-size: 0.75rem;
   }
 
   /* .add-series-btn {
