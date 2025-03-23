@@ -57,48 +57,50 @@ const TopSeries = () => {
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
-        <table className="top-series-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Image</th>
-              <th>Title</th>
-              <th className="ratings-header">Ratings</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {seriesList.map((series, index) => (
-              <tr
-                key={series.id}
-                onClick={() => handleClick(series)}
-                className="top-series-row"
-              >
-                <td>{index + 1}</td>
-                <td className="image-cell">
-                  <LazyLoadImage
-                    src={series.imageUrl}
-                    alt={series.title}
-                    className="top-series-thumbnail"
-                  />
-                </td>
-                <td className="title-cell">
-                  <div className="series-title">{series.title}</div>
-                  <div className="series-sub-info">
-                    {`TV (${series.episode} eps) • ${series.originalRelease} 
-                    `}
-                    <div> {series.genre}</div>
-                  </div>
-                </td>
-                <td className="rating-cell">
-                  <div className="rating-cell-inner">
-                    <Rating seriesId={series.id} />
-                  </div>
-                </td>
+        <div className="table-scroll-wrapper">
+          <table className="top-series-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th className="ratings-header">Ratings</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {seriesList.map((series, index) => (
+                <tr
+                  key={series.id}
+                  onClick={() => handleClick(series)}
+                  className="top-series-row"
+                >
+                  <td>{index + 1}</td>
+                  <td className="image-cell">
+                    <LazyLoadImage
+                      src={series.imageUrl}
+                      alt={series.title}
+                      className="top-series-thumbnail"
+                    />
+                  </td>
+                  <td className="title-cell">
+                    <div className="series-title">{series.title}</div>
+                    <div className="series-sub-info">
+                      {`TV (${series.episode} eps) • ${series.originalRelease} 
+                    `}
+                      <div> {series.genre}</div>
+                    </div>
+                  </td>
+                  <td className="rating-cell">
+                    <div className="rating-cell-inner">
+                      <Rating seriesId={series.id} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </InfiniteScroll>
     </div>
   );

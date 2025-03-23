@@ -14,6 +14,28 @@
   color: #fff;
 }
 
+.table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.table-scroll-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  background: linear-gradient(to left, #222228, transparent);
+  pointer-events: none;
+}
+
+.top-series-table {
+  min-width: 600px; /* prevents wrapping headers */
+}
+
 .top-series-table {
   width: 100%;
   border-collapse: collapse;
@@ -89,24 +111,62 @@
   font-weight: normal;
 }
 
-/* Responsive tweaks */
+/* Better mobile responsiveness */
 @media (max-width: 768px) {
   .top-series-container {
-    padding: 20px;
+    padding: 16px;
   }
 
   .top-series-header {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .top-series-table th,
   .top-series-table td {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .ratings-header,
+  .rating-cell-inner {
+    padding-right: 10px !important;
+  }
+
+  .rating-cell {
+    min-width: 100px;
   }
 
   .top-series-thumbnail {
     width: 40px;
-    height: 60px;
+    height: 55px;
+  }
+
+  .series-title {
+    font-size: 0.95rem;
+  }
+
+  .series-sub-info {
+    font-size: 0.75rem;
+  }
+
+  .rating-total-number {
+    font-size: 12px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .top-series-header {
+    font-size: 1.5rem;
+  }
+
+  .top-series-table th,
+  .top-series-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .rating-cell-inner {
+    padding-right: 6px;
   }
 }
