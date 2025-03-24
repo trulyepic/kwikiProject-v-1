@@ -72,28 +72,6 @@ header h1 {
   color: #dddddd;
 }
 
-@media (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-.series-list-header {
-  display: flex;
-  flex-direction: column;
-}
-
-.search-and-dropdown {
-  display: flex;
-  /* align-items: center; */
-  gap: 20px;
-}
-
-/* .sort-dropdown {
-  background-color: #222228 !important;
-} */
-
 .rating-sort-text {
   font-family: Roboto !important;
   font-size: 15px;
@@ -248,17 +226,37 @@ header h1 {
 /* Ensure responsiveness */
 @media (max-width: 768px) {
   .series-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 20px;
   }
 
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .series-card-image {
+    height: 100px;
+    width: 100px;
+  }
+
+  .series-info h3 {
+    font-size: 0.7rem;
+  }
+
+  .series-info p {
+    font-size: 0.6rem;
+  }
+
   .series-list-header {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
   .search-and-dropdown {
+    display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
 
   .series-search-input {
@@ -269,6 +267,14 @@ header h1 {
   .sort-dropdown {
     width: 100%;
     max-width: none;
+  }
+
+  .rating-series-list .ant-rate {
+    font-size: 13px !important; /* Smaller than the default ~20px */
+  }
+
+  .rating-total-number {
+    font-size: 12px !important;
   }
 
   /* .add-series-btn {
