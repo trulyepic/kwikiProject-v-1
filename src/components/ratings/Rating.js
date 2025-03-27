@@ -102,7 +102,7 @@ const Rating = ({ seriesId }) => {
             allowHalf
             value={userRating}
             style={{ color: "white" }}
-            tooltips={descriptions}
+            // tooltips={descriptions}
             onChange={handleRatingChange}
             disabled={!user || (hasRated && !isAdmin)}
           />
