@@ -67,16 +67,43 @@ export const getSeriesDetailBySeriesId = async (seriesId) => {
   }
 };
 
+// export const addRating = async (seriesId, rating) => {
+//   try {
+
+//     const token = localStorage.getItem("token");
+
+//     await axios.post(`${BASE_URL}/series/${seriesId}/rate`, rating, {
+//       headers: { "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//        },
+//     });
+//   } catch (error) {
+//     console.error("Error adding rating: ", error);
+//     throw error;
+//   }
+// };
+
 export const addRating = async (seriesId, rating) => {
   try {
-    await axios.post(`${BASE_URL}/series/${seriesId}/rate`, rating, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      `${BASE_URL}/series/${seriesId}/rate`,
+      { rating }, // ✅ send as an object
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("addRating() sending:", rating);
   } catch (error) {
     console.error("Error adding rating: ", error);
     throw error;
   }
 };
+
 
 export const getAverageRating = async (seriesId) => {
   try {
@@ -343,4 +370,26 @@ export const getTopRatedSeriesWithPagination = async (page, limit = 30) => {
   );
   if (!response.ok) throw new Error("Failed to fetch top-rated series");
   return await response.json();
+};
+
+
+export const hasUserRatedSeries = async (seriesId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/series/${seriesId}/rated`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to check rating status");
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error checking if user rated:", error);
+    return false;
+  }
 };

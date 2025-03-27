@@ -13,7 +13,18 @@ const LoginForm = () => {
   const handleLogin = async (values) => {
     try {
       const userData = await loginUser(values);
-      setUser(userData);
+
+        // Save JWT to localStorage
+        localStorage.setItem("token", userData.token);
+        localStorage.setItem("username", userData.username);
+        localStorage.setItem("roles", JSON.stringify(userData.roles));
+      
+        // ✅ Update context
+        setUser({
+          token: userData.token,
+          username: userData.username,
+          roles: userData.roles,
+        });
       console.log("userData: ", userData);
       message.success("Login successful!");
       navigate("/");

@@ -24,6 +24,17 @@ function App() {
   const [cookies, setCookie] = useCookies(["analytics", "marketing"]);
   const [user, setUser] = useState(null);
 
+  // restore user from localStorage on page load
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    const roles = JSON.parse(localStorage.getItem("roles"));
+
+    if (token && username) {
+      setUser({ token, username, roles })
+    }
+  }, []);
+
   useEffect(() => {
     console.log("Current cookies:", cookies);
     // Enable or disable analytics based on cookie

@@ -9,8 +9,10 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = async (credentials) => {
-  const response = await axios.post(`${BASE_URL}/login`, credentials, {
-    withCredentials: true, // important if using cookies
-  });
+  const response = await axios.post(`${BASE_URL}/login`, credentials);
+  
+  // Store JWT token in localStorage (or sessionStorage if you prefer)
+  localStorage.setItem("token", response.data.token);
+
   return response.data;
 };
