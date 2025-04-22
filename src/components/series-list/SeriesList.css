@@ -147,7 +147,7 @@ header h1 {
 
 .series-search-input {
   width: 300px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .ant-input-affix-wrapper {
@@ -209,6 +209,19 @@ header h1 {
 .series-info {
   padding: 6px;
   font-size: 1rem;
+}
+
+.search-and-dropdown {
+  display: flex;
+  align-items: flex-start; /* Align from top to fix misalignment */
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-and-dropdown > * {
+  align-self: flex-start; /* Override inconsistent vertical centering */
+  margin-bottom: 0 !important; /* prevent spacing shifts */
 }
 
 .series-card-image {
