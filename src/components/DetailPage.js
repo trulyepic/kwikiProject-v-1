@@ -228,9 +228,12 @@ const DetailPage = () => {
                         onClick={() => handleCharacterClick(character)}
                       />
                       <span>{character.name}</span>
-                      <span className="character_name_subtext">
-                        ({character.affiliation})
-                      </span>
+                      {character.affiliation && (
+                        <span className="character_name_subtext">
+                          ({character.affiliation})
+                        </span>
+                      )}
+
                       <div className="char-edit-btn">
                         {isAdmin && (
                           <Button
