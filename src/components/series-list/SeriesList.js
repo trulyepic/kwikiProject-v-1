@@ -193,7 +193,7 @@ const SeriesList = () => {
       <div id="series-list-container" className="series-list-container">
         <header className="series-list-header">
           <h1 className="series-title">Series</h1>
-          <div className="search-and-dropdown">
+          {/* <div className="search-and-dropdown">
             <Search
               className="series-search-input"
               placeholder="Search series"
@@ -218,6 +218,38 @@ const SeriesList = () => {
                 {" "}
                 <span className="add-series-btn">Add Series</span>
               </Button>
+            )}
+          </div> */}
+          <div className="search-and-dropdown">
+            <div className="search-wrapper">
+              <Search
+                className="series-search-input"
+                placeholder="Search series"
+                allowClear
+                size="large"
+                onSearch={handleSearch}
+              />
+            </div>
+
+            <div className="dropdown-wrapper">
+              <Dropdown.Button
+                menu={menuProps}
+                trigger={["click"]}
+                size="large"
+                className="sort-dropdown"
+              >
+                <span className="rating-sort-text" onClick={resetRatingSort}>
+                  {sortLabel}
+                </span>
+              </Dropdown.Button>
+            </div>
+
+            {isAdmin && (
+              <div className="add-series-wrapper">
+                <Button size="large" onClick={() => navigate("/addSeries")}>
+                  <span className="add-series-btn">Add Series</span>
+                </Button>
+              </div>
             )}
           </div>
           <div className="filters">
