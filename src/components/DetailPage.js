@@ -306,7 +306,7 @@ const DetailPage = () => {
                                     }
                                   />
                                   <p>{character.name}</p>
-                                  {character.role !== null && (
+                                  {character.role && (
                                     <span className="character_name_subtext">
                                       ({character.role})
                                     </span>
