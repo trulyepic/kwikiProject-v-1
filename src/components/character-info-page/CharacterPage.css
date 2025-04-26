@@ -21,6 +21,21 @@ html {
   box-sizing: border-box;
 }
 
+.character_breadcrumb {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.breadcrumb_link {
+  color: #3498db;
+  cursor: pointer;
+}
+
+.breadcrumb_link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
 .character_page_content {
   display: flex;
   flex-wrap: wrap;
