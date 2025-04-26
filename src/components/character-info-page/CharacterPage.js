@@ -5,7 +5,7 @@ import CharacterContent from "./sections/CharacterContent";
 import CharacterAdditionalContent from "./sections/CharacterAdditionalContent";
 import CharacterDetailPanel from "./sections/CharacterDetailPanel";
 import { getCharacterDetailByCharacterId } from "../../api/api";
-import { Button, Spin } from "antd";
+import { Breadcrumb, Button, Spin } from "antd";
 import { showErrorNotification } from "../../util/Notification";
 import { DiscussionEmbed } from "disqus-react";
 import { UserContext } from "../../login/UserContext";
@@ -91,6 +91,19 @@ const CharacterPage = () => {
     <div className="character_page_wrapper">
       <div className="character_page_content">
         <div className="character_information_page">
+          <Breadcrumb separator="➔" className="character_breadcrumb">
+            {seriesName && (
+              <Breadcrumb.Item>
+                <span
+                  className="breadcrumb_link"
+                  onClick={() => navigate(`/series/${seriesName}`)}
+                >
+                  {seriesName}
+                </span>
+              </Breadcrumb.Item>
+            )}
+            <Breadcrumb.Item>{characterName}</Breadcrumb.Item>
+          </Breadcrumb>
           <div className="character_page_header">
             <span>{characterName}</span>
             {isAdmin && (
